@@ -1,0 +1,1434 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light only">
+<title>Area of a Rectangle · CLIL Maths · Grade 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=League+Spartan:wght@400..800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --ink:#18201B; --muted:#56605A; --faint:#89928C; --line:#E6E8E6;
+  --g:#4E9A6B; --gd:#3A7A52; --gt:#E7F3EA;
+  --o:#EE7D45; --od:#C9612F; --ot:#FDECE2;
+  --y:#F6BE4A; --yd:#B9831A; --yt:#FDF7E3;
+  --b:#4A93D6; --bd:#3576B4; --bt:#E7F1FB;
+  --p:#EA7486; --pd:#C85567; --pt:#FCE9EC;
+  --grey:#F1F1F0; --grey2:#E4E5E3;
+  --head:'Bricolage Grotesque','Inter','Segoe UI',Arial,sans-serif;
+  --geo:'League Spartan','Poppins','Century Gothic','Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#fff;overflow:hidden;font-family:var(--head);color:var(--ink);-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font-family:inherit;color:inherit}
+#deck{position:absolute;left:50%;top:50%;width:1600px;height:900px;background:#fff;transform:translate(-50%,-50%);transform-origin:center;overflow:hidden}
+.prog{position:absolute;left:0;top:0;right:0;height:6px;background:var(--grey);z-index:5}
+.prog i{display:block;height:100%;width:0;background:var(--g);border-radius:0 3px 3px 0;transition:width .5s cubic-bezier(.2,.7,.2,1)}
+.slide{position:absolute;inset:0;padding:64px 96px 60px;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s linear .35s;font-weight:500}
+.slide.active{opacity:1;visibility:visible;transition:opacity .4s ease}
+.slide.active .rv{animation:rise .65s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*85ms + 100ms)}
+@keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.slide.active .ill{animation:pop .7s cubic-bezier(.2,.9,.3,1.3) both;animation-delay:calc(var(--i,0)*85ms + 250ms)}
+@keyframes pop{from{transform:scale(.6) rotate(-6deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.frag{opacity:0;transform:translateY(18px);transition:opacity .45s,transform .45s cubic-bezier(.2,.7,.2,1)}
+.frag.on{opacity:1;transform:none}
+.slide.flexs{display:flex;flex-direction:column}
+.slide.flexs>*{flex:none}
+.slide.flexs>.fill{flex:1 1 auto;min-height:0}
+
+h1{font:800 120px/0.98 var(--head);letter-spacing:-.035em;margin:0}
+h2{font:800 62px/1.05 var(--head);letter-spacing:-.03em;margin:12px 0 0}
+h3{font:700 34px/1.15 var(--geo);margin:0;letter-spacing:-.005em}
+h4{font:700 24px/1.2 var(--geo);margin:0}
+p{margin:0}
+.kicker{display:flex;align-items:center;gap:12px;font:700 22px/1 var(--geo);letter-spacing:.06em;text-transform:uppercase;color:var(--gd)}
+.pill{background:var(--gd);color:#fff;border-radius:999px;padding:7px 13px 5px;letter-spacing:.04em}
+.tag{display:inline-block;background:var(--y);color:var(--ink);font:800 18px/1 var(--geo);letter-spacing:.08em;text-transform:uppercase;padding:9px 16px 7px;border-radius:999px}
+.lead{font-size:32px;line-height:1.35;color:var(--muted);font-weight:500}
+.small{font-size:22px;line-height:1.4;color:var(--muted)}
+.vn{font:600 22px var(--head);color:var(--faint);font-style:italic}
+.cg{color:var(--gd)} .co{color:var(--od)} .cb{color:var(--bd)} .cy{color:var(--yd)}
+mark{background:var(--yt);color:inherit;padding:0 .2em;border-radius:6px;box-shadow:inset 0 -.32em 0 #FBE3A3}
+b{font-weight:750}
+.mt8{margin-top:8px}.mt16{margin-top:16px}.mt24{margin-top:24px}.mt32{margin-top:32px}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.box{border-radius:28px;padding:28px 32px;background:var(--grey)}
+.box.g{background:var(--gt)} .box.o{background:var(--ot)} .box.y{background:var(--yt)} .box.b{background:var(--bt)} .box.p{background:var(--pt)}
+.box.gd{background:var(--g);color:#fff} .box.dark{background:var(--ink);color:#fff}
+.box p{font-size:27px;line-height:1.38}
+.actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:22px}
+.btn{display:inline-flex;align-items:center;gap:10px;font:700 21px/1 var(--geo);padding:16px 24px 14px;border-radius:16px;border:0;background:var(--grey);cursor:pointer;color:var(--ink);transition:filter .15s,transform .1s}
+.btn:hover{filter:brightness(.95)} .btn:active{transform:scale(.97)}
+.btn.y{background:var(--y)} .btn.dark{background:var(--ink);color:#fff} .btn.g{background:var(--g);color:#fff} .btn.o{background:var(--o);color:#fff}
+.btn.sm{font-size:17px;padding:11px 16px 9px;border-radius:12px}
+.btn svg{width:26px;height:26px}
+
+/* title */
+.title-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;height:100%}
+.title-wrap .kicker{font-size:24px;letter-spacing:.03em;text-transform:none}
+.title-wrap h1{margin-top:26px}
+.title-wrap .lead{margin-top:28px;font-size:34px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:40px;font:600 21px var(--geo)}
+.chips span,.chips b{background:var(--grey);border-radius:999px;padding:11px 18px 9px}
+.chips b{background:var(--ink);color:#fff;font-weight:700}
+.titleart{position:relative;height:680px;padding:0;overflow:hidden}
+.titleart>div{position:absolute}
+
+/* divider */
+.divider{display:grid;grid-template-columns:1fr 600px;gap:60px;align-items:center;height:100%}
+.divider .big{font:800 200px/.8 var(--geo);color:var(--grey2);letter-spacing:-.04em}
+.divider h1{font-size:92px;margin-top:22px}
+.divider .sub{display:flex;flex-wrap:wrap;gap:12px;margin-top:40px}
+.divider .sub div{background:var(--grey);border-radius:20px;padding:16px 22px;font-size:23px;color:var(--muted)}
+.divider .sub b{display:block;font:700 15px var(--geo);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin-bottom:6px}
+.divart{height:640px;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:18px;padding:30px}
+
+/* goals */
+.goal{display:flex;flex-direction:column;padding:34px 34px}
+.goal .gk{font:800 18px var(--geo);letter-spacing:.12em;text-transform:uppercase;opacity:.6;margin-top:18px}
+.goal svg{width:150px;height:150px}
+.goal h3{font-size:46px;margin-top:8px}
+.goal p{font-size:31px;margin-top:16px;line-height:1.35}
+.goal .say{margin-top:auto;background:#fff;border-radius:18px;padding:20px 24px;font:600 29px/1.3 var(--head)}
+.wrapc{justify-content:center}.wrapc h3{font-size:56px}.wrapc p{font-size:38px}.wrapc .gk{font-size:26px}.wrapc .say{margin-top:28px;font-size:40px}
+
+/* furniture cards */
+.fgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.fc{border-radius:26px;background:var(--grey);padding:20px 14px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.fc svg{width:170px;height:170px}
+.fc h4{font-size:32px;margin-top:8px}
+.fc .n{font:800 60px/1 var(--geo);margin-top:12px}
+.fc .n small{font-size:20px;color:var(--muted);font-weight:700}
+.fc.core{background:var(--bt)} .fc.extra{background:var(--yt)}
+
+/* ruler */
+.rwrap{background:var(--yt);border-radius:28px;padding:30px 40px}
+.rtabs{display:flex;gap:12px}
+.rtabs button{font:700 22px var(--geo);padding:13px 22px 11px;border-radius:14px;border:0;background:#fff;cursor:pointer}
+.rtabs button.on{background:var(--ink);color:#fff}
+.rans{font:800 54px var(--geo);color:var(--gd);min-width:260px}
+.rans.hid{color:transparent;background:repeating-linear-gradient(45deg,#fff 0 12px,#FBF0D2 12px 24px);border-radius:18px}
+.qbtn{font:800 30px var(--geo);width:64px;height:64px;border-radius:18px;border:0;background:var(--y);cursor:pointer}
+
+/* hunt */
+.hunt{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.hc{height:300px;perspective:900px;cursor:pointer;border:0;background:none;padding:0}
+.hc .in{position:relative;width:100%;height:100%;transition:transform .6s cubic-bezier(.3,.7,.3,1.2);transform-style:preserve-3d}
+.hc.on .in{transform:rotateY(180deg)}
+.hc .fa,.hc .ba{position:absolute;inset:0;border-radius:26px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.hc .fa{background:var(--grey)}
+.hc .fa svg{width:170px;height:170px}
+.hc .fa b{font:700 28px var(--geo)}
+.hc .ba{transform:rotateY(180deg)}
+.hc .ba.yes{background:var(--gt)} .hc .ba.no{background:var(--pt)}
+.hc .ba svg{width:110px;height:110px}
+.hc .ba b{font:800 32px var(--geo)}
+.hc .ba span{font:600 22px var(--head);color:var(--muted)}
+
+/* rug */
+.rugs{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.rug{background:var(--grey);border-radius:28px;padding:24px 28px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.rug .rh{display:flex;justify-content:space-between;width:100%;align-items:center}
+.rug .rh b{font:800 40px var(--geo)}
+.vote{display:flex;align-items:center;gap:10px}
+.vote button{width:52px;height:52px;border-radius:14px;border:0;background:#fff;font:800 26px var(--geo);cursor:pointer}
+.vote output{font:800 42px var(--geo);min-width:56px;text-align:center}
+.rug .res{font:800 36px var(--geo);color:var(--gd);height:44px}
+
+/* vocab */
+.voc{display:flex;flex-direction:column;align-items:flex-start;padding:30px 32px}
+.voc svg{width:100%;flex:1;min-height:220px;background:#fff;border-radius:20px}
+.voc h3{font-size:52px;margin-top:20px}
+.voc .ph{font:600 24px var(--head);color:var(--muted);margin-top:4px}
+.voc p{font-size:31px;margin-top:14px}
+
+/* count grid */
+.cwrap{display:grid;grid-template-columns:auto 1fr;gap:48px;align-items:center}
+.cgrid{display:grid;gap:0;border:4px solid var(--ink);border-radius:6px;overflow:hidden;background:#fff}
+.cell{width:140px;height:140px;border:1.5px dashed #B9C0BB;display:grid;place-items:center;font:800 46px var(--geo);color:transparent;cursor:pointer;transition:background .2s}
+.cell:hover{background:var(--yt)}
+.cell.on{background:#CDEBD6;color:var(--gd);animation:pop .4s cubic-bezier(.2,.9,.3,1.3)}
+.ccount{font:800 120px/1 var(--geo)}
+.ccount small{font-size:44px;color:var(--muted)}
+.rowsum{font:700 40px var(--geo);margin-top:18px;min-height:52px}
+
+/* rule table */
+.rtab{width:100%;border-collapse:separate;border-spacing:10px;margin:-10px;font:700 34px var(--geo)}
+.rtab th{font:700 22px var(--geo);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;padding:6px}
+.rtab td{background:var(--grey);border-radius:20px;text-align:center;padding:10px 14px;height:150px;font-size:44px}
+.rtab td.sh{background:#fff;width:300px}
+.rv-cell{cursor:pointer}
+.rv-cell span{display:inline-block;transition:opacity .3s}
+.rv-cell.hid span{opacity:0}
+.rv-cell.hid{background:repeating-linear-gradient(45deg,var(--grey) 0 12px,#E8E9E7 12px 24px)}
+.rv-cell.hid::after{content:"?";font:800 44px var(--geo);color:var(--faint)}
+.rv-cell.hid span{display:none}
+
+/* rule */
+.formula{display:flex;align-items:center;justify-content:center;gap:26px;font:800 78px/1 var(--geo);padding:44px 30px;border-radius:32px;background:var(--ink);color:#fff}
+.formula .a{color:var(--y)} .formula .l{color:#9FD6B2} .formula .w{color:#F8B48F}
+.frame{background:#fff;border-radius:18px;padding:16px 22px;font:600 30px/1.35 var(--head);margin-top:12px}
+.frame u{text-decoration:none;background:var(--yt);border-bottom:3px dashed var(--yd);padding:0 12px;border-radius:6px}
+
+/* quiz */
+.quizwrap{display:grid;grid-template-columns:1fr 600px;gap:44px;height:100%}
+.qmain{display:flex;flex-direction:column}
+.qtop{display:flex;justify-content:space-between;align-items:center}
+.qn{font:800 26px var(--geo);color:var(--faint)}
+.qt{font:800 56px/1.12 var(--head);letter-spacing:-.025em;margin-top:20px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr;gap:20px;margin-top:30px;flex:1}
+.qo{display:flex;align-items:center;gap:20px;text-align:left;border:0;background:var(--grey);border-radius:24px;padding:24px 28px;min-height:120px;font:700 46px/1.15 var(--geo);cursor:pointer;transition:background .2s}
+.qo:hover{background:var(--grey2)}
+.qo b{flex:none;width:62px;height:62px;border-radius:50%;background:#fff;display:grid;place-items:center;font:800 23px var(--geo)}
+.qo.ok{background:#CDEBD6} .qo.ok b{background:var(--g);color:#fff}
+.qo.bad{background:#F8CBD2;animation:shake .4s} .qo.bad b{background:var(--p);color:#fff}
+.qfoot{margin-top:20px;display:flex;align-items:center;gap:16px;min-height:96px}
+.explain{flex:1;visibility:hidden;background:var(--gt);border-radius:20px;padding:18px 24px;font-size:28px;line-height:1.35}
+.explain.show{visibility:visible;animation:rise .45s both}
+.qart{background:var(--yt);border-radius:32px;display:flex;align-items:center;justify-content:center;padding:20px}
+.qart svg{max-width:100%;max-height:100%}
+.drawbtn{visibility:hidden}
+.drawbtn.show{visibility:visible;animation:pop .5s cubic-bezier(.2,.9,.3,1.3) both}
+
+/* furniture board */
+.fboard{display:grid;gap:18px}
+.fcol{border-radius:24px;background:var(--grey);padding:18px 18px 16px;border-top:10px solid var(--tc);display:flex;flex-direction:column}
+.fcol h4{display:flex;justify-content:space-between;align-items:center;font-size:28px}
+.fcol h4 span{font:800 22px var(--geo);color:var(--muted)}
+.fitems{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;align-content:flex-start;flex:1}
+.fit{background:#fff;border-radius:16px;padding:8px 8px 6px;display:flex;flex-direction:column;align-items:center;width:112px;font:700 16px var(--geo)}
+.fit svg{width:84px;height:84px}
+.fit.miss{background:transparent;outline:3px dashed #CDD2CE;outline-offset:-3px;color:var(--faint)}
+.fit.miss svg{opacity:.22}
+.fcol .btn{margin-top:12px;justify-content:center}
+.stockrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.stk{display:flex;align-items:center;gap:6px;background:var(--grey);border-radius:14px;padding:6px 14px 6px 8px;font:800 22px var(--geo)}
+.stk svg{width:46px;height:46px}
+.stk.zero{opacity:.35}
+
+/* draw modal */
+.drawm{width:min(1000px,96vw)}
+.dteams{display:flex;gap:10px;flex-wrap:wrap}
+.dteams button{display:flex;align-items:center;gap:8px;font:700 19px var(--geo);padding:12px 18px 10px;border-radius:14px;border:0;background:var(--grey);cursor:pointer;border-left:8px solid var(--tc)}
+.dteams button.on{background:var(--ink);color:#fff}
+.dteams button small{font-weight:600;opacity:.7;font-size:14px}
+.dstage{margin-top:16px;height:400px;border-radius:28px;background:var(--grey);display:flex;align-items:center;justify-content:center;gap:40px;position:relative;overflow:hidden}
+.dstage::before{content:"";position:absolute;left:0;right:0;top:0;height:12px;background:var(--tc,var(--grey2))}
+.dstage svg{width:300px;height:300px}
+.dstage .dname{font:800 72px/1 var(--head);letter-spacing:-.02em}
+.dstage .dsub{font:700 22px var(--geo);color:var(--muted);margin-top:14px;letter-spacing:.06em;text-transform:uppercase}
+.dstage.landed{animation:flashbg 1s ease-out}
+.dstage.landed svg{animation:pop .6s cubic-bezier(.2,.9,.3,1.5)}
+@keyframes flashbg{40%{background:#FBE3A3}}
+.dfoot{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+
+/* room model */
+.model{display:grid;grid-template-columns:640px 1fr;gap:40px;height:100%}
+.roombox{background:var(--bt);border-radius:28px;display:flex;align-items:center;justify-content:center;padding:20px}
+.msteps{display:flex;flex-direction:column;gap:12px}
+.ms{display:grid;grid-template-columns:62px 1fr;gap:18px;align-items:center;background:var(--grey);border-radius:22px;padding:14px 22px 14px 16px}
+.ms .sn{width:58px;height:58px;border-radius:50%;background:var(--y);display:grid;place-items:center;font:800 28px var(--geo)}
+.ms p{font-size:27px;line-height:1.3}
+.ms p b{font-family:var(--geo)}
+.ms.hi{background:var(--gt)}
+
+/* task */
+.tsteps{display:flex;flex-direction:column;gap:14px}
+.tstep{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--grey);border-radius:22px;padding:18px 26px}
+.tstep .sn{font:800 46px/1 var(--geo);color:var(--yd);min-width:40px}
+.tstep p{font-size:29px;line-height:1.3}
+.wtab{width:100%;border-collapse:separate;border-spacing:6px;margin:-6px;font:600 25px var(--head)}
+.wtab th{background:var(--ink);color:#fff;font:700 20px var(--geo);padding:12px;border-radius:12px}
+.wtab td{background:#fff;border-radius:12px;padding:12px 14px;height:58px}
+.wtab td.d{color:var(--faint)}
+
+/* calc board */
+.ctabs{display:flex;gap:10px;flex-wrap:wrap}
+.ctabs button{display:flex;align-items:center;gap:10px;font:700 22px var(--geo);padding:12px 20px 10px;border-radius:14px;border:0;background:var(--grey);cursor:pointer;border-left:8px solid var(--tc)}
+.ctabs button.on{background:var(--ink);color:#fff}
+.ctabs button b{font-size:18px;background:#fff;color:var(--ink);border-radius:8px;padding:3px 8px 1px}
+.ctab{width:100%;border-collapse:separate;border-spacing:8px;margin:-8px;font:700 26px var(--geo)}
+.ctab th{font:700 18px var(--geo);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;padding:2px}
+.ctab td{background:var(--grey);border-radius:14px;padding:6px 10px;text-align:center;height:66px}
+.ctab td.nm{text-align:left;padding-left:10px}
+.ctab td.nm .in{display:flex;align-items:center;gap:10px}
+.ctab td.nm svg{width:52px;height:52px}
+.ctab input{width:100%;max-width:150px;border:0;border-radius:10px;background:#fff;padding:10px 8px;font:800 26px var(--geo);text-align:center;outline:none}
+.ctab input:focus{outline:3px solid var(--y)}
+.ctab .key{color:var(--gd)}
+.ctab .key.hid{color:transparent;background:repeating-linear-gradient(45deg,#E8E9E7 0 10px,var(--grey) 10px 20px);border-radius:10px}
+.ctab tr.sum td{background:var(--yt)}
+.ctab tr.free td{background:var(--gt)}
+.mk{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:50%;font:800 24px var(--geo)}
+.mk.ok{background:var(--g);color:#fff} .mk.no{background:var(--p);color:#fff} .mk.na{background:transparent;color:var(--faint)}
+.cscore{font:800 34px var(--geo)}
+.ctab td:last-child{background:transparent}
+.delr{border:0;background:transparent;color:var(--faint);cursor:pointer;font-size:20px;border-radius:8px;width:34px;height:34px}
+.delr:hover{background:var(--pt);color:var(--pd)}
+
+/* feedback & vote */
+.fbgrid{display:grid;gap:18px}
+.fbc{background:var(--grey);border-radius:24px;padding:20px 22px;border-top:10px solid var(--tc);display:flex;flex-direction:column;gap:12px}
+.fbc h4{font-size:30px}
+.crit{flex:1;display:flex;flex-direction:column;justify-content:center;gap:8px;background:#fff;border-radius:18px;padding:14px 16px}
+.crit span{font:700 26px/1.2 var(--geo)}
+.stars{display:flex;gap:2px}
+.stars button{border:0;background:none;padding:2px;cursor:pointer}
+.stars svg{width:62px;height:62px}
+.fbsum{font:800 30px var(--geo);text-align:right;color:var(--muted)}
+.vc{background:var(--grey);border-radius:28px;padding:22px;border-top:12px solid var(--tc);display:flex;flex-direction:column;align-items:center;gap:12px}
+.vc h4{font-size:32px}
+.vc .stk2{display:flex;flex-wrap:wrap;justify-content:center;gap:4px;min-height:220px;align-content:flex-start;width:100%}
+.vc .stk2 svg{width:52px;height:52px;animation:pop .4s cubic-bezier(.2,.9,.3,1.4)}
+.vc .vn2{font:800 64px/1 var(--geo)}
+.vc .vbtns{display:flex;gap:10px}
+.vc .vbtns button{width:64px;height:64px;border-radius:18px;border:0;background:#fff;font:800 32px var(--geo);cursor:pointer}
+
+/* final */
+.final{display:flex;flex-direction:column;justify-content:center;gap:22px;margin-top:20px}
+.final .fbar .tr{height:80px}
+.fbar{display:grid;grid-template-columns:60px 250px 1fr 90px;gap:18px;align-items:center;font:700 26px var(--geo);opacity:0;transform:translateX(-40px);transition:opacity .45s,transform .5s cubic-bezier(.2,.8,.3,1.3)}
+.fbar.in{opacity:1;transform:none}
+.fbar .rk{font:800 40px var(--geo);color:var(--faint)}
+.fbar .tr{display:flex;height:64px;background:var(--grey);border-radius:16px;overflow:hidden}
+.fbar .seg{height:100%;width:0;transition:width 1.2s cubic-bezier(.2,.7,.2,1);display:flex;align-items:center;justify-content:center;font:800 20px var(--geo);color:#fff;white-space:nowrap;overflow:hidden}
+.fbar .s1{background:var(--g)} .fbar .s2{background:var(--b)} .fbar .s3{background:var(--y);color:var(--ink)}
+.fbar .tot{font:800 44px var(--geo);text-align:right}
+.fbar.win .rk{color:var(--yd)}
+.fbar.win{animation:winpulse 1s ease 3}
+@keyframes winpulse{50%{transform:scale(1.03)}}
+.legend{display:flex;gap:26px;font:700 21px var(--geo);color:var(--muted)}
+.legend i{display:inline-block;width:18px;height:18px;border-radius:6px;margin-right:8px;vertical-align:-2px}
+
+/* chrome */
+.toolbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:2px;background:var(--ink);padding:6px;border-radius:16px;z-index:50;transition:opacity .3s,transform .3s}
+.toolbar.hide{opacity:0;transform:translate(-50%,14px);pointer-events:none}
+.toolbar button{width:44px;height:42px;border-radius:10px;border:0;background:transparent;color:#EDEFED;cursor:pointer;display:grid;place-items:center}
+.toolbar button:hover{background:rgba(255,255,255,.14)}
+.toolbar svg{width:21px;height:21px}
+.toolbar .sep{width:1px;height:22px;background:rgba(255,255,255,.2);margin:10px 4px}
+.toolbar .muted-ind{color:#F4A07A}
+.strip{position:fixed;top:14px;right:16px;display:flex;flex-wrap:wrap;justify-content:flex-end;gap:6px;z-index:40;max-width:72vw}
+.strip button{display:flex;align-items:center;gap:6px;font:700 14px var(--geo);padding:5px 10px 4px 9px;border-radius:999px;border:0;background:var(--grey);cursor:pointer;min-height:34px}
+.strip button i{width:11px;height:11px;border-radius:50%;background:var(--tc);flex:none}
+.strip button svg{width:22px;height:22px}
+.strip button.pulse{animation:pulse .7s}
+@keyframes pulse{40%{transform:scale(1.2);background:#FBE3A3}}
+.responder{position:fixed;top:14px;left:16px;z-index:40;display:none;align-items:center;gap:10px;background:var(--grey);border-radius:16px;padding:7px 8px 7px 14px;font:600 15px var(--geo);border-left:6px solid var(--tc,#18201B)}
+.responder.show{display:flex;animation:rise .35s both}
+.responder small{display:block;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.responder b{font-size:17px}
+.responder button{border:0;background:#fff;border-radius:9px;padding:7px 11px 5px;font:700 14px var(--geo);cursor:pointer}
+.responder button.y{background:var(--y)}
+.toast{position:fixed;left:50%;top:64px;transform:translate(-50%,-10px);background:var(--ink);color:#fff;font:700 18px var(--geo);padding:12px 18px 10px;border-radius:14px;opacity:0;transition:all .3s;z-index:90;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.scrim{position:fixed;inset:0;background:rgba(24,32,27,.5);z-index:60;display:none;align-items:center;justify-content:center;padding:24px}
+.scrim.show{display:flex;animation:fade .2s both}
+.modal{background:#fff;border-radius:26px;max-height:calc(100vh - 48px);overflow:auto;animation:rise .3s both}
+.mh{display:flex;justify-content:space-between;align-items:center;padding:20px 26px 10px;position:sticky;top:0;background:#fff;z-index:2}
+.mh h3{font-size:28px}
+.xbtn{width:40px;height:40px;border-radius:12px;border:0;background:var(--grey);cursor:pointer;font-size:16px}
+.mb{padding:10px 26px 26px}
+label.f{display:block;font:700 13px var(--geo);letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+textarea,input[type=text],input[type=number],select{font:500 15px var(--head);background:var(--grey);border:0;border-radius:12px;padding:10px 12px;outline:none}
+textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
+.mbtn{font:700 14px var(--geo);padding:11px 15px 9px;border-radius:12px;border:0;background:var(--grey);cursor:pointer}
+.mbtn.solid{background:var(--ink);color:#fff}
+.mbtn.ghost{background:transparent;color:var(--muted)}
+.setup{width:min(1180px,96vw)}
+.setup .mb{display:grid;grid-template-columns:320px 1fr;gap:24px}
+.setup textarea{width:100%;height:300px;resize:vertical;line-height:1.5}
+.setup .opts{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.setup .r{display:flex;gap:8px;align-items:center;font-size:14px;flex-wrap:wrap}
+.teamed{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;align-content:start}
+.tcard{background:var(--grey);border-top:6px solid var(--tc);border-radius:16px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:150px}
+.tcard.hot{outline:3px solid var(--y)}
+.tcard header{display:flex;align-items:center;gap:6px}
+.tdot{width:22px;height:22px;border-radius:50%;background:var(--tc);border:0;cursor:pointer;flex:none}
+.tname{flex:1;min-width:0;font:700 15px var(--geo)!important;background:transparent!important;padding:6px 8px!important}
+.tname:hover{background:#fff!important}
+.tcount{font:700 12px var(--geo);color:var(--faint)}
+.tdel,.mdel{border:0;background:transparent;color:var(--faint);cursor:pointer;border-radius:6px}
+.tdel:hover,.mdel:hover{background:var(--pt);color:var(--pd)}
+.tmem{display:flex;flex-wrap:wrap;gap:6px;flex:1;align-content:flex-start}
+.mchip{display:inline-flex;align-items:center;gap:2px;font:500 13px var(--head);background:#fff;border-radius:9px;padding:4px 4px 4px 9px;cursor:grab}
+.mchip.dragging{opacity:.4}
+.tadd input{width:100%;font-size:13px;padding:7px 9px;background:#fff}
+.foot2{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 26px;position:sticky;bottom:0;background:#fff;flex-wrap:wrap}
+.stat{font-size:13px;color:var(--muted)}
+.picker{width:min(860px,94vw)}
+.pmodes{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.seg2{display:inline-flex;background:var(--grey);border-radius:12px;padding:4px}
+.seg2 button{border:0;background:transparent;padding:8px 14px 6px;font:700 14px var(--geo);cursor:pointer;color:var(--muted);border-radius:9px}
+.seg2 button.on{background:var(--ink);color:#fff}
+.stage{margin-top:16px;height:280px;border-radius:24px;background:var(--grey);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;--tc:var(--grey2)}
+.stage::before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:var(--tc)}
+.pname{font:800 78px/1.05 var(--head);letter-spacing:-.025em;text-align:center;padding:0 20px}
+.pteam{margin-top:14px;font:800 17px var(--geo);letter-spacing:.12em;text-transform:uppercase;color:var(--tc)}
+.stage.landed .pname{animation:land .5s cubic-bezier(.2,.8,.3,1.5)}
+@keyframes land{from{transform:scale(.7)}to{transform:none}}
+.stage.landed{animation:flashbg .9s ease-out}
+.pfoot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.pfoot .meta{font-size:13px;color:var(--muted)}
+.timerw{position:fixed;left:16px;top:64px;z-index:45;display:none;align-items:center;gap:10px;background:var(--grey);border-radius:18px;padding:8px 10px 8px 8px}
+.timerw.show{display:flex;animation:rise .3s both}
+.timerw svg{width:58px;height:58px;transform:rotate(-90deg)}
+.timerw .t{font:800 34px var(--geo);min-width:96px;font-variant-numeric:tabular-nums}
+.timerw button{border:0;background:#fff;border-radius:10px;height:34px;padding:0 10px;font:700 13px var(--geo);cursor:pointer}
+.timerw.done{animation:flash .5s 6 alternate}
+@keyframes flash{to{background:var(--ot)}}
+.tpop{width:min(460px,94vw)}
+.tpre{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.tpre button{padding:16px 0;border-radius:14px;border:0;background:var(--grey);font:800 24px var(--geo);cursor:pointer}
+.ov{width:min(980px,94vw)}
+.ovgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.ovgrid button{display:flex;gap:10px;align-items:baseline;text-align:left;border:0;background:var(--grey);border-radius:12px;padding:10px 12px;font:600 14px/1.3 var(--head);cursor:pointer}
+.ovgrid button.cur{background:var(--ink);color:#fff}
+.ovgrid button b{font:800 15px var(--geo);color:var(--faint);min-width:22px}
+.ovpart{grid-column:1/-1;font:800 12px var(--geo);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.boardm{width:min(1400px,96vw)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:80}
+
+@page{size:1600px 900px;margin:0}
+@media print{
+  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html,body{overflow:visible!important;height:auto!important}
+  #deck{position:static!important;transform:none!important;height:auto!important;overflow:visible!important}
+  #deck>.prog{display:none!important}
+  .slide{position:relative!important;inset:auto!important;width:1600px!important;height:900px!important;opacity:1!important;visibility:visible!important;break-after:page;overflow:hidden!important}
+  .frag{opacity:1!important;transform:none!important}
+  .toolbar,.strip,.responder,.timerw,.scrim,#confetti,.toast{display:none!important}
+}
+</style></head><body>
+<div id="deck"><div class="prog"><i id="progBar"></i></div>
+
+<!-- 1 TITLE -->
+<section class="slide" data-part="Opening" data-title="Area of a Rectangle">
+ <div class="title-wrap">
+  <div>
+   <div class="kicker rv">CLIL · Maths in English · Grade 3</div>
+   <h1 class="rv" style="--i:1">Area of a<br>Rectangle</h1>
+   <p class="lead rv" style="--i:2">How much <span class="cg">space</span> is <span class="co">inside</span> a shape?<br>Let's find out — and design a bedroom!</p>
+   <div class="chips rv" style="--i:3"><b>Thầy Độ</b><span>length</span><span>width</span><span>area</span><span>cm²</span></div>
+  </div>
+  <div class="box y titleart rv" style="--i:2" id="titleArt"></div>
+ </div>
+</section>
+
+<!-- 2 GOALS -->
+<section class="slide flexs" data-part="Opening" data-title="Today we will…">
+ <div class="kicker rv">Today we will…</div><h2 class="rv" style="--i:1">Our three goals</h2>
+ <div class="g3 fill mt32">
+  <div class="box g goal rv" style="--i:1"><svg class="ill" width="110" height="110" viewBox="0 0 120 120"><rect x="14" y="30" width="92" height="62" rx="4" fill="#fff" stroke="#18201B" stroke-width="4"/><g stroke="#4E9A6B" stroke-width="2" stroke-dasharray="4 4"><path d="M37 30v62M60 30v62M83 30v62M14 51h92M14 72h92"/></g><path d="M14 104h92" stroke="#EE7D45" stroke-width="5" stroke-linecap="round"/><path d="M114 30v62" stroke="#4A93D6" stroke-width="5" stroke-linecap="round"/></svg>
+   <div class="gk">Maths</div><h3>Find the area</h3><p>Area of a rectangle<br>= <b class="co">length</b> × <b class="cb">width</b></p><div class="say">Answer in <b>square centimetres (cm²)</b>.</div></div>
+  <div class="box b goal rv" style="--i:2"><svg class="ill" width="110" height="110" viewBox="0 0 120 120"><path d="M16 16 h88 a12 12 0 0 1 12 12 v44 a12 12 0 0 1 -12 12 h-46 l-24 22 v-22 h-18 a12 12 0 0 1 -12 -12 v-44 a12 12 0 0 1 12 -12z" fill="#4A93D6"/><rect x="26" y="36" width="68" height="9" rx="4.5" fill="#fff"/><rect x="26" y="54" width="46" height="9" rx="4.5" fill="#fff"/></svg>
+   <div class="gk">English</div><h3>Say it in English</h3><p>length · width · area<br>square centimetre</p><div class="say">“The area is <b>12</b> square centimetres.”</div></div>
+  <div class="box o goal rv" style="--i:3"><svg class="ill" width="110" height="110" viewBox="0 0 120 120"><rect x="10" y="40" width="100" height="70" rx="6" fill="#fff" stroke="#18201B" stroke-width="4"/><rect x="18" y="50" width="36" height="24" rx="3" fill="#fff" stroke="#18201B" stroke-width="3.5"/><rect x="22" y="53" width="10" height="18" rx="2" fill="#F1F1F0" stroke="#18201B" stroke-width="2.5"/><rect x="74" y="50" width="28" height="12" rx="2" fill="#fff" stroke="#18201B" stroke-width="3.5"/><rect x="70" y="84" width="32" height="18" rx="4" fill="#fff" stroke="#18201B" stroke-width="3.5"/><path d="M60 8 l6 12 13 2 -10 9 3 13 -12-7 -12 7 3-13 -10-9 13-2z" fill="#F6BE4A"/></svg>
+   <div class="gk">Project</div><h3>Design a bedroom</h3><p>Work in groups.<br>Measure, calculate, present.</p><div class="say">Win furniture by giving <b>right answers</b>!</div></div>
+ </div>
+</section>
+
+<!-- 3 REWARD RULES -->
+<section class="slide flexs" data-part="Opening" data-title="Win furniture!">
+ <div class="kicker rv">Our reward</div><h2 class="rv" style="--i:1">Right answer = draw a furniture piece!</h2>
+ <p class="lead rv mt16" style="--i:2">Every group will get <b class="cb">1 bed, 1 wardrobe and 1 sofa</b> — plus some <b class="cy">surprise items</b>. Keep them for your bedroom project.</p>
+ <div class="fgrid fill mt24 rv" style="--i:3" id="rewardGrid"></div>
+ <div class="actions rv" style="--i:4"><button class="btn dark" data-open-setup>Set up the 4 groups</button><button class="btn y" data-draw>Try a draw</button><button class="btn" data-board>See the furniture board</button></div>
+</section>
+
+<!-- 4 DIVIDER WARM-UP -->
+<section class="slide" data-part="Warm-up" data-title="Warm-up">
+ <div class="divider">
+  <div><div class="big rv">00</div><div class="tag rv" style="--i:1">Warm-up</div><h1 class="rv" style="--i:2">Ready, steady, measure!</h1>
+   <div class="sub rv" style="--i:3"><div><b>Game 1</b>How long is it?</div><div><b>Game 2</b>Rectangle hunt</div><div><b>Game 3</b>Which rug is bigger?</div></div></div>
+  <div class="box b divart rv" style="--i:2" id="divWarm"></div>
+ </div>
+</section>
+
+<!-- 5 RULER -->
+<section class="slide flexs" data-part="Warm-up" data-title="Game 1: How long is it?">
+ <div class="kicker rv">Warm-up · Game 1</div><h2 class="rv" style="--i:1">How long is it?</h2>
+ <div class="rwrap fill mt24 rv" style="--i:2;display:flex;flex-direction:column">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+   <div class="rtabs" id="rTabs"><button data-r="0" class="on">Pencil</button><button data-r="1">Eraser</button><button data-r="2">Crayon</button></div>
+   <button class="btn dark" data-pick>Call a student</button>
+  </div>
+  <div id="rulerArt" style="flex:1;display:flex;align-items:center;justify-content:center"></div>
+  <div style="display:flex;align-items:center;gap:22px">
+   <p style="font:600 36px var(--head)">The <b id="rObj">pencil</b> is</p>
+   <span class="rans hid" id="rAns">7 cm</span><p style="font:600 36px var(--head)">long.</p>
+   <button class="qbtn" id="rShow" title="Show answer">?</button>
+   <span class="small" style="margin-left:auto">Start at <b>0</b>, read the number at the end.</span>
+  </div>
+ </div>
+</section>
+
+<!-- 6 HUNT -->
+<section class="slide flexs" data-part="Warm-up" data-title="Game 2: Rectangle hunt">
+ <div class="kicker rv">Warm-up · Game 2</div><h2 class="rv" style="--i:1">Rectangle hunt: Is it a rectangle?</h2>
+ <p class="lead rv mt8" style="--i:2">Say <b class="cg">“Yes, it is.”</b> or <b class="co">“No, it isn't.”</b> — then tap to check.</p>
+ <div class="hunt fill mt24 rv" style="--i:3" id="hunt"></div>
+</section>
+
+<!-- 7 RUGS -->
+<section class="slide flexs" data-part="Warm-up" data-title="Game 3: Which rug is bigger?">
+ <div class="kicker rv">Warm-up · Game 3</div><h2 class="rv" style="--i:1">Which rug covers more floor?</h2>
+ <div class="rugs fill mt24 rv" style="--i:2" id="rugs"></div>
+ <div class="actions" style="margin-top:16px"><button class="btn y" id="rugGo">Show the squares</button><button class="btn" id="rugReset">Reset</button><p class="small frag" data-f="1" id="rugMsg" style="margin-left:12px">The space <b>inside</b> a shape is its <mark><b>area</b></mark>.</p></div>
+</section>
+
+<!-- 8 DIVIDER LEARN -->
+<section class="slide" data-part="Learn" data-title="Part 1 — Learn">
+ <div class="divider">
+  <div><div class="big rv">01</div><div class="tag rv" style="--i:1">Part 1 · Learn</div><h1 class="rv" style="--i:2">Area of a rectangle</h1>
+   <div class="sub rv" style="--i:3"><div><b>Words</b>length · width · area</div><div><b>Unit</b>square centimetre</div><div><b>Rule</b>Length × Width</div></div></div>
+  <div class="box g divart rv" style="--i:2" id="divLearn"></div>
+ </div>
+</section>
+
+<!-- 9 VOCAB -->
+<section class="slide flexs" data-part="Learn" data-title="Key words">
+ <div class="kicker rv">Key words</div><h2 class="rv" style="--i:1">Length, width and area</h2>
+ <div class="g3 fill mt32">
+  <div class="box o voc rv" style="--i:1"><svg viewBox="0 0 300 200" id="vL"></svg><h3>length</h3><div class="ph">/leŋθ/ · <span class="vn">chiều dài</span></div><p>The <b class="co">long</b> side.<br>The length is <b>6 cm</b>.</p></div>
+  <div class="box b voc rv" style="--i:2"><svg viewBox="0 0 300 200" id="vW"></svg><h3>width</h3><div class="ph">/wɪdθ/ · <span class="vn">chiều rộng</span></div><p>The <b class="cb">short</b> side.<br>The width is <b>3 cm</b>.</p></div>
+  <div class="box y voc rv" style="--i:3"><svg viewBox="0 0 300 200" id="vA"></svg><h3>area</h3><div class="ph">/ˈeəriə/ · <span class="vn">diện tích</span></div><p>The <b class="cy">space inside</b>.<br>The area is <b>18 cm²</b>.</p></div>
+ </div>
+</section>
+
+<!-- 10 SQUARE CM -->
+<section class="slide flexs" data-part="Learn" data-title="Square centimetre">
+ <div class="kicker rv">The unit</div><h2 class="rv" style="--i:1">One square centimetre: 1 cm²</h2>
+ <div class="g2 fill mt32" style="grid-template-columns:.9fr 1.1fr">
+  <div class="box y rv" style="--i:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+   <svg width="360" height="330" viewBox="0 0 360 330"><rect x="80" y="40" width="200" height="200" fill="#CDEBD6" stroke="#18201B" stroke-width="6" rx="4"/><text x="180" y="160" text-anchor="middle" font-family="League Spartan,Poppins,sans-serif" font-weight="800" font-size="56" fill="#3A7A52">1 cm²</text><path d="M80 280h200" stroke="#EE7D45" stroke-width="6" stroke-linecap="round"/><path d="M80 268v24M280 268v24" stroke="#EE7D45" stroke-width="5"/><text x="180" y="320" text-anchor="middle" font-family="League Spartan,Poppins,sans-serif" font-weight="700" font-size="30" fill="#C9612F">1 cm</text><path d="M316 40v200" stroke="#4A93D6" stroke-width="6" stroke-linecap="round"/><path d="M304 40h24M304 240h24" stroke="#4A93D6" stroke-width="5"/><text x="346" y="150" text-anchor="middle" font-family="League Spartan,Poppins,sans-serif" font-weight="700" font-size="30" fill="#3576B4" transform="rotate(90 346 150)">1 cm</text></svg>
+   <p style="font:700 34px var(--geo);text-align:center">A square: 1 cm long, 1 cm wide.</p>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:20px">
+   <div class="box g rv" style="--i:2"><p style="font-size:30px">We write: <b style="font:800 44px var(--geo)">cm²</b></p><p class="mt8" style="font-size:30px">We say: <b>“square centimetre(s)”</b></p><p class="vn mt8">xăng-ti-mét vuông</p></div>
+   <div class="box rv" style="--i:3;flex:1;display:flex;align-items:center;gap:30px">
+    <svg width="300" height="200" viewBox="0 0 300 200" id="sixSq"></svg>
+    <div><p style="font-size:30px">This shape has <b>6</b> squares.</p><p class="mt16" style="font:800 46px var(--geo)" >Area = <span class="cg">6 cm²</span></p></div>
+   </div>
+  </div>
+ </div>
+</section>
+
+<!-- 11 COUNT -->
+<section class="slide flexs" data-part="Learn" data-title="Count the squares">
+ <div class="kicker rv">Let's count</div><h2 class="rv" style="--i:1">What is the area of this rectangle?</h2>
+ <div class="cwrap fill mt32 rv" style="--i:2">
+  <div><div class="cgrid" id="cgrid" style="grid-template-columns:repeat(4,140px)"></div>
+   <div style="display:flex;justify-content:space-between;margin-top:14px;font:700 26px var(--geo)"><span class="co">length = 4 cm</span><span class="cb">width = 3 cm</span></div></div>
+  <div>
+   <p class="lead">Tap each square to count.</p>
+   <div class="ccount mt16"><span id="cnum">0</span> <small>squares</small></div>
+   <div class="rowsum" id="rowsum"></div>
+   <div class="actions"><button class="btn y" id="cRows">Count by rows</button><button class="btn" id="cReset">Reset</button><button class="btn dark" data-pick>Call a student</button></div>
+  </div>
+ </div>
+</section>
+
+<!-- 12 FIND THE RULE -->
+<section class="slide flexs" data-part="Learn" data-title="Find the rule">
+ <div class="kicker rv">Be a maths detective</div><h2 class="rv" style="--i:1">Count, then look at length and width</h2>
+ <div class="fill mt24 rv" style="--i:2;display:grid;grid-template-columns:1fr 430px;gap:30px">
+  <table class="rtab"><tr><th>Rectangle</th><th>Squares</th><th class="co">Length</th><th class="cb">Width</th></tr><tbody id="ruleRows"></tbody></table>
+  <div style="display:flex;flex-direction:column;gap:18px">
+   <div class="box y"><p style="font:700 32px/1.3 var(--geo)">What do you notice?</p><p class="small mt8">Tap the boxes with “?” to check.</p></div>
+   <div class="box gd frag" data-f="1" style="flex:1;display:flex;flex-direction:column;justify-content:center"><p style="font:800 40px/1.2 var(--geo);color:#fff">Squares =<br>Length × Width</p><p class="mt16" style="color:#fff">3 × 2 = 6 · 4 × 3 = 12 · 5 × 2 = 10</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- 13 THE RULE -->
+<section class="slide flexs" data-part="Learn" data-title="The rule">
+ <div class="kicker rv">Remember</div><h2 class="rv" style="--i:1">The area of a rectangle</h2>
+ <div class="formula mt24 rv" style="--i:2"><span class="a">Area</span><span>=</span><span class="l">Length</span><span>×</span><span class="w">Width</span></div>
+ <div class="g2 fill mt24" style="grid-template-columns:1fr 1.1fr">
+  <div class="box y rv" style="--i:3;display:flex;align-items:center;justify-content:center"><svg id="ruleEx" width="520" height="300" viewBox="0 0 520 300"></svg></div>
+  <div class="box g rv" style="--i:4;display:flex;flex-direction:column;justify-content:center">
+   <p style="font:700 34px var(--geo)">Length = 5 cm, Width = 3 cm</p>
+   <p class="mt16" style="font:800 50px var(--geo)">5 × 3 = <span class="cg">15 cm²</span></p>
+   <div class="frame mt24">The length is <u>5</u> centimetres.<br>The width is <u>3</u> centimetres.<br>The area is <u>15</u> square centimetres.</div>
+  </div>
+ </div>
+</section>
+
+<!-- 14 DIVIDER PRACTICE -->
+<section class="slide" data-part="Practice" data-title="Part 2 — Practice">
+ <div class="divider">
+  <div><div class="big rv">02</div><div class="tag rv" style="--i:1">Part 2 · Practice</div><h1 class="rv" style="--i:2">Answer &amp; win furniture</h1>
+   <div class="sub rv" style="--i:3"><div><b>Step 1</b>Thầy calls a student</div><div><b>Step 2</b>Answer in English</div><div><b>Step 3</b>Right? Draw a piece!</div></div></div>
+  <div class="box y divart rv" style="--i:2" id="divPrac"></div>
+ </div>
+</section>
+
+<!-- QUIZ SLIDES are inserted here by script -->
+<section class="slide flexs" data-part="Practice" data-title="Furniture board" id="boardSlide">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Furniture board</div><h2 class="rv" style="--i:1">What does each group have?</h2></div>
+  <div class="actions rv" style="--i:2;margin:0"><button class="btn y" data-draw>Draw</button><button class="btn" id="dealRest">Give out the rest</button></div></div>
+ <div class="stockrow mt16 rv" style="--i:2" id="stockRow"></div>
+ <div class="fboard fill mt16 rv" style="--i:3" id="boardMain"></div>
+</section>
+
+<!-- DIVIDER PROJECT -->
+<section class="slide" data-part="Project" data-title="Part 3 — Design a bedroom">
+ <div class="divider">
+  <div><div class="big rv">03</div><div class="tag rv" style="--i:1">Part 3 · Project</div><h1 class="rv" style="--i:2">Design a bedroom</h1>
+   <div class="sub rv" style="--i:3"><div><b>Room</b>40 cm × 30 cm</div><div><b>Measure</b>length &amp; width</div><div><b>Calculate</b>area &amp; free floor</div></div></div>
+  <div class="box o divart rv" style="--i:2" id="divProj"></div>
+ </div>
+</section>
+
+<!-- ROOM AREA -->
+<section class="slide flexs" data-part="Project" data-title="Our room">
+ <div class="kicker rv">Your room</div><h2 class="rv" style="--i:1">What is the area of the floor?</h2>
+ <div class="g2 fill mt24" style="grid-template-columns:1.1fr .9fr">
+  <div class="box b rv" style="--i:2;display:flex;align-items:center;justify-content:center"><svg id="roomBig" width="660" height="520" viewBox="0 0 660 520"></svg></div>
+  <div style="display:flex;flex-direction:column;gap:18px">
+   <div class="box rv" style="--i:3"><p style="font:700 32px var(--geo)">Length = <span class="co">40 cm</span></p><p class="mt8" style="font:700 32px var(--geo)">Width = <span class="cb">30 cm</span></p></div>
+   <div class="box y rv" style="--i:4"><p style="font-size:28px">Tip: 4 × 3 = 12<br>so 40 × 30 = 12<b>00</b></p></div>
+   <div class="box gd frag" data-f="1" style="flex:1;display:flex;flex-direction:column;justify-content:center"><p style="font:800 40px var(--geo);color:#fff">40 × 30 = 1,200 cm²</p><p class="mt8" style="color:#fff">The floor area is 1,200 square centimetres.</p></div>
+  </div>
+ </div>
+</section>
+
+<!-- TEACHER MODEL -->
+<section class="slide flexs" data-part="Project" data-title="Watch Thầy Độ first">
+ <div class="kicker rv">Watch first</div><h2 class="rv" style="--i:1">Thầy Độ designs a bedroom</h2>
+ <div class="model fill mt24">
+  <div class="roombox rv" style="--i:2"><svg id="roomModel" width="600" height="470" viewBox="0 0 600 470"></svg></div>
+  <div class="msteps">
+   <div class="ms frag" data-f="1"><span class="sn">1</span><p><b>Place</b> the furniture in the room. Leave space to walk!</p></div>
+   <div class="ms frag" data-f="2"><span class="sn">2</span><p><b>Measure</b> the bottom of each piece with a ruler.<br>Bed: length <b>12 cm</b>, width <b>8 cm</b>.</p></div>
+   <div class="ms frag" data-f="3"><span class="sn">3</span><p><b>Calculate</b> L × W: Bed 12 × 8 = <b>96</b> · Wardrobe 10 × 4 = <b>40</b> · Sofa 9 × 4 = <b>36</b> · Plant 3 × 3 = <b>9</b></p></div>
+   <div class="ms frag" data-f="4"><span class="sn">4</span><p><b>Add</b>: 96 + 40 + 36 + 9 = <b>181 cm²</b> (furniture)</p></div>
+   <div class="ms hi frag" data-f="5"><span class="sn">5</span><p><b>Free floor</b> = 1,200 − 181 = <b class="cg">1,019 cm²</b></p></div>
+  </div>
+ </div>
+</section>
+
+<!-- TASK -->
+<section class="slide flexs" data-part="Project" data-title="Your task">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Group work</div><h2 class="rv" style="--i:1">Now it's your turn!</h2></div>
+  <div class="actions rv" style="--i:2;margin:0"><button class="btn" data-timer="600">10 min</button><button class="btn y" data-timer="900">15 min</button><button class="btn" data-timer="1200">20 min</button></div></div>
+ <div class="g2 fill mt24" style="grid-template-columns:.95fr 1.05fr">
+  <div class="tsteps">
+   <div class="tstep rv" style="--i:2"><span class="sn">1</span><p><b>Design</b>: put all your furniture in the 40 × 30 cm room.</p></div>
+   <div class="tstep rv" style="--i:3"><span class="sn">2</span><p><b>Measure</b> the length and width of each bottom.</p></div>
+   <div class="tstep rv" style="--i:4"><span class="sn">3</span><p><b>Calculate</b> each area: Length × Width.</p></div>
+   <div class="tstep rv" style="--i:5"><span class="sn">4</span><p><b>Add</b> all areas: total furniture area.</p></div>
+   <div class="tstep rv" style="--i:6"><span class="sn">5</span><p><b>Free floor</b> = 1,200 cm² − total.</p></div>
+  </div>
+  <div class="box y rv" style="--i:3;display:flex;flex-direction:column">
+   <h3>Write it like this</h3>
+   <table class="wtab mt16"><tr><th>Furniture</th><th>Length</th><th>Width</th><th>Area</th></tr>
+    <tr><td>Bed</td><td>12 cm</td><td>8 cm</td><td>12 × 8 = 96 cm²</td></tr>
+    <tr><td>Wardrobe</td><td class="d">… cm</td><td class="d">… cm</td><td class="d">… × … = … cm²</td></tr>
+    <tr><td>Sofa</td><td class="d">… cm</td><td class="d">… cm</td><td class="d">… × … = … cm²</td></tr>
+    <tr><td colspan="3"><b>Total furniture area</b></td><td class="d">… cm²</td></tr>
+    <tr><td colspan="3"><b>Free floor</b> = 1,200 − …</td><td class="d">… cm²</td></tr></table>
+   <p class="small mt16">Everyone in the group has a job: designer · measurer · calculator · checker · presenter.</p>
+  </div>
+ </div>
+</section>
+
+<!-- CALC CHECK -->
+<section class="slide flexs" data-part="Project" data-title="Check the maths" id="calcSlide">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Thầy checks</div><h2 class="rv" style="--i:1">Check the maths</h2></div>
+  <div class="actions rv" style="--i:2;margin:0"><button class="btn" id="addRow">+ Add item</button><button class="btn y" id="showKey">Show answers</button></div></div>
+ <div class="ctabs mt16 rv" style="--i:2" id="ctabs"></div>
+ <div class="fill mt24 rv" style="--i:3;display:grid;grid-template-columns:1fr 300px;gap:26px;min-height:0">
+  <div style="overflow:auto;min-height:0"><table class="ctab"><thead><tr><th style="text-align:left">Furniture</th><th>Length (cm)</th><th>Width (cm)</th><th>Group's area</th><th>Correct</th><th></th><th></th></tr></thead><tbody id="ctBody"></tbody></table></div>
+  <div class="box g" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px">
+   <p class="small">Correct answers</p><div class="cscore" style="font-size:90px" id="cScore">0</div><p class="small" id="cOf">of 0</p>
+   <p class="small mt16" style="font-size:18px">Type the measured length and width, then what the group wrote. ✓ / ✗ appears by itself.</p>
+  </div>
+ </div>
+</section>
+
+<!-- DIVIDER PRESENT -->
+<section class="slide" data-part="Present & vote" data-title="Part 4 — Present & vote">
+ <div class="divider">
+  <div><div class="big rv">04</div><div class="tag rv" style="--i:1">Part 4 · Present</div><h1 class="rv" style="--i:2">Show your bedroom</h1>
+   <div class="sub rv" style="--i:3"><div><b>Present</b>1 student per group</div><div><b>Feedback</b>from Thầy Độ</div><div><b>Vote</b>stickers for the best room</div></div></div>
+  <div class="box g divart rv" style="--i:2" id="divPres"></div>
+ </div>
+</section>
+
+<!-- PRESENT FRAMES -->
+<section class="slide flexs" data-part="Present & vote" data-title="How to present">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Presentation</div><h2 class="rv" style="--i:1">Present your bedroom</h2></div>
+  <div class="actions rv" style="--i:2;margin:0"><button class="btn y" data-pick-team>Which group goes first?</button><button class="btn" data-timer="120">2 min</button></div></div>
+ <div class="g2 fill mt24" style="grid-template-columns:1.2fr .8fr">
+  <div class="box b rv" style="--i:2">
+   <div class="frame">This is our bedroom. We have <u>a bed</u>, <u>a wardrobe</u> and <u>a sofa</u>.</div>
+   <div class="frame">The bed is <u>12</u> cm long and <u>8</u> cm wide.<br>Its area is <u>96</u> square centimetres.</div>
+   <div class="frame">The total area of the furniture is <u>…</u> square centimetres.</div>
+   <div class="frame">The free floor area is <u>…</u> square centimetres.</div>
+   <div class="frame">We put the bed <u>next to</u> the window because <u>…</u>.</div>
+  </div>
+  <div class="box y rv" style="--i:3;display:flex;flex-direction:column;gap:14px">
+   <h3>Listeners</h3>
+   <p>Listen and check the maths.</p>
+   <p>Ask one question:</p>
+   <div class="frame" style="font-size:26px">What is the area of the <u>sofa</u>?</div>
+   <div class="frame" style="font-size:26px">Why did you put the <u>wardrobe</u> there?</div>
+   <p class="small" style="margin-top:auto">Useful: next to · near · in the corner · opposite</p>
+  </div>
+ </div>
+</section>
+
+<!-- FEEDBACK -->
+<section class="slide flexs" data-part="Present & vote" data-title="Thầy's feedback">
+ <div class="kicker rv">Feedback</div><h2 class="rv" style="--i:1">Thầy Độ's stars</h2>
+ <div class="fbgrid fill mt24 rv" style="--i:2" id="fbGrid"></div>
+</section>
+
+<!-- VOTE -->
+<section class="slide flexs" data-part="Present & vote" data-title="Sticker vote">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Vote</div><h2 class="rv" style="--i:1">Which bedroom do you like best?</h2></div>
+  <p class="small rv" style="--i:2;max-width:520px;text-align:right">Put your sticker on your favourite room — but <b>not your own group's</b>!</p></div>
+ <div class="g4 fill mt24 rv" style="--i:2" id="voteGrid"></div>
+</section>
+
+<!-- FINAL -->
+<section class="slide flexs" data-part="Present & vote" data-title="And the winner is…" id="finalSlide">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Results</div><h2 class="rv" style="--i:1">And the winner is…</h2></div>
+  <div class="actions rv" style="--i:2;margin:0"><button class="btn y" id="revealFinal">Reveal</button></div></div>
+ <div class="legend mt24 rv" style="--i:2"><span><i style="background:var(--g)"></i>Maths: correct answers</span><span><i style="background:var(--b)"></i>Design: Thầy's stars</span><span><i style="background:var(--y)"></i>Votes: stickers</span></div>
+ <div class="final fill" id="finalBars"></div>
+</section>
+
+<!-- WRAP UP -->
+<section class="slide flexs" data-part="Wrap-up" data-title="What did we learn?">
+ <div class="kicker rv">Wrap-up</div><h2 class="rv" style="--i:1">What did we learn today?</h2>
+ <div class="g3 fill mt32">
+  <div class="box g goal wrapc rv" style="--i:1"><div class="gk" style="margin-top:0">1</div><h3>Area</h3><p>The space inside a shape.<br>We use <b>cm²</b>.</p></div>
+  <div class="box o goal wrapc rv" style="--i:2"><div class="gk" style="margin-top:0">2</div><h3>The rule</h3><p style="font:800 44px/1.3 var(--geo)">Area =<br>Length × Width</p></div>
+  <div class="box b goal wrapc rv" style="--i:3"><div class="gk" style="margin-top:0">3</div><h3>Exit ticket</h3><p>A mat is <b>9 cm</b> long and <b>2 cm</b> wide. What is its area?</p><div class="say frag" data-f="1">9 × 2 = <b class="cg">18 cm²</b></div></div>
+ </div>
+</section>
+
+<!-- THANK YOU -->
+<section class="slide" data-part="Wrap-up" data-title="Great job!">
+ <div class="title-wrap">
+  <div><div class="kicker rv">CLIL · Maths in English</div><h1 class="rv" style="--i:1">Great job,<br>designers!</h1>
+   <p class="lead rv" style="--i:2">Homework: measure your desk at home.<br>What is its area?</p></div>
+  <div class="box g titleart rv" style="--i:2" id="endArt"></div>
+ </div>
+</section>
+</div>
+
+<div class="responder" id="responder"><div><small>Answering</small><b id="respName"></b> <span id="respTeam" style="color:var(--muted)"></span></div><button class="y" id="respDraw">Correct → Draw</button><button id="respX">✕</button></div>
+<div class="strip" id="strip"></div>
+<div class="toast" id="toast"></div>
+
+<div class="toolbar" id="toolbar">
+  <button data-act="prev" title="Back (←)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button data-act="next" title="Next (→)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button>
+  <span class="sep"></span>
+  <button data-act="setup" title="Groups (S)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17.5" cy="9" r="2.5"/><path d="M17 13.6c2.4.2 4 1.8 4.5 4.4"/></svg></button>
+  <button data-act="pick" title="Random student (R)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><circle cx="9" cy="9" r="1.3" fill="currentColor"/><circle cx="15" cy="15" r="1.3" fill="currentColor"/><circle cx="15" cy="9" r="1.3" fill="currentColor"/><circle cx="9" cy="15" r="1.3" fill="currentColor"/></svg></button>
+  <button data-act="draw" title="Draw furniture (D)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 15v-4a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v4"/><path d="M2 15h20v3H2zM4 18v2M20 18v2"/><rect x="5" y="9" width="5" height="3" rx="1"/></svg></button>
+  <button data-act="board" title="Furniture board (B)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg></button>
+  <button data-act="timer" title="Timer (T)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg></button>
+  <span class="sep"></span>
+  <button data-act="sound" id="soundBtn" title="Sound (M)"></button>
+  <button data-act="overview" title="All slides (O)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
+  <button data-act="full" title="Full screen (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+
+<div class="timerw" id="timerw">
+  <svg viewBox="0 0 58 58"><circle cx="29" cy="29" r="24" fill="none" stroke="#E4E5E3" stroke-width="6"/><circle id="tring" cx="29" cy="29" r="24" fill="none" stroke="#F6BE4A" stroke-width="6" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"/></svg>
+  <span class="t" id="ttext">0:00</span><button id="tpause">Pause</button><button id="tplus">+1 min</button><button id="tclose">✕</button>
+</div>
+
+<div class="scrim" id="mSetup"><div class="modal setup">
+  <div class="mh"><h3>Class &amp; groups</h3><button class="xbtn" data-close>✕</button></div>
+  <div class="mb">
+    <div>
+      <label class="f" for="rosterIn">Paste the class list</label>
+      <textarea id="rosterIn" placeholder="One name per line&#10;(optional: name [tab] group)"></textarea>
+      <div class="opts">
+        <div class="r"><label for="teamN" style="min-width:90px">Groups</label><input id="teamN" type="number" min="1" max="4" value="4" style="width:76px"></div>
+        <div class="r"><input type="checkbox" id="useCol"><label for="useCol">Use the group column from the list</label></div>
+        <div class="r"><button class="mbtn solid" id="mkRandom">Shuffle into groups</button><button class="mbtn" id="mkOrder">Split in order</button></div>
+      </div>
+      <p class="stat" style="margin-top:14px;line-height:1.5">The furniture set (4 beds, 4 wardrobes, 4 sofas) is made for <b>4 groups</b>. Drag names between groups. Click a colour dot to change colour.</p>
+    </div>
+    <div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><label class="f" style="margin:0">Groups</label><button class="mbtn" id="addTeam">+ Group</button></div>
+      <div class="teamed" id="teamEd"></div>
+    </div>
+  </div>
+  <div class="foot2"><span class="stat" id="setupStat"></span>
+    <span style="display:flex;gap:8px;flex-wrap:wrap"><button class="mbtn ghost" id="resetFurn">Reset furniture</button><button class="mbtn ghost" id="resetCalled">Reset called</button><button class="mbtn ghost" id="resetLesson">Reset whole lesson</button><button class="mbtn solid" data-close>Done</button></span></div>
+</div></div>
+
+<div class="scrim" id="mPick"><div class="modal picker">
+  <div class="mh"><h3>Random call</h3><button class="xbtn" data-close>✕</button></div>
+  <div class="mb">
+    <div class="pmodes"><div class="seg2" id="pickMode"><button data-m="person" class="on">A student</button><button data-m="team">A group</button></div>
+      <select id="pickPool"></select>
+      <label style="font-size:14px;display:flex;align-items:center;gap:6px"><input type="checkbox" id="rotate" checked> Group by group</label>
+      <label style="font-size:14px;display:flex;align-items:center;gap:6px;margin-left:auto"><input type="checkbox" id="noRepeat" checked> No repeats</label></div>
+    <div class="stage" id="pStage"><div class="pname" id="pName">Ready?</div><div class="pteam" id="pTeam"></div></div>
+    <div class="pfoot"><span class="meta" id="pMeta"></span><span style="display:flex;gap:8px"><button class="mbtn" id="pDraw">Correct → Draw</button><button class="mbtn solid" id="pSpin">Spin</button></span></div>
+  </div>
+</div></div>
+
+<div class="scrim" id="mDraw"><div class="modal drawm">
+  <div class="mh"><h3>Furniture draw</h3><button class="xbtn" data-close>✕</button></div>
+  <div class="mb">
+    <div class="dteams" id="dTeams"></div>
+    <div class="dstage" id="dStage"><div id="dArt"></div><div><div class="dname" id="dName">Who draws?</div><div class="dsub" id="dSub">Choose a group, then press Draw</div></div></div>
+    <div class="dfoot"><div class="stockrow" id="dStock"></div><span style="display:flex;gap:8px"><button class="mbtn ghost" id="dUndo">Undo last</button><button class="btn y" id="dGo">Draw!</button></span></div>
+  </div>
+</div></div>
+
+<div class="scrim" id="mBoard"><div class="modal boardm">
+  <div class="mh"><h3>Furniture board</h3><button class="xbtn" data-close>✕</button></div>
+  <div class="mb"><div class="stockrow" id="stockRow2"></div><div class="fboard mt16" id="boardModal"></div></div>
+</div></div>
+
+<div class="scrim" id="mTimer"><div class="modal tpop">
+  <div class="mh"><h3>Timer</h3><button class="xbtn" data-close>✕</button></div>
+  <div class="mb"><div class="tpre"><button data-sec="30">0:30</button><button data-sec="60">1:00</button><button data-sec="120">2:00</button><button data-sec="300">5:00</button><button data-sec="600">10:00</button><button data-sec="900">15:00</button></div>
+    <div style="display:flex;gap:8px;align-items:center;margin-top:16px"><input type="number" id="tCustom" min="1" max="60" placeholder="min" style="width:90px"><button class="mbtn" id="tCustomGo">Start</button></div></div>
+</div></div>
+
+<div class="scrim" id="mOv"><div class="modal ov">
+  <div class="mh"><h3>All slides</h3><button class="xbtn" data-close>✕</button></div>
+  <div class="mb"><div class="ovgrid" id="ovGrid"></div></div>
+</div></div>
+<canvas id="confetti"></canvas>
+
+<script>(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Math.random().toString(36).slice(2, 9);
+const shuffle = a => { for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+const COLORS = ['#4E9A6B','#EE7D45','#4A93D6','#E0A42E','#8C6CC4','#EA7486'];
+const KEY = 'clil-g3-area-bedroom-v1';
+const FONT = "League Spartan,Poppins,sans-serif";
+
+/* ===== furniture (white foam, black outline) ===== */
+const ST = 'stroke="#18201B" stroke-width="3.5" stroke-linejoin="round" stroke-linecap="round"';
+const FSVG = {
+  bed: `<rect x="10" y="30" width="16" height="70" rx="5" fill="#fff" ${ST}/><rect x="96" y="52" width="14" height="48" rx="5" fill="#fff" ${ST}/><rect x="22" y="64" width="78" height="22" rx="3" fill="#fff" ${ST}/><rect x="24" y="50" width="74" height="16" rx="6" fill="#fff" ${ST}/><path d="M58 50 h38 a4 4 0 0 1 4 4 v12 h-42z" fill="#EDEEEC" ${ST}/><rect x="30" y="40" width="24" height="12" rx="6" fill="#fff" ${ST}/><path d="M28 86v12M94 86v12" ${ST}/>`,
+  wardrobe: `<rect x="26" y="8" width="68" height="10" rx="3" fill="#fff" ${ST}/><rect x="30" y="18" width="60" height="86" rx="3" fill="#fff" ${ST}/><path d="M60 18v86" ${ST}/><path d="M54 52v14M66 52v14" stroke="#18201B" stroke-width="4.5" stroke-linecap="round"/><path d="M36 104v8M84 104v8" ${ST}/><path d="M36 28 h18 M66 28 h18" stroke="#C9CCCA" stroke-width="3" stroke-linecap="round"/>`,
+  sofa: `<rect x="22" y="34" width="76" height="34" rx="9" fill="#fff" ${ST}/><rect x="16" y="62" width="88" height="24" rx="6" fill="#fff" ${ST}/><path d="M60 62v24" ${ST}/><rect x="6" y="50" width="18" height="40" rx="8" fill="#fff" ${ST}/><rect x="96" y="50" width="18" height="40" rx="8" fill="#fff" ${ST}/><path d="M16 90v10M104 90v10" ${ST}/><path d="M40 44 q20 8 40 0" stroke="#C9CCCA" stroke-width="3" fill="none" stroke-linecap="round"/>`,
+  vase: `<path d="M60 52 C52 34 40 28 30 22 M60 52 C60 34 62 22 64 12 M60 52 C68 36 80 30 92 26" fill="none" ${ST}/><circle cx="28" cy="20" r="8" fill="#fff" ${ST}/><circle cx="64" cy="11" r="8" fill="#fff" ${ST}/><circle cx="94" cy="24" r="8" fill="#fff" ${ST}/><path d="M46 50 h28 l-4 10 c12 8 16 20 14 32 c-2 12 -10 18 -24 18 c-14 0 -22 -6 -24 -18 c-2 -12 2 -24 14 -32z" fill="#fff" ${ST}/><path d="M44 80 q16 6 32 0" stroke="#C9CCCA" stroke-width="3" fill="none"/>`,
+  duck: `<path d="M18 70 c0 -10 10 -16 22 -14 c8 -16 46 -18 56 4 c6 2 14 0 18 -6 c4 14 -2 32 -20 40 c-16 8 -56 8 -68 -6 c-6 -6 -8 -12 -8 -18z" fill="#fff" ${ST}/><circle cx="40" cy="44" r="20" fill="#fff" ${ST}/><path d="M20 44 c-8 0 -14 4 -14 8 c6 2 12 2 18 -2" fill="#fff" ${ST}/><circle cx="42" cy="38" r="3.5" fill="#18201B"/><path d="M62 72 c8 8 22 8 30 -2" fill="none" ${ST}/>`,
+  plant: `<path d="M60 64 C58 46 50 34 34 28 C40 44 48 54 60 64z" fill="#fff" ${ST}/><path d="M60 64 C64 42 74 30 92 24 C88 42 76 56 60 64z" fill="#fff" ${ST}/><path d="M60 64 C58 40 60 22 66 8 C72 26 70 46 60 64z" fill="#fff" ${ST}/><path d="M60 64 C50 58 36 58 24 64 C38 70 50 70 60 64z" fill="#fff" ${ST}/><rect x="34" y="64" width="52" height="12" rx="3" fill="#fff" ${ST}/><path d="M38 76 h44 l-6 34 h-32z" fill="#fff" ${ST}/>`
+};
+const svgF = (t, w = 120) => `<svg viewBox="0 0 120 120" width="${w}" height="${w}" aria-hidden="true">${FSVG[t]}</svg>`;
+const TYPES = ['bed', 'wardrobe', 'sofa', 'vase', 'duck', 'plant'];
+const NAME = { bed: 'bed', wardrobe: 'wardrobe', sofa: 'sofa', vase: 'vase of flowers', duck: 'duck', plant: 'plant pot' };
+const LABEL = { bed: 'Bed', wardrobe: 'Wardrobe', sofa: 'Sofa', vase: 'Vase', duck: 'Duck', plant: 'Plant pot' };
+const TOTAL = { bed: 4, wardrobe: 4, sofa: 4, vase: 1, duck: 2, plant: 3 };
+const CORE = ['bed', 'wardrobe', 'sofa'];
+const isCore = t => CORE.includes(t);
+
+/* ===== state ===== */
+let S = { teams: [], people: [], called: [], rot: 0, sound: true, responder: null, inv: {}, log: [], calc: {}, stars: {}, votes: {}, rug: [0, 0] };
+try { const d = JSON.parse(localStorage.getItem(KEY) || 'null'); if (d && Array.isArray(d.teams)) S = Object.assign(S, d); } catch (e) {}
+function defaultTeams() { S.teams = [0, 1, 2, 3].map(i => ({ id: 'g' + (i + 1), name: 'Group ' + (i + 1), color: COLORS[i] })); }
+if (!S.teams.length) defaultTeams();
+const subs = []; const onChange = f => subs.push(f);
+function persist() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function save() { persist(); subs.forEach(f => { try { f(); } catch (e) { console.error(e); } }); }
+const team = id => S.teams.find(t => t.id === id) || null;
+const person = id => S.people.find(p => p.id === id) || null;
+const membersOf = tid => S.people.filter(p => p.team === tid);
+const inv = tid => (S.inv[tid] = S.inv[tid] || []);
+
+/* ===== sound (no slide-transition sound) ===== */
+const Sound = (() => {
+  let ctx, master;
+  function ac() { if (!ctx) { const C = window.AudioContext || window.webkitAudioContext; if (!C) return null; ctx = new C(); master = ctx.createGain(); master.gain.value = .55; master.connect(ctx.destination); } if (ctx.state === 'suspended') ctx.resume(); return ctx; }
+  function tone(f, t0, dur, type = 'sine', vol = .3, f2) {
+    if (!S.sound) return; const c = ac(); if (!c) return;
+    const t = c.currentTime + t0, o = c.createOscillator(), g = c.createGain();
+    o.type = type; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + .012); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    o.connect(g); g.connect(master); o.start(t); o.stop(t + dur + .05);
+  }
+  function noise(t0, dur, vol = .12, f1 = 600, f2 = 2400) {
+    if (!S.sound) return; const c = ac(); if (!c) return;
+    const t = c.currentTime + t0, n = Math.floor(c.sampleRate * dur), b = c.createBuffer(1, n, c.sampleRate), d = b.getChannelData(0);
+    for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
+    const s = c.createBufferSource(); s.buffer = b; const bp = c.createBiquadFilter(); bp.type = 'bandpass'; bp.Q.value = 1.1;
+    bp.frequency.setValueAtTime(f1, t); bp.frequency.exponentialRampToValueAtTime(f2, t + dur);
+    const g = c.createGain(); g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vol, t + dur * .35); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+    s.connect(bp); bp.connect(g); g.connect(master); s.start(t); s.stop(t + dur + .05);
+  }
+  return {
+    unlock: ac,
+    tick: () => tone(1700, 0, .03, 'square', .04),
+    click: () => tone(1100, 0, .025, 'triangle', .08),
+    pop: () => tone(520, 0, .09, 'sine', .2, 940),
+    ting: () => { tone(1568, 0, .5, 'sine', .22); tone(2093, .02, .5, 'sine', .08); },
+    tingting: () => { tone(1319, 0, .35, 'sine', .22); tone(1760, .14, .6, 'sine', .22); tone(2637, .14, .5, 'sine', .06); },
+    wrong: () => { tone(220, 0, .18, 'sawtooth', .09, 180); tone(150, .17, .34, 'sawtooth', .1, 100); },
+    cash: () => { noise(0, .07, .22, 3000, 5000); noise(.07, .05, .15, 2000, 4000); tone(2637, .12, .7, 'sine', .22); tone(3520, .14, .6, 'sine', .14); tone(4186, .16, .5, 'sine', .08); },
+    jingle: () => { [523, 659, 784, 1047, 784, 1047].forEach((f, i) => tone(f, i * .09, .22, 'square', .07)); tone(1319, .58, .6, 'square', .07); tone(1568, .58, .6, 'triangle', .1); },
+    fanfare: () => { [392, 523, 659].forEach((f, i) => tone(f, i * .13, .22, 'triangle', .2)); [523, 659, 784, 1047].forEach(f => tone(f, .42, 1.1, 'triangle', .12)); },
+    drum: n => { for (let i = 0; i < n; i++) noise(i * .055, .05, .09 + i * .003, 180, 360); },
+    alarm: () => { for (let i = 0; i < 3; i++) { tone(880, i * .4, .16, 'square', .1); tone(1175, i * .4 + .18, .16, 'square', .08); } },
+    beep: () => tone(660, 0, .08, 'square', .06)
+  };
+})();
+['pointerdown', 'keydown'].forEach(ev => window.addEventListener(ev, () => Sound.unlock(), { once: true }));
+let toastT;
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2000); }
+
+/* ===== confetti ===== */
+const Conf = (() => { const cv = $('#confetti'), cx = cv.getContext('2d'); let ps = [], raf;
+  function size() { cv.width = innerWidth; cv.height = innerHeight; } addEventListener('resize', size); size();
+  function burst(n = 140) { const cols = ['#4E9A6B', '#EE7D45', '#4A93D6', '#F6BE4A', '#EA7486'];
+    for (let i = 0; i < n; i++) ps.push({ x: innerWidth / 2 + (Math.random() - .5) * 300, y: innerHeight * .35, vx: (Math.random() - .5) * 16, vy: -Math.random() * 15 - 4, r: Math.random() * 7 + 4, c: cols[i % 5], a: Math.random() * 6, life: 0 });
+    if (!raf) loop(); }
+  function loop() { cx.clearRect(0, 0, cv.width, cv.height); ps.forEach(p => { p.vy += .35; p.x += p.vx; p.y += p.vy; p.a += .1; p.life++; cx.save(); cx.translate(p.x, p.y); cx.rotate(p.a); cx.fillStyle = p.c; cx.fillRect(-p.r / 2, -p.r / 4, p.r, p.r / 2); cx.restore(); });
+    ps = ps.filter(p => p.y < innerHeight + 40 && p.life < 300); if (ps.length) raf = requestAnimationFrame(loop); else { raf = null; cx.clearRect(0, 0, cv.width, cv.height); } }
+  return { burst }; })();
+
+/* ===== rectangle diagram ===== */
+function rectSVG(L, W, o = {}) {
+  const maxW = o.maxW || 500, maxH = o.maxH || 360;
+  const u = Math.min(maxW / L, maxH / W, o.maxU || 100);
+  const lab = o.labels !== false, ar = !!o.arrows, pw = L * u, ph = W * u, ox = (lab || ar) ? 30 : 6, oy = (lab || ar) ? 20 : 6, totW = pw + ox + (lab ? 150 : ar ? 92 : 6), totH = ph + oy + ((lab || ar) ? 84 : 6);
+  let s = `<svg viewBox="0 0 ${totW} ${totH}" width="${totW}" height="${totH}" aria-hidden="true">`;
+  s += `<rect x="${ox}" y="${oy}" width="${pw}" height="${ph}" fill="${o.fill || '#fff'}" stroke="#18201B" stroke-width="5" rx="3"/>`;
+  if (o.book) s += `<rect x="${ox}" y="${oy}" width="${u * .7}" height="${ph}" fill="#4A93D6" stroke="#18201B" stroke-width="5"/><rect x="${ox + pw * .3}" y="${oy + ph * .25}" width="${pw * .5}" height="${u * .7}" rx="4" fill="#E7F1FB"/>`;
+  if (o.rug) { s += `<rect x="${ox + u * .35}" y="${oy + u * .35}" width="${pw - u * .7}" height="${ph - u * .7}" fill="none" stroke="#EE7D45" stroke-width="5" stroke-dasharray="10 8" rx="3"/>`; }
+  if (o.grid) { s += `<g stroke="#89928C" stroke-width="1.5" stroke-dasharray="5 5">`; for (let i = 1; i < L; i++) s += `<path d="M${ox + i * u} ${oy}v${ph}"/>`; for (let j = 1; j < W; j++) s += `<path d="M${ox} ${oy + j * u}h${pw}"/>`; s += `</g>`; }
+  if (o.inner) { const n = o.inner; s += `<rect x="${ox + n.x * u}" y="${oy + n.y * u}" width="${n.w * u}" height="${n.h * u}" fill="#FAD2BC" stroke="#18201B" stroke-width="4"/><text x="${ox + (n.x + n.w / 2) * u}" y="${oy + (n.y + n.h / 2) * u + 10}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="28" fill="#C9612F">${n.label}</text>`; }
+  if (o.labels !== false) {
+    s += `<path d="M${ox} ${oy + ph + 26}h${pw}" stroke="#EE7D45" stroke-width="4"/><path d="M${ox} ${oy + ph + 16}v20M${ox + pw} ${oy + ph + 16}v20" stroke="#EE7D45" stroke-width="4"/>`;
+    s += `<text x="${ox + pw / 2}" y="${oy + ph + 66}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34" fill="#C9612F">${o.lt || L + ' cm'}</text>`;
+    s += `<path d="M${ox + pw + 26} ${oy}v${ph}" stroke="#4A93D6" stroke-width="4"/><path d="M${ox + pw + 16} ${oy}h20M${ox + pw + 16} ${oy + ph}h20" stroke="#4A93D6" stroke-width="4"/>`;
+    s += `<text x="${ox + pw + 44}" y="${oy + ph / 2 + 12}" font-family="${FONT}" font-weight="800" font-size="34" fill="#3576B4">${o.wt || W + ' cm'}</text>`;
+  }
+  if (o.arrows) {
+    s += `<path d="M${ox} ${oy + ph + 26}h${pw}" stroke="#EE7D45" stroke-width="5"/><circle cx="${ox + pw / 2}" cy="${oy + ph + 52}" r="20" fill="#EE7D45"/><text x="${ox + pw / 2}" y="${oy + ph + 61}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="26" fill="#fff">1</text>`;
+    s += `<path d="M${ox + pw + 26} ${oy}v${ph}" stroke="#4A93D6" stroke-width="5"/><circle cx="${ox + pw + 56}" cy="${oy + ph / 2}" r="20" fill="#4A93D6"/><text x="${ox + pw + 56}" y="${oy + ph / 2 + 9}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="26" fill="#fff">2</text>`;
+  }
+  if (o.center) s += `<text x="${ox + pw / 2}" y="${oy + ph / 2 + 18}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="52" fill="#18201B">${o.center}</text>`;
+  return s + '</svg>';
+}
+
+/* ===== static art ===== */
+function artCluster(types, sizes) { return types.map((t, i) => `<div class="ill" style="--i:${i}">${svgF(t, sizes[i] || 150)}</div>`).join(''); }
+$('#titleArt').innerHTML = `<div style="left:50%;top:50%;transform:translate(-50%,-50%)">${rectSVG(6, 4, { grid: true, maxW: 330, maxH: 240, maxU: 55, fill: '#fff' })}</div><div style="left:30px;top:24px" class="ill">${svgF('bed', 170)}</div><div style="right:30px;top:40px" class="ill" >${svgF('wardrobe', 150)}</div><div style="left:40px;bottom:26px" class="ill">${svgF('duck', 130)}</div><div style="right:40px;bottom:30px" class="ill">${svgF('plant', 150)}</div>`;
+$('#endArt').innerHTML = `<div style="left:50%;top:50%;transform:translate(-50%,-50%)" class="ill">${svgF('sofa', 300)}</div><div style="left:40px;top:40px" class="ill">${svgF('vase', 150)}</div><div style="right:40px;bottom:40px" class="ill">${svgF('duck', 150)}</div>`;
+$('#divWarm').innerHTML = `<svg class="ill" width="520" height="160" viewBox="0 0 520 160"><rect x="10" y="40" width="500" height="90" rx="10" fill="#F6BE4A" stroke="#18201B" stroke-width="4"/>${Array.from({ length: 11 }, (_, i) => `<path d="M${30 + i * 46} 40v${i % 5 === 0 ? 40 : 28}" stroke="#18201B" stroke-width="3"/><text x="${30 + i * 46}" y="112" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="22">${i}</text>`).join('')}</svg>` + artCluster(['plant', 'duck'], [170, 170]);
+$('#divLearn').innerHTML = `<div class="ill">${rectSVG(5, 3, { grid: true, maxW: 440, maxH: 300 })}</div>`;
+$('#divPrac').innerHTML = artCluster(['bed', 'wardrobe', 'sofa', 'vase', 'duck', 'plant'], [160, 160, 160, 160, 160, 160]);
+$('#divProj').innerHTML = `<div class="ill" style="background:#fff;border-radius:20px;padding:10px">${rectSVG(8, 6, { grid: true, labels: false, maxW: 480, maxH: 330, maxU: 60 })}</div>` + artCluster(['bed', 'wardrobe', 'sofa'], [140, 140, 140]);
+$('#divPres').innerHTML = `<svg class="ill" width="300" height="300" viewBox="0 0 120 120"><path d="M60 6 l15 31 34 5 -25 24 6 34 -30-16 -30 16 6-34 -25-24 34-5z" fill="#F6BE4A" stroke="#18201B" stroke-width="3.5" stroke-linejoin="round"/></svg>` + artCluster(['sofa'], [220]);
+$('#rewardGrid').innerHTML = TYPES.map((t, i) => `<div class="fc ${isCore(t) ? 'core' : 'extra'}">${svgF(t, 150)}<h4>${LABEL[t]}</h4><div class="n">${TOTAL[t]} <small>${isCore(t) ? '1 per group' : 'surprise'}</small></div></div>`).join('');
+
+/* vocab art */
+$('#vL').innerHTML = `<rect x="40" y="40" width="200" height="100" fill="#fff" stroke="#18201B" stroke-width="4"/><path d="M40 166h200" stroke="#EE7D45" stroke-width="8" stroke-linecap="round"/><path d="M40 154v24M240 154v24" stroke="#EE7D45" stroke-width="5"/><text x="140" y="104" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34" fill="#C9612F">6 cm</text>`;
+$('#vW').innerHTML = `<rect x="40" y="40" width="200" height="100" fill="#fff" stroke="#18201B" stroke-width="4"/><path d="M266 40v100" stroke="#4A93D6" stroke-width="8" stroke-linecap="round"/><path d="M254 40h24M254 140h24" stroke="#4A93D6" stroke-width="5"/><text x="140" y="104" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34" fill="#3576B4">3 cm</text>`;
+$('#vA').innerHTML = `<rect x="40" y="40" width="200" height="100" fill="#FBE3A3" stroke="#18201B" stroke-width="4"/><g stroke="#B9831A" stroke-width="1.5" stroke-dasharray="4 4">${[1, 2, 3, 4, 5].map(i => `<path d="M${40 + i * 33.3} 40v100"/>`).join('')}${[1, 2].map(j => `<path d="M40 ${40 + j * 33.3}h200"/>`).join('')}</g>`;
+$('#sixSq').innerHTML = (() => { let s = ''; for (let r = 0; r < 2; r++) for (let c = 0; c < 3; c++) s += `<rect x="${20 + c * 86}" y="${14 + r * 86}" width="86" height="86" fill="#CDEBD6" stroke="#18201B" stroke-width="3"/><text x="${63 + c * 86}" y="${70 + r * 86}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="30" fill="#3A7A52">${r * 3 + c + 1}</text>`; return s; })();
+$('#ruleEx').outerHTML = rectSVG(5, 3, { grid: true, maxW: 400, maxH: 230 }).replace('<svg', '<svg id="ruleEx"');
+
+/* ===== warm-up 1: ruler ===== */
+const RULER = [{ n: 'pencil', cm: 7 }, { n: 'eraser', cm: 3 }, { n: 'crayon', cm: 5 }];
+function objSVG(n, cm, u) {
+  const w = cm * u, y = 40;
+  if (n === 'pencil') return `<rect x="40" y="${y}" width="${w - 50}" height="44" fill="#F6BE4A" stroke="#18201B" stroke-width="4"/><rect x="40" y="${y}" width="30" height="44" fill="#EA7486" stroke="#18201B" stroke-width="4"/><path d="M${40 + w - 50} ${y} L${40 + w} ${y + 22} L${40 + w - 50} ${y + 44}z" fill="#F5C49A" stroke="#18201B" stroke-width="4" stroke-linejoin="round"/><path d="M${40 + w - 16} ${y + 15} L${40 + w} ${y + 22} L${40 + w - 16} ${y + 29}z" fill="#18201B"/>`;
+  if (n === 'eraser') return `<rect x="40" y="${y - 6}" width="${w}" height="56" rx="8" fill="#fff" stroke="#18201B" stroke-width="4"/><rect x="40" y="${y - 6}" width="${w * .45}" height="56" rx="8" fill="#4A93D6" stroke="#18201B" stroke-width="4"/>`;
+  return `<rect x="40" y="${y}" width="${w - 40}" height="44" rx="6" fill="#4E9A6B" stroke="#18201B" stroke-width="4"/><path d="M${40 + w - 40} ${y + 4} L${40 + w} ${y + 22} L${40 + w - 40} ${y + 40}z" fill="#4E9A6B" stroke="#18201B" stroke-width="4" stroke-linejoin="round"/><rect x="${40 + w * .3}" y="${y}" width="${w * .3}" height="44" fill="#E7F3EA" stroke="#18201B" stroke-width="4"/>`;
+}
+let rIdx = 0;
+function drawRuler() {
+  const u = 120, it = RULER[rIdx];
+  let s = `<svg width="1340" height="290" viewBox="0 0 1340 290">${objSVG(it.n, it.cm, u)}<rect x="10" y="120" width="1320" height="150" rx="14" fill="#fff" stroke="#18201B" stroke-width="4"/>`;
+  for (let i = 0; i <= 100; i++) { const x = 40 + i * u / 10; const h = i % 10 === 0 ? 50 : i % 5 === 0 ? 36 : 22; s += `<path d="M${x} 120v${h}" stroke="#18201B" stroke-width="${i % 10 === 0 ? 3.5 : 2}"/>`; if (i % 10 === 0) s += `<text x="${x}" y="215" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34">${i / 10}</text>`; }
+  s += `<text x="1290" y="250" text-anchor="end" font-family="${FONT}" font-weight="700" font-size="22" fill="#89928C">cm</text></svg>`;
+  $('#rulerArt').innerHTML = s; $('#rObj').textContent = it.n; $('#rAns').textContent = it.cm + ' cm'; $('#rAns').classList.add('hid');
+  $$('#rTabs button').forEach(b => b.classList.toggle('on', +b.dataset.r === rIdx));
+}
+$('#rTabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; rIdx = +b.dataset.r; drawRuler(); Sound.click(); });
+$('#rShow').onclick = () => { $('#rAns').classList.remove('hid'); Sound.tingting(); };
+drawRuler();
+
+/* ===== warm-up 2: hunt ===== */
+const ICON = {
+  book: `<rect x="22" y="14" width="76" height="92" rx="4" fill="#4A93D6" stroke="#18201B" stroke-width="4"/><rect x="22" y="14" width="14" height="92" fill="#3576B4" stroke="#18201B" stroke-width="4"/><rect x="46" y="32" width="40" height="12" rx="4" fill="#fff"/>`,
+  door: `<rect x="30" y="8" width="60" height="104" rx="3" fill="#EE7D45" stroke="#18201B" stroke-width="4"/><circle cx="78" cy="62" r="5" fill="#18201B"/><rect x="40" y="20" width="40" height="30" rx="3" fill="none" stroke="#C9612F" stroke-width="3"/>`,
+  clock: `<circle cx="60" cy="60" r="48" fill="#fff" stroke="#18201B" stroke-width="4"/><path d="M60 60V30M60 60l20 12" stroke="#18201B" stroke-width="5" stroke-linecap="round"/><circle cx="60" cy="60" r="5" fill="#EE7D45"/>`,
+  envelope: `<rect x="10" y="28" width="100" height="64" rx="3" fill="#FDF7E3" stroke="#18201B" stroke-width="4"/><path d="M10 30 L60 66 L110 30" fill="none" stroke="#18201B" stroke-width="4" stroke-linejoin="round"/>`,
+  ball: `<circle cx="60" cy="60" r="46" fill="#F6BE4A" stroke="#18201B" stroke-width="4"/><path d="M16 50 q44 22 88 0 M60 14 q-20 46 0 92" fill="none" stroke="#18201B" stroke-width="3.5"/>`,
+  window: `<rect x="14" y="20" width="92" height="80" rx="3" fill="#C7E0F6" stroke="#18201B" stroke-width="4"/><path d="M60 20v80M14 60h92" stroke="#18201B" stroke-width="4"/>`,
+  pizza: `<path d="M18 22 L102 22 L60 108z" fill="#F6BE4A" stroke="#18201B" stroke-width="4" stroke-linejoin="round"/><path d="M18 22 L102 22" stroke="#C9612F" stroke-width="10" stroke-linecap="round"/><circle cx="50" cy="42" r="7" fill="#EA7486"/><circle cx="70" cy="50" r="7" fill="#EA7486"/><circle cx="60" cy="72" r="6" fill="#EA7486"/>`,
+  tv: `<rect x="10" y="20" width="100" height="70" rx="4" fill="#2B3A33" stroke="#18201B" stroke-width="4"/><rect x="18" y="28" width="84" height="54" rx="2" fill="#4A93D6"/><path d="M44 106 h32 M60 90 v16" stroke="#18201B" stroke-width="5" stroke-linecap="round"/>`
+};
+const HL = { book: 'a book', door: 'a door', clock: 'a clock', envelope: 'an envelope', ball: 'a ball', window: 'a window', pizza: 'a pizza slice', tv: 'a TV' };
+const HUNT = [['book', 1], ['clock', 0], ['door', 1], ['pizza', 0], ['envelope', 1], ['ball', 0], ['window', 1], ['tv', 1]];
+const TICK = '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#4E9A6B"/><path d="M34 62 l18 18 34-38" stroke="#fff" stroke-width="12" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const CROSS = '<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#EA7486"/><path d="M40 40 l40 40 M80 40 l-40 40" stroke="#fff" stroke-width="12" stroke-linecap="round"/></svg>';
+$('#hunt').innerHTML = HUNT.map(([k, y], i) => `<button class="hc" data-y="${y}"><div class="in"><div class="fa"><svg viewBox="0 0 120 120">${ICON[k]}</svg><b>${HL[k]}</b></div><div class="ba ${y ? 'yes' : 'no'}">${y ? TICK : CROSS}<b>${y ? 'Yes, it is.' : "No, it isn't."}</b><span>${y ? '4 sides, 4 square corners' : 'not a rectangle'}</span></div></div></button>`).join('');
+$('#hunt').addEventListener('click', e => { const b = e.target.closest('.hc'); if (!b) return; b.classList.toggle('on'); if (b.classList.contains('on')) (b.dataset.y === '1' ? Sound.tingting : Sound.wrong)(); });
+
+/* ===== warm-up 3: rugs ===== */
+let rugGrid = false;
+function drawRugs() {
+  const R = [{ k: 'A', L: 6, W: 3 }, { k: 'B', L: 4, W: 4 }];
+  $('#rugs').innerHTML = R.map((r, i) => `<div class="rug"><div class="rh"><b>Rug ${r.k}</b><div class="vote"><button data-v="${i}" data-d="-1">−</button><output>${S.rug[i] || 0}</output><button data-v="${i}" data-d="1">+</button></div></div>
+    <div>${rectSVG(r.L, r.W, { grid: rugGrid, rug: true, labels: false, maxW: 560, maxH: 340, maxU: 80, fill: i ? '#E7F1FB' : '#FDECE2', center: rugGrid ? '' : '?' })}</div>
+    <div class="res">${rugGrid ? `${r.L * r.W} squares` : 'votes'}</div></div>`).join('');
+}
+$('#rugs').addEventListener('click', e => { const b = e.target.closest('button[data-v]'); if (!b) return; const i = +b.dataset.v; S.rug[i] = Math.max(0, (S.rug[i] || 0) + +b.dataset.d); persist(); drawRugs(); Sound.click(); });
+$('#rugGo').onclick = () => { rugGrid = true; drawRugs(); Sound.tingting(); $('#rugMsg').classList.add('on'); };
+$('#rugReset').onclick = () => { rugGrid = false; S.rug = [0, 0]; persist(); drawRugs(); $('#rugMsg').classList.remove('on'); };
+drawRugs();
+
+/* ===== count squares ===== */
+let cnt = 0;
+function buildCount() { cnt = 0; $('#cnum').textContent = 0; $('#rowsum').textContent = ''; $('#cgrid').innerHTML = Array.from({ length: 12 }, () => '<div class="cell"></div>').join(''); }
+$('#cgrid').addEventListener('click', e => { const c = e.target.closest('.cell'); if (!c || c.classList.contains('on')) return; cnt++; c.textContent = cnt; c.classList.add('on'); $('#cnum').textContent = cnt; Sound.ting(); if (cnt === 12) { setTimeout(() => { Sound.tingting(); $('#rowsum').innerHTML = 'Area = <span class="cg">12 cm²</span>'; }, 250); } });
+$('#cRows').onclick = () => { $$('#cgrid .cell').forEach((c, i) => { c.textContent = i + 1; c.classList.add('on'); }); cnt = 12; $('#cnum').textContent = 12; $('#rowsum').innerHTML = '4 + 4 + 4 = 12 &nbsp;→&nbsp; <span class="cg">3 rows × 4 = 12</span>'; Sound.tingting(); };
+$('#cReset').onclick = () => { buildCount(); Sound.click(); };
+buildCount();
+
+/* ===== find the rule ===== */
+const RR = [[3, 2], [4, 3], [5, 2]];
+$('#ruleRows').innerHTML = RR.map(([L, W]) => `<tr><td class="sh">${rectSVG(L, W, { grid: true, labels: false, maxW: 260, maxH: 120, maxU: 48 })}</td><td class="rv-cell hid"><span>${L * W}</span></td><td class="rv-cell hid co"><span>${L} cm</span></td><td class="rv-cell hid cb"><span>${W} cm</span></td></tr>`).join('');
+$('#ruleRows').addEventListener('click', e => { const c = e.target.closest('.rv-cell'); if (!c || !c.classList.contains('hid')) return; c.classList.remove('hid'); Sound.ting(); });
+
+/* ===== quiz ===== */
+const Q = [
+  { q: 'How many squares? What is the area?', art: () => rectSVG(5, 2, { grid: true, labels: false, maxW: 500, maxH: 500 }), o: ['10 cm²', '7 cm²', '12 cm²', '14 cm²'], a: 0, ex: '2 rows of 5 squares: 5 × 2 = <b>10 cm²</b>.' },
+  { q: 'Which arrow shows the WIDTH?', art: () => rectSVG(7, 3, { labels: false, arrows: true, maxW: 500, maxH: 500 }), o: ['Arrow 1', 'Arrow 2'], a: 1, ex: 'The width is the <b>short</b> side: arrow <b>2</b>.' },
+  { q: 'What is the area of this rectangle?', art: () => rectSVG(6, 3, { maxW: 500, maxH: 500 }), o: ['18 cm²', '9 cm²', '15 cm²', '21 cm²'], a: 0, ex: 'Length × Width = 6 × 3 = <b>18 cm²</b>.' },
+  { q: 'A book is 8 cm long and 5 cm wide. What is its area?', art: () => rectSVG(8, 5, { book: true, maxW: 500, maxH: 500 }), o: ['40 cm²', '13 cm²', '26 cm²', '45 cm²'], a: 0, ex: '8 × 5 = <b>40 cm²</b>. (8 + 5 = 13 is not the area!)' },
+  { q: 'This is a square. What is its area?', art: () => rectSVG(4, 4, { maxW: 500, maxH: 500 }), o: ['16 cm²', '8 cm²', '12 cm²', '20 cm²'], a: 0, ex: 'A square is a special rectangle: 4 × 4 = <b>16 cm²</b>.' },
+  { q: 'Nam says: “The area is 7 + 2 = 9 cm².” What is the right area?', art: () => rectSVG(7, 2, { maxW: 500, maxH: 500 }), o: ['14 cm²', '9 cm²', '16 cm²', '18 cm²'], a: 0, ex: 'We <b>multiply</b>, not add: 7 × 2 = <b>14 cm²</b>.' },
+  { q: 'Which rectangle has an area of 24 cm²?', art: () => rectSVG(6, 4, { labels: false, center: '24 cm²', maxW: 500, maxH: 500, fill: '#FDF7E3' }), o: ['6 cm × 4 cm', '5 cm × 5 cm', '7 cm × 3 cm', '8 cm × 2 cm'], a: 0, ex: '6 × 4 = <b>24</b>. (5 × 5 = 25, 7 × 3 = 21, 8 × 2 = 16)' },
+  { q: 'A rug is 9 cm long and 3 cm wide. What is its area?', art: () => rectSVG(9, 3, { rug: true, maxW: 500, maxH: 500, fill: '#FDECE2' }), o: ['27 cm²', '12 cm²', '24 cm²', '18 cm²'], a: 0, ex: '9 × 3 = <b>27 cm²</b>.' },
+  { q: 'We measure AREA in…', art: () => `<svg width="440" height="440" viewBox="0 0 300 300"><rect x="50" y="50" width="200" height="200" fill="#CDEBD6" stroke="#18201B" stroke-width="6"/><text x="150" y="168" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="60" fill="#3A7A52">?</text></svg>`, o: ['cm²', 'cm', 'kg', 'ml'], a: 0, ex: '<b>cm</b> is for length. <b>cm²</b> (square centimetres) is for area.' },
+  { q: 'The floor is 10 cm × 5 cm. A table covers 20 cm². How much floor is free?', art: () => rectSVG(10, 5, { grid: true, inner: { x: 5, y: 1, w: 5, h: 4, label: '20' }, maxW: 500, maxH: 500 }), o: ['30 cm²', '70 cm²', '25 cm²', '15 cm²'], a: 0, ex: 'Floor: 10 × 5 = 50. Free: 50 − 20 = <b>30 cm²</b>.' }
+];
+const LET = 'ABCD';
+const qHolder = $('#boardSlide');
+Q.forEach((x, i) => {
+  const order = shuffle(x.o.map((t, j) => j));
+  const s = document.createElement('section'); s.className = 'slide'; s.dataset.part = 'Practice'; s.dataset.title = `Question ${i + 1}`;
+  s.innerHTML = `<div class="quizwrap"><div class="qmain"><div class="qtop"><span class="qn rv">QUESTION ${i + 1} / ${Q.length}</span><button class="btn dark sm rv" data-pick>Call a student</button></div>
+    <div class="qt rv" style="--i:1">${x.q}</div>
+    <div class="qopts rv" style="--i:2">${order.map((j, k) => `<button class="qo" data-ok="${j === x.a ? 1 : 0}"><b>${LET[k]}</b>${esc(x.o[j])}</button>`).join('')}</div>
+    <div class="qfoot"><div class="explain">${x.ex}</div><button class="btn y drawbtn" data-draw>${svgF('sofa', 30)} Draw furniture</button></div></div>
+    <div class="qart rv" style="--i:2">${x.art()}</div></div>`;
+  qHolder.parentNode.insertBefore(s, qHolder);
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('.qo'); if (!b) return; const sl = b.closest('.slide');
+  if (sl.querySelector('.qo.ok')) return;
+  if (b.dataset.ok === '1') { b.classList.add('ok'); Sound.tingting(); sl.querySelector('.explain').classList.add('show'); sl.querySelector('.drawbtn').classList.add('show'); Conf.burst(70); }
+  else { b.classList.remove('bad'); void b.offsetWidth; b.classList.add('bad'); Sound.wrong(); }
+});
+
+/* ===== room drawings ===== */
+(() => {
+  const u = 15, ox = 30, oy = 20, W = 40 * u, H = 30 * u;
+  let s = `<rect x="${ox}" y="${oy}" width="${W}" height="${H}" fill="#fff" stroke="#18201B" stroke-width="6"/><g stroke="#C7E0F6" stroke-width="1">`;
+  for (let i = 1; i < 40; i++) s += `<path d="M${ox + i * u} ${oy}v${H}"/>`; for (let j = 1; j < 30; j++) s += `<path d="M${ox} ${oy + j * u}h${W}"/>`;
+  s += `</g><path d="M${ox} ${oy + H + 26}h${W}" stroke="#EE7D45" stroke-width="5"/><text x="${ox + W / 2}" y="${oy + H + 64}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34" fill="#C9612F">40 cm</text>`;
+  s += `<text x="${ox + W / 2}" y="${oy + H / 2 + 24}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="90" fill="#C7E0F6">?</text>`;
+  $('#roomBig').innerHTML = s + `<path d="M${ox - 22} ${oy}v${H}" stroke="#4A93D6" stroke-width="5"/><text x="${ox - 32}" y="${oy + H / 2}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34" fill="#3576B4" transform="rotate(-90 ${ox - 32} ${oy + H / 2})">30 cm</text>`;
+  $('#roomBig').setAttribute('viewBox', '-30 0 700 540');
+})();
+(() => {
+  const u = 13.5, ox = 20, oy = 16, W = 40 * u, H = 30 * u;
+  const F = [['Bed', 12, 8, 1, 1, '#E7F3EA'], ['Wardrobe', 10, 4, 28, 1, '#FDECE2'], ['Sofa', 9, 4, 2, 24, '#E7F1FB'], ['Plant', 3, 3, 35, 25, '#FDF7E3']];
+  let s = `<rect x="${ox}" y="${oy}" width="${W}" height="${H}" fill="#fff" stroke="#18201B" stroke-width="5"/><g stroke="#E7F1FB" stroke-width="1">`;
+  for (let i = 1; i < 40; i++) s += `<path d="M${ox + i * u} ${oy}v${H}"/>`; for (let j = 1; j < 30; j++) s += `<path d="M${ox} ${oy + j * u}h${W}"/>`;
+  s += `</g><path d="M${ox + 16 * u} ${oy + H}h${6 * u}" stroke="#fff" stroke-width="8"/><path d="M${ox + 16 * u} ${oy + H} a ${6 * u} ${6 * u} 0 0 1 ${6 * u} -${6 * u}" fill="none" stroke="#89928C" stroke-width="2" stroke-dasharray="5 4"/><text x="${ox + 19 * u}" y="${oy + H - 8}" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="16" fill="#89928C">door</text>`;
+  F.forEach(([n, L, Wd, x, y, c]) => { s += `<rect x="${ox + x * u}" y="${oy + y * u}" width="${L * u}" height="${Wd * u}" fill="${c}" stroke="#18201B" stroke-width="3.5" rx="3"/><text x="${ox + (x + L / 2) * u}" y="${oy + (y + Wd / 2) * u + (Wd > 3 ? -2 : 6)}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="${Wd > 3 ? 22 : 15}">${n}</text>${Wd > 3 ? `<text x="${ox + (x + L / 2) * u}" y="${oy + (y + Wd / 2) * u + 22}" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="18" fill="#56605A">${L} × ${Wd}</text>` : ''}`; });
+  s += `<text x="${ox + W / 2}" y="${oy + H + 34}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="24" fill="#3576B4">Room: 40 cm × 30 cm = 1,200 cm²</text>`;
+  $('#roomModel').innerHTML = s;
+})();
+
+/* ===== deck ===== */
+const deck = $('#deck'); let slides = $$('.slide', deck); let cur = 0;
+function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 900); deck.style.transform = `translate(-50%,-50%) scale(${s})`; }
+addEventListener('resize', fit); fit();
+function frags(sl) { const els = $$('.frag', sl); return { els, groups: [...new Set(els.map(e => +e.dataset.f || 0))].sort((a, b) => a - b) }; }
+function show(i, all) {
+  i = Math.max(0, Math.min(slides.length - 1, i));
+  slides.forEach(s => s.classList.remove('active')); cur = i; const sl = slides[i];
+  frags(sl).els.forEach(e => e.classList.toggle('on', !!all));
+  void sl.offsetWidth; sl.classList.add('active');
+  $('#progBar').style.width = ((i + 1) / slides.length * 100) + '%';
+  try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
+  sl.dispatchEvent(new Event('enter'));
+}
+function next() {
+  const { els, groups } = frags(slides[cur]);
+  const g = groups.find(g => els.some(e => (+e.dataset.f || 0) === g && !e.classList.contains('on')));
+  if (g !== undefined) { els.filter(e => (+e.dataset.f || 0) === g).forEach(e => e.classList.add('on')); Sound.pop(); return; }
+  if (cur < slides.length - 1) show(cur + 1);
+}
+function prev() { if (cur > 0) show(cur - 1, true); }
+
+/* modals */
+const anyOpen = () => $$('.scrim.show').length > 0;
+function openM(id) { $$('.scrim.show').forEach(m => m.classList.remove('show')); $(id).classList.add('show'); }
+function closeAll() { $$('.scrim.show').forEach(m => m.classList.remove('show')); }
+$$('.scrim').forEach(s => s.addEventListener('pointerdown', e => { if (e.target === s) s.classList.remove('show'); }));
+$$('[data-close]').forEach(b => b.addEventListener('click', () => b.closest('.scrim').classList.remove('show')));
+
+/* keyboard */
+document.addEventListener('keydown', e => {
+  const typing = /INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName || '');
+  if (e.key === 'Escape') { if (anyOpen()) closeAll(); return; }
+  if (typing) return;
+  if ($('#mPick').classList.contains('show')) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); spin(); } return; }
+  if ($('#mDraw').classList.contains('show')) { if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); doDraw(); } return; }
+  if (anyOpen()) return;
+  const k = e.key;
+  if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(k)) { e.preventDefault(); next(); }
+  else if (['ArrowLeft', 'PageUp', 'Backspace'].includes(k)) { e.preventDefault(); prev(); }
+  else if (k === 'Home') show(0); else if (k === 'End') show(slides.length - 1);
+  else switch (k.toLowerCase()) {
+    case 'r': openPicker(true); break; case 's': openSetup(); break; case 'd': openDraw(); break; case 'b': openBoard(); break;
+    case 't': openM('#mTimer'); break; case 'm': toggleSound(); break; case 'f': toggleFull(); break; case 'o': openOverview(); break;
+  }
+});
+
+/* toolbar */
+const tb = $('#toolbar'); let tbT;
+function wake() { tb.classList.remove('hide'); clearTimeout(tbT); tbT = setTimeout(() => { if (!tb.matches(':hover')) tb.classList.add('hide'); }, 2500); }
+addEventListener('mousemove', wake); wake();
+tb.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return;
+  ({ prev, next, setup: openSetup, pick: () => openPicker(false), draw: () => openDraw(), board: openBoard, timer: () => openM('#mTimer'), sound: toggleSound, overview: openOverview, full: toggleFull })[b.dataset.act]?.(); });
+const ICON_ON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></svg>';
+const ICON_OFF = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></svg>';
+function paintSound() { const b = $('#soundBtn'); b.innerHTML = S.sound ? ICON_ON : ICON_OFF; b.classList.toggle('muted-ind', !S.sound); }
+function toggleSound() { S.sound = !S.sound; persist(); paintSound(); toast(S.sound ? 'Sound on' : 'Sound off'); if (S.sound) Sound.ting(); }
+paintSound();
+function toggleFull() { try { if (!document.fullscreenElement) document.documentElement.requestFullscreen(); else document.exitFullscreen(); } catch (e) {} }
+function openOverview() {
+  let h = '', last = '';
+  slides.forEach((s, i) => { const p = s.dataset.part || ''; if (p !== last) { h += `<div class="ovpart">${esc(p)}</div>`; last = p; }
+    h += `<button data-i="${i}" class="${i === cur ? 'cur' : ''}"><b>${i + 1}</b>${esc(s.dataset.title || '')}</button>`; });
+  $('#ovGrid').innerHTML = h; openM('#mOv');
+}
+$('#ovGrid').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; closeAll(); show(+b.dataset.i); });
+
+/* ===== furniture logic ===== */
+const used = t => S.teams.reduce((n, tm) => n + inv(tm.id).filter(x => x.type === t).length, 0);
+const left = t => Math.max(0, TOTAL[t] - used(t));
+const extraCap = () => Math.ceil((TOTAL.vase + TOTAL.duck + TOTAL.plant) / Math.max(1, S.teams.length));
+function options(tid) {
+  const mine = inv(tid), ex = mine.filter(x => !isCore(x.type)).length, pool = [];
+  TYPES.forEach(t => {
+    const l = left(t); if (!l) return;
+    if (isCore(t)) { if (mine.some(x => x.type === t)) return; }
+    else if (ex >= extraCap()) return;
+    for (let i = 0; i < l; i++) pool.push(t);
+  });
+  return pool;
+}
+function give(tid, t) { inv(tid).push({ type: t, id: uid() }); S.log.push(tid); }
+
+let dTeam = null, drawing = false;
+function openDraw(tid) {
+  if (!S.teams.length) { toast('Set up groups first'); openSetup(); return; }
+  const r = S.responder && person(S.responder);
+  dTeam = tid || (r && r.team) || dTeam || S.teams[0].id;
+  if (!team(dTeam)) dTeam = S.teams[0].id;
+  renderDraw(); $('#dArt').innerHTML = ''; $('#dName').textContent = team(dTeam).name; $('#dSub').textContent = 'Press Draw!'; $('#dStage').style.setProperty('--tc', team(dTeam).color);
+  openM('#mDraw');
+}
+function stockHTML() { return TYPES.map(t => `<span class="stk ${left(t) ? '' : 'zero'}">${svgF(t, 46)}${left(t)}</span>`).join(''); }
+function renderDraw() {
+  $('#dTeams').innerHTML = S.teams.map(t => `<button data-t="${t.id}" class="${t.id === dTeam ? 'on' : ''}" style="--tc:${t.color}">${esc(t.name)} <small>${inv(t.id).length} pcs</small></button>`).join('');
+  $('#dStock').innerHTML = stockHTML();
+}
+$('#dTeams').addEventListener('click', e => { const b = e.target.closest('button'); if (!b || drawing) return; dTeam = b.dataset.t; renderDraw(); $('#dArt').innerHTML = ''; $('#dName').textContent = team(dTeam).name; $('#dSub').textContent = 'Press Draw!'; $('#dStage').style.setProperty('--tc', team(dTeam).color); Sound.click(); });
+function doDraw() {
+  if (drawing || !dTeam) return; const pool = options(dTeam), tm = team(dTeam);
+  if (S.teams.length > 4) toast('Note: the set has furniture for 4 groups');
+  if (!pool.length) { $('#dArt').innerHTML = ''; $('#dName').textContent = 'All done!'; $('#dSub').textContent = tm.name + ' has all its furniture — give a clap instead'; Sound.ting(); return; }
+  const win = pool[Math.floor(Math.random() * pool.length)]; drawing = true;
+  const seq = shuffle(TYPES.slice()); let k = 0, delay = 60, el = 0; $('#dStage').classList.remove('landed'); $('#dSub').textContent = 'Drawing…';
+  (function step() { const t = seq[k++ % seq.length]; $('#dArt').innerHTML = svgF(t, 300); $('#dName').textContent = LABEL[t] + '?'; Sound.tick(); el += delay; delay *= 1.12;
+    if (el < 2200) setTimeout(step, delay); else setTimeout(() => land(win), delay); })();
+  function land(t) {
+    drawing = false; give(dTeam, t); save();
+    $('#dArt').innerHTML = svgF(t, 300); $('#dName').textContent = `${isCore(t) ? 'A' : 'A'} ${NAME[t]}!`; $('#dSub').textContent = `for ${tm.name}${isCore(t) ? '' : ' · surprise item'}`;
+    const st = $('#dStage'); void st.offsetWidth; st.classList.add('landed'); Sound.cash(); if (!isCore(t)) setTimeout(Sound.jingle, 500); Conf.burst(90);
+    renderDraw(); pulse(dTeam);
+  }
+}
+$('#dGo').onclick = doDraw;
+$('#dUndo').onclick = () => { const tid = S.log.pop(); if (!tid) return toast('Nothing to undo'); const a = inv(tid); const it = a.pop(); save(); renderDraw(); toast(`Removed ${NAME[it.type]} from ${team(tid)?.name || ''}`); };
+function dealRest() {
+  let guard = 0, gave = 0, i = 0;
+  while (guard++ < 200) { const any = S.teams.some(t => options(t.id).length); if (!any) break; const t = S.teams[i++ % S.teams.length]; const p = options(t.id); if (!p.length) continue; give(t.id, p[Math.floor(Math.random() * p.length)]); gave++; }
+  save(); if (gave) { Sound.cash(); toast(`Gave out ${gave} more pieces`); } else toast('No furniture left');
+}
+$('#dealRest').onclick = () => { if (confirm('Give all the remaining furniture to the groups at random?')) dealRest(); };
+
+function boardHTML() {
+  return S.teams.map(t => { const mine = inv(t.id);
+    const miss = CORE.filter(c => !mine.some(x => x.type === c));
+    return `<div class="fcol" style="--tc:${t.color}"><h4>${esc(t.name)} <span>${mine.length} pcs</span></h4><div class="fitems">${mine.map(x => `<div class="fit">${svgF(x.type, 84)}${LABEL[x.type]}</div>`).join('')}${miss.map(c => `<div class="fit miss">${svgF(c, 84)}${LABEL[c]}</div>`).join('')}</div><button class="btn sm y" data-draw-team="${t.id}">Draw for ${esc(t.name)}</button></div>`; }).join('');
+}
+function renderBoard() {
+  const cols = `repeat(${Math.max(1, S.teams.length)},1fr)`;
+  $('#boardMain').style.gridTemplateColumns = cols; $('#boardMain').innerHTML = boardHTML(); $('#stockRow').innerHTML = '<b style="font:700 20px var(--geo);color:var(--muted)">Left in the box:</b>' + stockHTML();
+  $('#boardModal').style.gridTemplateColumns = cols; $('#boardModal').innerHTML = boardHTML(); $('#stockRow2').innerHTML = '<b style="font:700 18px var(--geo);color:var(--muted)">Left in the box:</b>' + stockHTML();
+}
+function openBoard() { renderBoard(); openM('#mBoard'); }
+onChange(renderBoard);
+
+/* strip */
+function renderStrip() {
+  $('#strip').innerHTML = S.teams.map(t => `<button data-t="${t.id}" style="--tc:${t.color}" title="${esc(t.name)}"><i></i>${esc(t.name)} ${inv(t.id).map(x => svgF(x.type, 22)).join('')}</button>`).join('');
+}
+$('#strip').addEventListener('click', e => { const b = e.target.closest('button'); if (b) openBoard(); });
+function pulse(tid) { const c = $(`#strip [data-t="${tid}"]`); if (c) { c.classList.remove('pulse'); void c.offsetWidth; c.classList.add('pulse'); } }
+onChange(renderStrip);
+
+/* responder */
+function renderResponder() {
+  const r = $('#responder'), p = S.responder && person(S.responder);
+  if (!p) { r.classList.remove('show'); return; }
+  const t = team(p.team); r.style.setProperty('--tc', t ? t.color : '#18201B');
+  $('#respName').textContent = p.name; $('#respTeam').textContent = t ? '· ' + t.name : ''; r.classList.add('show');
+}
+$('#respDraw').onclick = () => { const p = person(S.responder); openDraw(p && p.team); };
+$('#respX').onclick = () => { S.responder = null; save(); };
+onChange(renderResponder);
+
+/* global data-* buttons */
+document.addEventListener('click', e => {
+  if (e.target.closest('[data-pick]')) { openPicker(true, 'person'); return; }
+  if (e.target.closest('[data-pick-team]')) { openPicker(true, 'team'); return; }
+  const dt = e.target.closest('[data-draw-team]'); if (dt) { closeAll(); openDraw(dt.dataset.drawTeam); return; }
+  if (e.target.closest('[data-draw]')) { openDraw(); return; }
+  if (e.target.closest('[data-board]')) { openBoard(); return; }
+  const tm = e.target.closest('[data-timer]'); if (tm) Timer.start(+tm.dataset.timer);
+  if (e.target.closest('[data-open-setup]')) openSetup();
+});
+
+/* ===== setup ===== */
+function parseRoster(text) {
+  const out = [];
+  text.split(/\r?\n/).forEach(line => {
+    const l = line.trim(); if (!l) return;
+    let cols = l.includes('\t') ? l.split('\t') : l.includes(';') ? l.split(';') : l.includes(',') ? l.split(',') : [l];
+    cols = cols.map(c => c.trim()).filter(Boolean);
+    while (cols.length > 1 && /^\d+[.)]?$/.test(cols[0])) cols.shift();
+    const name = (cols[0] || '').replace(/^\d+\s*[.)\-:]\s*/, '').trim();
+    if (!name || /^(stt|no\.?|#|name|full name|họ và tên|họ tên|tên)$/i.test(name)) return;
+    out.push({ name, team: cols[1] || '' });
+  });
+  return out;
+}
+function makeTeams(mode) {
+  const list = parseRoster($('#rosterIn').value); if (!list.length) { toast('Paste names first'); return; }
+  let teams = S.teams.slice(), people = [];
+  if ($('#useCol').checked && list.some(x => x.team)) {
+    const names = [...new Set(list.map(x => x.team || 'No group'))];
+    teams = names.map((nm, i) => ({ id: (S.teams[i] && S.teams[i].id) || uid(), name: nm, color: COLORS[i % COLORS.length] }));
+    list.forEach(x => people.push({ id: uid(), name: x.name, team: teams[names.indexOf(x.team || 'No group')].id }));
+  } else {
+    const n = Math.max(1, Math.min(6, parseInt($('#teamN').value, 10) || 4));
+    teams = Array.from({ length: n }, (_, i) => S.teams[i] || { id: 'g' + (i + 1) + uid(), name: `Group ${i + 1}`, color: COLORS[i % COLORS.length] });
+    const arr = list.slice(); if (mode === 'random') shuffle(arr);
+    arr.forEach((x, i) => people.push({ id: uid(), name: x.name, team: teams[mode === 'random' ? i % n : Math.floor(i * n / arr.length)].id }));
+  }
+  S.teams = teams; S.people = people; S.called = []; S.responder = null;
+  save(); Sound.tingting(); toast(`${people.length} students · ${teams.length} groups`);
+}
+$('#mkRandom').onclick = () => makeTeams('random'); $('#mkOrder').onclick = () => makeTeams('order');
+$('#addTeam').onclick = () => { const i = S.teams.length; if (i >= 6) return; S.teams.push({ id: uid(), name: `Group ${i + 1}`, color: COLORS[i % COLORS.length] }); save(); };
+$('#resetFurn').onclick = () => { if (confirm('Take all furniture back from every group?')) { S.inv = {}; S.log = []; save(); toast('Furniture reset'); } };
+$('#resetCalled').onclick = () => { S.called = []; save(); toast('Everyone can be called again'); };
+$('#resetLesson').onclick = () => { if (confirm('Reset furniture, checks, stars and votes? (Names stay.)')) { S.inv = {}; S.log = []; S.calc = {}; S.stars = {}; S.votes = {}; S.rug = [0, 0]; S.called = []; S.responder = null; save(); drawRugs(); toast('Lesson reset'); } };
+function openSetup() { if (!$('#rosterIn').value.trim() && S.people.length) $('#rosterIn').value = S.people.map(p => p.name + '\t' + (team(p.team)?.name || '')).join('\n'); renderTeamEd(); openM('#mSetup'); }
+function renderTeamEd() {
+  const card = t => { const ms = t ? membersOf(t.id) : S.people.filter(p => !team(p.team));
+    return `<div class="tcard" data-tid="${t ? t.id : ''}" style="--tc:${t ? t.color : '#C9CCCA'}"><header>${t ? `<button class="tdot" title="Change colour"></button><input class="tname" type="text" value="${esc(t.name)}">` : '<span class="tname" style="padding:6px 8px">No group</span>'}<span class="tcount">${ms.length}</span>${t ? '<button class="tdel">✕</button>' : ''}</header>
+      <div class="tmem">${ms.map(p => `<span class="mchip" draggable="true" data-pid="${p.id}">${esc(p.name)}<button class="mdel">✕</button></span>`).join('')}</div>${t ? '<form class="tadd"><input type="text" placeholder="+ name"></form>' : ''}</div>`; };
+  let h = S.teams.map(card).join(''); if (S.people.some(p => !team(p.team))) h += card(null);
+  $('#teamEd').innerHTML = h || '<p style="color:var(--muted);font-size:14px">No groups yet.</p>';
+  $('#setupStat').textContent = `${S.people.length} students · ${S.teams.length} groups · ${S.called.length} called`;
+}
+const ed = $('#teamEd');
+ed.addEventListener('input', e => { if (e.target.classList.contains('tname')) { const t = team(e.target.closest('.tcard').dataset.tid); if (t) { t.name = e.target.value; persist(); renderStrip(); } } });
+ed.addEventListener('change', e => { if (e.target.classList.contains('tname')) save(); });
+ed.addEventListener('click', e => {
+  const tc = e.target.closest('.tcard');
+  if (e.target.classList.contains('tdot')) { const t = team(tc.dataset.tid); t.color = COLORS[(COLORS.indexOf(t.color) + 1) % COLORS.length]; save(); }
+  else if (e.target.classList.contains('tdel')) { const t = team(tc.dataset.tid); if (!confirm(`Delete “${t.name}”?`)) return; membersOf(t.id).forEach(p => p.team = null); S.teams = S.teams.filter(x => x !== t); delete S.inv[t.id]; save(); }
+  else if (e.target.classList.contains('mdel')) { const id = e.target.closest('.mchip').dataset.pid; S.people = S.people.filter(p => p.id !== id); S.called = S.called.filter(x => x !== id); if (S.responder === id) S.responder = null; save(); }
+});
+ed.addEventListener('submit', e => { e.preventDefault(); const inp = e.target.querySelector('input'); const nm = inp.value.trim(); if (!nm) return; S.people.push({ id: uid(), name: nm, team: e.target.closest('.tcard').dataset.tid }); save(); });
+let dragId = null;
+ed.addEventListener('dragstart', e => { const c = e.target.closest('.mchip'); if (!c) return; dragId = c.dataset.pid; c.classList.add('dragging'); try { e.dataTransfer.setData('text/plain', dragId); } catch (x) {} });
+ed.addEventListener('dragend', () => { dragId = null; $$('#teamEd .dragging,#teamEd .hot').forEach(x => x.classList.remove('dragging', 'hot')); });
+ed.addEventListener('dragover', e => { const tc = e.target.closest('.tcard'); if (tc && dragId) { e.preventDefault(); $$('#teamEd .hot').forEach(x => x !== tc && x.classList.remove('hot')); tc.classList.add('hot'); } });
+ed.addEventListener('drop', e => { const tc = e.target.closest('.tcard'); if (!tc || !dragId) return; e.preventDefault(); person(dragId).team = tc.dataset.tid || null; dragId = null; save(); Sound.pop(); });
+onChange(() => { if ($('#mSetup').classList.contains('show') && !(document.activeElement && document.activeElement.classList.contains('tname'))) renderTeamEd(); });
+
+/* ===== picker (rotates group by group) ===== */
+let pickMode = 'person', spinning = false, lastPick = null;
+function fillPool() {
+  const sel = $('#pickPool'), v = sel.value;
+  sel.innerHTML = '<option value="all">Everyone</option>' + S.teams.map(t => `<option value="${t.id}">${esc(t.name)} only</option>`).join('');
+  if ([...sel.options].some(o => o.value === v)) sel.value = v;
+  sel.style.display = pickMode === 'person' && S.teams.length ? '' : 'none'; updateMeta();
+}
+function candidates() {
+  if (pickMode === 'team') return S.teams.map(t => ({ kind: 'team', id: t.id, name: t.name, team: t }));
+  let pool = $('#pickPool').value || 'all';
+  if (pool === 'all' && $('#rotate').checked && S.teams.length) {
+    for (let k = 0; k < S.teams.length; k++) { const t = S.teams[(S.rot + k) % S.teams.length]; if (membersOf(t.id).length) { pool = t.id; break; } }
+  }
+  return S.people.filter(p => pool === 'all' || p.team === pool).map(p => ({ kind: 'person', id: p.id, name: p.name, team: team(p.team) }));
+}
+function updateMeta() { const c = candidates(); if (pickMode === 'team') { $('#pMeta').textContent = `${c.length} groups`; return; }
+  const l = c.filter(x => !S.called.includes(x.id)).length; $('#pMeta').textContent = c.length ? ($('#rotate').checked && $('#pickPool').value === 'all' && c[0].team ? `Next: ${c[0].team.name} · ` : '') + ($('#noRepeat').checked ? `${l} of ${c.length} not yet called` : `${c.length} in pool`) : ''; }
+$('#pickMode').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; pickMode = b.dataset.m; $$('#pickMode button').forEach(x => x.classList.toggle('on', x === b)); fillPool(); });
+$('#pickPool').onchange = updateMeta; $('#noRepeat').onchange = updateMeta; $('#rotate').onchange = updateMeta;
+function setStage(name, t, landed) { const st = $('#pStage'); st.style.setProperty('--tc', t ? t.color : '#E4E5E3'); $('#pName').textContent = name; $('#pTeam').textContent = t ? t.name : ''; st.classList.remove('landed'); if (landed) { void st.offsetWidth; st.classList.add('landed'); } }
+function openPicker(auto, mode) {
+  if (mode) { pickMode = mode; $$('#pickMode button').forEach(x => x.classList.toggle('on', x.dataset.m === mode)); }
+  fillPool(); openM('#mPick');
+  if (!S.people.length && pickMode === 'person') { setStage('No class list yet', null); $('#pTeam').innerHTML = '<button class="mbtn" id="goSetup">Paste the class list</button>'; $('#goSetup').onclick = openSetup; return; }
+  if (!S.teams.length && pickMode === 'team') { setStage('No groups yet', null); return; }
+  if (auto) setTimeout(spin, 160); else if (!lastPick) setStage('Ready?', null);
+}
+function spin() {
+  if (spinning) return; const c = candidates(); if (!c.length) return; let pool = c;
+  if (pickMode === 'person' && $('#noRepeat').checked) { pool = c.filter(x => !S.called.includes(x.id)); if (!pool.length) { S.called = S.called.filter(id => !c.some(x => x.id === id)); pool = c; toast('Everyone in this group has been called — new round'); } }
+  const win = pool[Math.floor(Math.random() * pool.length)]; spinning = true; let delay = 45, el = 0, k = 0; const seq = shuffle(c.slice());
+  (function step() { const x = c.length > 1 ? seq[k++ % seq.length] : win; setStage(x.name, x.team, false); Sound.tick(); el += delay; delay *= 1.13;
+    if (el < 2100) setTimeout(step, delay); else setTimeout(() => landP(win), delay); })();
+}
+function landP(w) { spinning = false; lastPick = w; setStage(w.name, w.team, true); Sound.ting();
+  if (w.kind === 'person') { if (!S.called.includes(w.id)) S.called.push(w.id); S.responder = w.id;
+    if ($('#rotate').checked && $('#pickPool').value === 'all' && w.team) S.rot = (S.teams.indexOf(w.team) + 1) % S.teams.length; }
+  save(); updateMeta(); }
+$('#pSpin').onclick = spin;
+$('#pDraw').onclick = () => { if (!lastPick) return toast('Spin first'); const tid = lastPick.kind === 'team' ? lastPick.id : lastPick.team?.id; if (!tid) return toast('No group'); openDraw(tid); };
+
+/* ===== timer ===== */
+const Timer = {
+  total: 0, left: 0, iv: null, paused: false,
+  start(sec) { this.total = sec; this.left = sec; this.paused = false; $('#tpause').textContent = 'Pause'; $('#timerw').classList.remove('done'); $('#timerw').classList.add('show'); closeAll(); this.paint(); clearInterval(this.iv); this.iv = setInterval(() => this.tick(), 1000); Sound.click(); },
+  tick() { if (this.paused) return; this.left--; if (this.left <= 10 && this.left > 0) Sound.beep(); if (this.left <= 0) { this.left = 0; clearInterval(this.iv); this.iv = null; Sound.alarm(); $('#timerw').classList.add('done'); toast("Time's up!"); } this.paint(); },
+  paint() { const m = Math.floor(this.left / 60), s = this.left % 60; $('#ttext').textContent = `${m}:${String(s).padStart(2, '0')}`; $('#tring').setAttribute('stroke-dashoffset', String(100 - (this.total ? this.left / this.total * 100 : 0))); $('#tring').setAttribute('stroke', this.left <= 10 ? '#EE7D45' : '#F6BE4A'); }
+};
+$('#tpause').onclick = () => { Timer.paused = !Timer.paused; $('#tpause').textContent = Timer.paused ? 'Resume' : 'Pause'; };
+$('#tplus').onclick = () => { Timer.left += 60; Timer.total = Math.max(Timer.total, Timer.left); if (!Timer.iv) Timer.iv = setInterval(() => Timer.tick(), 1000); $('#timerw').classList.remove('done'); Timer.paint(); };
+$('#tclose').onclick = () => { clearInterval(Timer.iv); Timer.iv = null; $('#timerw').classList.remove('show', 'done'); };
+$$('.tpre button').forEach(b => b.onclick = () => Timer.start(+b.dataset.sec));
+$('#tCustomGo').onclick = () => { const m = parseFloat($('#tCustom').value); if (m > 0) Timer.start(Math.round(m * 60)); };
+
+/* ===== calc check ===== */
+let cTeam = null, showKey = false;
+const num = v => { const n = parseFloat(String(v).replace(/[, ]/g, '')); return isNaN(n) ? null : n; };
+function calcOf(tid) {
+  const c = (S.calc[tid] = S.calc[tid] || { rows: {}, extra: [], total: '', free: '' });
+  const items = inv(tid).map(x => ({ id: x.id, type: x.type })).concat(c.extra);
+  return { c, items };
+}
+function scoreOf(tid) {
+  const { c, items } = calcOf(tid); let ok = 0, n = 0, tot = 0, allKnown = items.length > 0;
+  items.forEach(it => { const r = c.rows[it.id] || {}; const L = num(r.L), W = num(r.W), A = num(r.A);
+    if (L != null && W != null) { tot += L * W; if (A != null) { n++; if (Math.abs(A - L * W) < 1e-9) ok++; } } else allKnown = false; });
+  const T = num(c.total), F = num(c.free);
+  const rows = { total: null, free: null };
+  if (allKnown && T != null) { n++; rows.total = T === tot; if (rows.total) ok++; }
+  if (allKnown && F != null) { n++; rows.free = F === 1200 - tot || (T != null && F === 1200 - T); if (rows.free) ok++; }
+  return { ok, n, tot, allKnown, rows };
+}
+function mark(v) { return v === true ? '<span class="mk ok">✓</span>' : v === false ? '<span class="mk no">✗</span>' : '<span class="mk na">–</span>'; }
+function renderCalc() {
+  if (!S.teams.length) { $('#ctBody').innerHTML = ''; return; }
+  if (!team(cTeam)) cTeam = S.teams[0].id;
+  $('#ctabs').innerHTML = S.teams.map(t => { const sc = scoreOf(t.id); return `<button data-t="${t.id}" class="${t.id === cTeam ? 'on' : ''}" style="--tc:${t.color}">${esc(t.name)} <b>${sc.ok}/${sc.n}</b></button>`; }).join('');
+  const { c, items } = calcOf(cTeam), sc = scoreOf(cTeam);
+  let h = items.map(it => { const r = c.rows[it.id] || {}; const L = num(r.L), W = num(r.W), A = num(r.A); const key = L != null && W != null ? `${L} × ${W} = ${L * W}` : '';
+    const ok = L != null && W != null && A != null ? A === L * W : null; const isX = c.extra.some(x => x.id === it.id);
+    return `<tr data-id="${it.id}"><td class="nm"><span class="in">${svgF(it.type, 52)}${LABEL[it.type]}</span></td><td><input data-k="L" value="${esc(r.L || '')}" inputmode="decimal"></td><td><input data-k="W" value="${esc(r.W || '')}" inputmode="decimal"></td><td><input data-k="A" value="${esc(r.A || '')}" inputmode="decimal"></td><td class="key ${showKey ? '' : 'hid'}">${key}</td><td>${mark(ok)}</td><td>${isX ? '<button class="delr" title="Remove">✕</button>' : ''}</td></tr>`; }).join('');
+  if (!items.length) h = `<tr><td colspan="7" style="color:var(--muted);font:600 24px var(--head)">This group has no furniture yet. Draw furniture or press “+ Add item”.</td></tr>`;
+  h += `<tr class="sum"><td class="nm" style="background:var(--yt)"><b>Total furniture</b></td><td colspan="2" style="font:600 20px var(--head);color:var(--muted)">add all the areas</td><td><input data-k="total" value="${esc(c.total || '')}"></td><td class="key ${showKey ? '' : 'hid'}">${sc.allKnown ? sc.tot + ' cm²' : ''}</td><td>${mark(sc.rows.total)}</td><td></td></tr>`;
+  h += `<tr class="free"><td class="nm" style="background:var(--gt)"><b>Free floor</b></td><td colspan="2" style="font:600 20px var(--head);color:var(--muted)">1,200 − total</td><td><input data-k="free" value="${esc(c.free || '')}"></td><td class="key ${showKey ? '' : 'hid'}">${sc.allKnown ? (1200 - sc.tot).toLocaleString('en-US') + ' cm²' : ''}</td><td>${mark(sc.rows.free)}</td><td></td></tr>`;
+  $('#ctBody').innerHTML = h; $('#cScore').textContent = sc.ok; $('#cOf').textContent = `of ${sc.n} checked`;
+}
+$('#ctabs').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; cTeam = b.dataset.t; renderCalc(); Sound.click(); });
+$('#ctBody').addEventListener('change', e => {
+  const inp = e.target.closest('input'); if (!inp) return; const { c } = calcOf(cTeam), k = inp.dataset.k;
+  if (k === 'total' || k === 'free') c[k] = inp.value.trim(); else { const id = inp.closest('tr').dataset.id; (c.rows[id] = c.rows[id] || {})[k] = inp.value.trim(); }
+  const before = scoreOf(cTeam).ok; persist(); renderCalc(); const after = scoreOf(cTeam).ok;
+  if (after > before) Sound.tingting(); else if (inp.value.trim() && (k === 'A' || k === 'total' || k === 'free')) Sound.wrong();
+});
+$('#ctBody').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.target.blur(); } });
+$('#ctBody').addEventListener('click', e => { const b = e.target.closest('.delr'); if (!b) return; const id = b.closest('tr').dataset.id; const { c } = calcOf(cTeam); c.extra = c.extra.filter(x => x.id !== id); delete c.rows[id]; save(); });
+$('#addRow').onclick = () => { if (!cTeam) return; const t = prompt('Which item? Type: bed, wardrobe, sofa, vase, duck, plant', 'plant'); if (!t) return; const k = t.trim().toLowerCase().replace('plant pot', 'plant'); if (!TYPES.includes(k)) return toast('Unknown item'); calcOf(cTeam).c.extra.push({ id: uid(), type: k }); save(); };
+$('#showKey').onclick = () => { showKey = !showKey; $('#showKey').textContent = showKey ? 'Hide answers' : 'Show answers'; renderCalc(); Sound.click(); };
+onChange(renderCalc); renderCalc();
+
+/* ===== feedback stars ===== */
+const CRIT = ['Correct maths', 'Smart, tidy design', 'Clear English'];
+const STAR = on => `<svg viewBox="0 0 120 120"><path d="M60 8 l15 31 34 5 -25 24 6 34 -30-16 -30 16 6-34 -25-24 34-5z" fill="${on ? '#F6BE4A' : '#fff'}" stroke="${on ? '#B9831A' : '#C9CCCA'}" stroke-width="5" stroke-linejoin="round"/></svg>`;
+const starsOf = tid => (S.stars[tid] = S.stars[tid] || [0, 0, 0]);
+function renderFb() {
+  $('#fbGrid').style.gridTemplateColumns = `repeat(${Math.max(1, S.teams.length)},1fr)`;
+  $('#fbGrid').innerHTML = S.teams.map(t => { const st = starsOf(t.id); return `<div class="fbc" style="--tc:${t.color}"><h4>${esc(t.name)}</h4>${CRIT.map((c, ci) => `<div class="crit"><span>${c}</span><div class="stars" data-t="${t.id}" data-c="${ci}">${[1, 2, 3].map(n => `<button data-n="${n}">${STAR(n <= st[ci])}</button>`).join('')}</div></div>`).join('')}<div class="fbsum">${st.reduce((a, b) => a + b, 0)} / 9 stars</div></div>`; }).join('');
+}
+$('#fbGrid').addEventListener('click', e => { const b = e.target.closest('.stars button'); if (!b) return; const w = b.closest('.stars'); const st = starsOf(w.dataset.t); const n = +b.dataset.n; st[+w.dataset.c] = st[+w.dataset.c] === n ? n - 1 : n; save(); Sound.ting(); });
+onChange(renderFb); renderFb();
+
+/* ===== sticker vote ===== */
+const STICK = `<svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="54" fill="#F6BE4A" stroke="#18201B" stroke-width="4"/><path d="M60 22 l10 21 23 3 -17 16 4 23 -20-11 -20 11 4-23 -17-16 23-3z" fill="#fff" stroke="#18201B" stroke-width="3.5" stroke-linejoin="round"/></svg>`;
+function renderVote() {
+  $('#voteGrid').style.gridTemplateColumns = `repeat(${Math.max(1, S.teams.length)},1fr)`;
+  $('#voteGrid').innerHTML = S.teams.map(t => { const v = S.votes[t.id] || 0; return `<div class="vc" style="--tc:${t.color}"><h4>${esc(t.name)}</h4><div class="vn2">${v}</div><div class="stk2">${STICK.repeat(Math.min(v, 30))}</div><div class="vbtns"><button data-t="${t.id}" data-d="-1">−</button><button data-t="${t.id}" data-d="1">+</button></div></div>`; }).join('');
+}
+$('#voteGrid').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (!b) return; S.votes[b.dataset.t] = Math.max(0, (S.votes[b.dataset.t] || 0) + +b.dataset.d); save(); (+b.dataset.d > 0 ? Sound.pop : Sound.click)(); });
+onChange(renderVote); renderVote();
+
+/* ===== final ===== */
+function renderFinal(reveal) {
+  const rows = S.teams.map(t => { const m = scoreOf(t.id).ok, d = starsOf(t.id).reduce((a, b) => a + b, 0), v = S.votes[t.id] || 0; return { t, m, d, v, tot: m + d + v }; });
+  if (!reveal) { $('#finalBars').innerHTML = `<div class="box y" style="flex:1;display:flex;align-items:center;justify-content:center;gap:40px;margin-top:10px"><svg width="220" height="220" viewBox="0 0 120 120"><path d="M34 14 h52 v30 a26 26 0 0 1 -52 0z" fill="#F6BE4A" stroke="#18201B" stroke-width="3.5"/><path d="M34 22 h-14 a14 14 0 0 0 16 20 M86 22 h14 a14 14 0 0 1 -16 20" stroke="#18201B" stroke-width="3.5" fill="none"/><rect x="52" y="70" width="16" height="16" fill="#DC9E22" stroke="#18201B" stroke-width="3"/><rect x="32" y="86" width="56" height="20" rx="5" fill="#fff" stroke="#18201B" stroke-width="3.5"/></svg><p style="font:800 56px var(--geo)">Maths + Design + Votes<br><span class="small" style="font-size:30px">Press <b>Reveal</b> when every group is checked.</span></p></div>`; return; }
+  const max = Math.max(1, ...rows.map(r => r.tot));
+  const sorted = rows.slice().sort((a, b) => b.tot - a.tot || b.m - a.m || b.d - a.d);
+  const top = sorted[0] ? sorted[0].tot : 0;
+  $('#finalBars').innerHTML = sorted.map((r, i) => `<div class="fbar ${reveal && r.tot === top && top > 0 ? 'win' : ''}" data-i="${i}"><span class="rk">${i + 1}</span><span style="color:${r.t.color}">${esc(r.t.name)}</span><span class="tr"><span class="seg s1" data-w="${r.m / max * 100}">${r.m ? 'Maths ' + r.m : ''}</span><span class="seg s2" data-w="${r.d / max * 100}">${r.d ? 'Design ' + r.d : ''}</span><span class="seg s3" data-w="${r.v / max * 100}">${r.v ? 'Votes ' + r.v : ''}</span></span><span class="tot">${reveal ? r.tot : ''}</span></div>`).join('');
+  if (!reveal) return;
+  const bars = $$('#finalBars .fbar').reverse();
+  Sound.drum(28);
+  bars.forEach((b, k) => setTimeout(() => { b.classList.add('in'); requestAnimationFrame(() => $$('.seg', b).forEach(s => s.style.width = s.dataset.w + '%')); Sound.pop(); if (k === bars.length - 1) setTimeout(() => { Sound.jingle(); setTimeout(Sound.fanfare, 700); Conf.burst(220); }, 900); }, 1500 + k * 900));
+}
+$('#revealFinal').onclick = () => renderFinal(true);
+$('#finalSlide').addEventListener('enter', () => renderFinal(false));
+$('#calcSlide').addEventListener('enter', renderCalc);
+$('#boardSlide').addEventListener('enter', renderBoard);
+
+/* init */
+slides = $$('.slide', deck);
+renderStrip(); renderResponder(); renderBoard();
+const start = parseInt((location.hash || '').slice(1), 10);
+show(isNaN(start) ? 0 : start - 1, false);
+})();</script></body></html>
