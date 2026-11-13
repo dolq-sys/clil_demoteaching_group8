@@ -96,7 +96,8 @@ b{font-weight:750}
 .wrapc{justify-content:center}.wrapc h3{font-size:56px}.wrapc p{font-size:38px}.wrapc .gk{font-size:26px}.wrapc .say{margin-top:28px;font-size:40px}
 
 /* furniture cards */
-.fgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:18px}
+.fgrid{display:grid;grid-template-columns:repeat(3,1fr) 1.35fr;gap:22px}
+.fc.mystery{background:var(--y);background-image:radial-gradient(rgba(255,255,255,.3) 2px,transparent 2.5px);background-size:22px 22px}.fc.mystery h4{font-size:38px;line-height:1.1}
 .fc{border-radius:26px;background:var(--grey);padding:20px 14px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
 .fc svg{width:170px;height:170px}
 .fc h4{font-size:32px;margin-top:8px}
@@ -156,16 +157,17 @@ b{font-weight:750}
 .rowsum{font:700 40px var(--geo);margin-top:18px;min-height:52px}
 
 /* rule table */
-.rtab{width:100%;border-collapse:separate;border-spacing:10px;margin:-10px;font:700 34px var(--geo)}
+.rtab{width:100%;table-layout:fixed;border-collapse:separate;border-spacing:10px;margin:-10px;font:700 34px var(--geo)}
+.rtab th:first-child{width:300px}
 .rtab th{font:700 22px var(--geo);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);text-align:center;padding:6px}
-.rtab td{background:var(--grey);border-radius:20px;text-align:center;padding:10px 14px;height:150px;font-size:44px}
+.rtab td{background:var(--grey);border-radius:20px;text-align:center;vertical-align:middle;padding:0;height:150px;font-size:44px;position:relative;overflow:hidden}
 .rtab td.sh{background:#fff;width:300px}
 .rv-cell{cursor:pointer}
 .rv-cell span{display:inline-block;transition:opacity .3s}
 .rv-cell.hid span{opacity:0}
 .rv-cell.hid{background:repeating-linear-gradient(45deg,var(--grey) 0 12px,#E8E9E7 12px 24px)}
-.rv-cell.hid::after{content:"?";font:800 44px var(--geo);color:var(--faint)}
-.rv-cell.hid span{display:none}
+.rv-cell.hid::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font:800 44px var(--geo);color:var(--faint)}
+.rv-cell.hid span{visibility:hidden}
 
 /* rule */
 .formula{display:flex;align-items:center;justify-content:center;gap:26px;font:800 78px/1 var(--geo);padding:44px 30px;border-radius:32px;background:var(--ink);color:#fff}
@@ -240,9 +242,9 @@ b{font-weight:750}
 .tstep{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center;background:var(--grey);border-radius:22px;padding:18px 26px}
 .tstep .sn{font:800 46px/1 var(--geo);color:var(--yd);min-width:40px}
 .tstep p{font-size:29px;line-height:1.3}
-.wtab{width:100%;border-collapse:separate;border-spacing:6px;margin:-6px;font:600 25px var(--head)}
+.wtab{width:100%;border-collapse:separate;border-spacing:5px;margin:-5px;font:600 22px var(--head)}
 .wtab th{background:var(--ink);color:#fff;font:700 20px var(--geo);padding:12px;border-radius:12px}
-.wtab td{background:#fff;border-radius:12px;padding:12px 14px;height:58px}
+.wtab td{background:#fff;border-radius:12px;padding:8px 12px;height:50px}
 .wtab td.d{color:var(--faint)}
 
 /* calc board */
@@ -341,6 +343,29 @@ b{font-weight:750}
 .pframes .frame:first-child{margin-top:0}
 .ck{font:600 27px var(--head)!important;display:flex;align-items:center;gap:14px;background:#fff;border-radius:14px;padding:12px 16px}
 .ck::before{content:"";width:28px;height:28px;border:3px solid var(--ink);border-radius:7px;flex:none}
+.pickrow{display:flex;align-items:center;gap:14px;font:700 24px var(--geo);color:var(--muted)}
+#roomWho{display:flex;gap:10px;flex-wrap:wrap}
+#roomWho button{display:flex;align-items:center;gap:8px;font:700 20px var(--geo);padding:10px 16px 8px;border-radius:14px;border:0;background:var(--grey);cursor:pointer;border-left:8px solid var(--tc)}
+#roomWho button.on{background:var(--ink);color:#fff}
+#roomWho button.done{opacity:.45}
+.rcards{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:20px}
+.rc{perspective:1200px;border:0;background:none;padding:0;cursor:pointer;min-height:0}
+.rc .in{position:relative;width:100%;height:100%;transition:transform .8s cubic-bezier(.3,.7,.3,1.15);transform-style:preserve-3d}
+.rc.on .in{transform:rotateY(180deg)}
+.rc .fa,.rc .ba{position:absolute;inset:0;border-radius:26px;backface-visibility:hidden;-webkit-backface-visibility:hidden;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rc .fa{background:var(--cc);background-image:radial-gradient(rgba(255,255,255,.22) 2px,transparent 2.5px);background-size:22px 22px;box-shadow:inset 0 0 0 10px rgba(255,255,255,.35)}
+.rc .fa b{font:800 130px/1 var(--geo);color:#fff;text-shadow:0 4px 0 rgba(0,0,0,.12)}
+.rc .fa span{position:absolute;bottom:18px;font:800 22px var(--geo);letter-spacing:.14em;text-transform:uppercase;color:#fff}
+.rc:hover:not(.on) .in{transform:translateY(-6px) rotate(-1deg)}
+.rc .ba{transform:rotateY(180deg);background:#fff;border:6px solid var(--cc);display:grid;grid-template-columns:1.7fr .8fr;gap:6px;padding:4px 16px 4px 4px;align-items:center}
+.rc .ba svg{width:100%;height:100%}
+.rc.on{cursor:zoom-in}
+.roomm{width:min(1300px,96vw)}.roomm svg{width:100%;height:auto;max-height:78vh;display:block}
+.rc .ba h4{font:800 34px/1.1 var(--head);text-align:left}
+.rc .ba .who{display:inline-block;margin-top:12px;font:800 22px var(--geo);color:#fff;background:var(--tc,var(--ink));border-radius:12px;padding:8px 14px 6px}
+.rc .ba .who:empty{display:none}
+.rc.dim{opacity:.35;filter:grayscale(.6);transition:opacity .4s,filter .4s}
+.armed{background:var(--p)!important;color:#fff!important}
 /* chrome */
 .toolbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:2px;background:var(--ink);padding:6px;border-radius:16px;z-index:50;transition:opacity .3s,transform .3s}
 .toolbar.hide{opacity:0;transform:translate(-50%,14px);pointer-events:none}
@@ -649,6 +674,14 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
  </div>
 </section>
 
+<!-- PICK A ROOM -->
+<section class="slide flexs" data-part="Project" data-title="Pick a room card" id="roomSlide">
+ <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Pick a card</div><h2 class="rv" style="--i:1">Which room will your group design?</h2></div>
+  <div class="actions rv" style="--i:2;margin:0"><button class="btn" id="roomReset">Shuffle again</button></div></div>
+ <div class="pickrow mt16 rv" style="--i:2"><span>Now picking:</span><div id="roomWho"></div></div>
+ <div class="rcards fill mt16 rv" style="--i:3" id="rcards"></div>
+</section>
+
 <!-- ROOM AREA -->
 <section class="slide flexs" data-part="Project" data-title="Our room">
  <div class="kicker rv">Your room</div><h2 class="rv" style="--i:1">What is the area of the floor?</h2>
@@ -670,9 +703,9 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
   <div class="msteps">
    <div class="ms frag" data-f="1"><span class="sn">1</span><p><b>Place</b> the furniture in the room. Leave space to walk!</p></div>
    <div class="ms frag" data-f="2"><span class="sn">2</span><p><b>Measure</b> the bottom of each piece with a ruler.<br>Bed: length <b>12 cm</b>, width <b>8 cm</b>.</p></div>
-   <div class="ms frag" data-f="3"><span class="sn">3</span><p><b>Calculate</b> L × W: Bed 12 × 8 = <b>96</b> · Wardrobe 10 × 4 = <b>40</b> · Sofa 9 × 4 = <b>36</b> · Plant 3 × 3 = <b>9</b></p></div>
-   <div class="ms frag" data-f="4"><span class="sn">4</span><p><b>Add</b>: 96 + 40 + 36 + 9 = <b>181 cm²</b> (furniture)</p></div>
-   <div class="ms hi frag" data-f="5"><span class="sn">5</span><p><b>Remaining area</b> = 1,200 − 181 = <b class="cg">1,019 cm²</b></p></div>
+   <div class="ms frag" data-f="3"><span class="sn">3</span><p><b>Calculate</b> L × W: Bed 12 × 8 = <b>96</b> · Wardrobe 10 × 4 = <b>40</b> · Sofa 9 × 4 = <b>36</b><br><span class="small">The plant is only decor — we don’t count it.</span></p></div>
+   <div class="ms frag" data-f="4"><span class="sn">4</span><p><b>Add</b>: 96 + 40 + 36 = <b>172 cm²</b> (furniture)</p></div>
+   <div class="ms hi frag" data-f="5"><span class="sn">5</span><p><b>Remaining area</b> = 1,200 − 172 = <b class="cg">1,028 cm²</b></p></div>
   </div>
  </div>
 </section>
@@ -684,7 +717,7 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
  <div class="g2 fill mt24" style="grid-template-columns:.95fr 1.05fr">
   <div class="tsteps">
    <div class="tstep rv" style="--i:2"><span class="sn">1</span><p><b>Design</b>: put all your furniture in the 40 × 30 cm room.</p></div>
-   <div class="tstep rv" style="--i:3"><span class="sn">2</span><p><b>Measure</b> the length and width of each bottom.</p></div>
+   <div class="tstep rv" style="--i:3"><span class="sn">2</span><p><b>Measure</b> the bottom of the <b>bed, wardrobe and sofa</b>. Surprise items are only <b>decor</b> — don’t count them.</p></div>
    <div class="tstep rv" style="--i:4"><span class="sn">3</span><p><b>Calculate</b> each area: Length × Width.</p></div>
    <div class="tstep rv" style="--i:5"><span class="sn">4</span><p><b>Add</b> all areas: total furniture area.</p></div>
    <div class="tstep rv" style="--i:6"><span class="sn">5</span><p><b>Remaining area</b> = 1,200 cm² − total.</p></div>
@@ -697,8 +730,8 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
     <tr><td>Bed</td><td>12 cm</td><td>8 cm</td><td>12 × 8 = 96</td></tr>
     <tr><td>Wardrobe</td><td class="d">… cm</td><td class="d">… cm</td><td class="d">… × … = …</td></tr>
     <tr><td>Sofa</td><td class="d">… cm</td><td class="d">… cm</td><td class="d">… × … = …</td></tr>
-    <tr><td colspan="3"><b>Remaining area</b> = 1,200 − (all furniture)</td><td class="d">… cm²</td></tr></table>
-   <p class="small mt16">Everyone in the group has a job: designer · measurer · calculator · checker · presenter.</p>
+    <tr><td colspan="3"><b>Remaining area</b> = 1,200 − (bed + wardrobe + sofa)</td><td class="d">… cm²</td></tr></table>
+   <p class="small mt8" style="font-size:19px">Jobs: designer · measurer · calculator · checker · presenter.</p>
   </div>
  </div>
 </section>
@@ -706,13 +739,13 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
 <!-- CALC CHECK -->
 <section class="slide flexs" data-part="Project" data-title="Check the maths" id="calcSlide">
  <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Teacher checks</div><h2 class="rv" style="--i:1">Check the maths</h2></div>
-  <div class="actions rv" style="--i:2;margin:0"><button class="btn" id="addRow">+ Add item</button><button class="btn y" id="showKey">Show answers</button></div></div>
+  <div class="actions rv" style="--i:2;margin:0"><select class="btn" id="addRow" style="appearance:auto"><option value="">+ Add item</option><option value="bed">Bed</option><option value="wardrobe">Wardrobe</option><option value="sofa">Sofa</option></select><button class="btn y" id="showKey">Show answers</button></div></div>
  <div class="ctabs mt16 rv" style="--i:2" id="ctabs"></div>
  <div class="fill mt24 rv" style="--i:3;display:grid;grid-template-columns:1fr 300px;gap:26px;min-height:0">
   <div style="overflow:auto;min-height:0"><table class="ctab"><thead><tr><th style="text-align:left">Furniture</th><th>Length (cm)</th><th>Width (cm)</th><th>Group's area</th><th>Correct</th><th></th><th></th></tr></thead><tbody id="ctBody"></tbody></table></div>
   <div class="box g" style="display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:10px">
    <p class="small">Correct answers</p><div class="cscore" style="font-size:90px" id="cScore">0</div><p class="small" id="cOf">of 0</p>
-   <p class="small mt16" style="font-size:18px">Type the measured length and width, then what the group wrote. ✓ / ✗ appears by itself.</p>
+   <p class="small mt16" style="font-size:18px">Type the measured length and width, then what the group wrote. ✓ / ✗ appears by itself.<br><b>Only rectangles count:</b> vase, duck and plant pots are decor.</p>
   </div>
  </div>
 </section>
@@ -871,6 +904,7 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
   <div class="mh"><h3>All slides</h3><button class="xbtn" data-close>✕</button></div>
   <div class="mb"><div class="ovgrid" id="ovGrid"></div></div>
 </div></div>
+<div class="scrim" id="mRoom"><div class="modal roomm"><div class="mh"><h3 id="roomBigT"></h3><button class="xbtn" data-close>✕</button></div><div class="mb" id="roomBigA"></div></div></div>
 <canvas id="confetti"></canvas>
 
 <script>(() => {
@@ -894,6 +928,7 @@ const FSVG = {
   duck: `<path d="M18 70 c0 -10 10 -16 22 -14 c8 -16 46 -18 56 4 c6 2 14 0 18 -6 c4 14 -2 32 -20 40 c-16 8 -56 8 -68 -6 c-6 -6 -8 -12 -8 -18z" fill="#fff" ${ST}/><circle cx="40" cy="44" r="20" fill="#fff" ${ST}/><path d="M20 44 c-8 0 -14 4 -14 8 c6 2 12 2 18 -2" fill="#fff" ${ST}/><circle cx="42" cy="38" r="3.5" fill="#18201B"/><path d="M62 72 c8 8 22 8 30 -2" fill="none" ${ST}/>`,
   plant: `<path d="M60 64 C58 46 50 34 34 28 C40 44 48 54 60 64z" fill="#fff" ${ST}/><path d="M60 64 C64 42 74 30 92 24 C88 42 76 56 60 64z" fill="#fff" ${ST}/><path d="M60 64 C58 40 60 22 66 8 C72 26 70 46 60 64z" fill="#fff" ${ST}/><path d="M60 64 C50 58 36 58 24 64 C38 70 50 70 60 64z" fill="#fff" ${ST}/><rect x="34" y="64" width="52" height="12" rx="3" fill="#fff" ${ST}/><path d="M38 76 h44 l-6 34 h-32z" fill="#fff" ${ST}/>`
 };
+FSVG.mystery = `<path d="M14 48 h92 v62 h-92z" fill="#fff" ${ST}/><path d="M8 34 h104 v16 h-104z" fill="#fff" ${ST}/><path d="M52 34 v76 M68 34 v76" ${ST}/><path d="M60 34 c-10 -20 -30 -22 -30 -10 c0 8 18 10 30 10 c12 0 30 -2 30 -10 c0 -12 -20 -10 -30 10z" fill="#fff" ${ST}/><path d="M30 66 q0 -10 9 -10 q9 0 9 8 q0 6 -9 9 v5 M39 92 v1" fill="none" stroke="#18201B" stroke-width="4" stroke-linecap="round"/><path d="M81 66 q0 -10 9 -10 q9 0 9 8 q0 6 -9 9 v5 M90 92 v1" fill="none" stroke="#18201B" stroke-width="4" stroke-linecap="round"/>`;
 const svgF = (t, w = 120) => `<svg viewBox="0 0 120 120" width="${w}" height="${w}" aria-hidden="true">${FSVG[t]}</svg>`;
 const TYPES = ['bed', 'wardrobe', 'sofa', 'vase', 'duck', 'plant'];
 const NAME = { bed: 'bed', wardrobe: 'wardrobe', sofa: 'sofa', vase: 'vase of flowers', duck: 'duck', plant: 'plant pot' };
@@ -939,18 +974,32 @@ const Sound = (() => {
     unlock: ac,
     tick: () => tone(1700, 0, .03, 'square', .04),
     click: () => tone(1100, 0, .025, 'triangle', .08),
-    pop: () => tone(520, 0, .09, 'sine', .2, 940),
+    pop: () => { tone(380, 0, .07, 'sine', .32, 1500); noise(0, .025, .18, 2500, 4000); },
+    bubble: () => { const f = 300 + Math.random() * 250; tone(f, 0, .08, 'sine', .35, f * 4); tone(f * 2, .05, .05, 'sine', .12, f * 5); },
     ting: () => { tone(1568, 0, .5, 'sine', .22); tone(2093, .02, .5, 'sine', .08); },
     tingting: () => { tone(1319, 0, .35, 'sine', .22); tone(1760, .14, .6, 'sine', .22); tone(2637, .14, .5, 'sine', .06); },
+    coin: () => { tone(988, 0, .08, 'square', .1); tone(1319, .08, .45, 'square', .1); },
+    sparkle: () => { for (let i = 0; i < 7; i++) tone(2000 + Math.random() * 2200, i * .045, .22, 'sine', .07); },
+    xylo: n => { const sc = [523, 587, 659, 784, 880, 1047, 1175, 1319, 1568]; for (let i = 0; i < n; i++) { const f = sc[i % sc.length]; tone(f, i * .09, .35, 'triangle', .22); tone(f * 4, i * .09, .06, 'sine', .05); } },
+    boing: () => { tone(160, 0, .45, 'sine', .3, 520); tone(170, .02, .45, 'triangle', .1, 560); },
+    tada: () => { tone(523, 0, .12, 'triangle', .2); tone(784, .12, .9, 'triangle', .2); tone(1047, .12, .9, 'triangle', .14); tone(1319, .12, .9, 'sine', .1); },
+    win: () => { const k = Math.floor(Math.random() * 4); [Sound2.tingting, Sound2.coin, Sound2.sparkle, Sound2.tada][k](); },
     wrong: () => { tone(220, 0, .18, 'sawtooth', .09, 180); tone(150, .17, .34, 'sawtooth', .1, 100); },
-    cash: () => { noise(0, .07, .22, 3000, 5000); noise(.07, .05, .15, 2000, 4000); tone(2637, .12, .7, 'sine', .22); tone(3520, .14, .6, 'sine', .14); tone(4186, .16, .5, 'sine', .08); },
+    cash: () => { noise(0, .05, .25, 1500, 900); noise(.06, .04, .2, 1800, 1000); noise(.12, .18, .1, 600, 300); tone(2637, .2, .9, 'sine', .22); tone(3520, .22, .8, 'sine', .14); tone(4186, .24, .6, 'sine', .08); tone(988, .38, .08, 'square', .08); tone(1319, .46, .4, 'square', .08); },
     jingle: () => { [523, 659, 784, 1047, 784, 1047].forEach((f, i) => tone(f, i * .09, .22, 'square', .07)); tone(1319, .58, .6, 'square', .07); tone(1568, .58, .6, 'triangle', .1); },
     fanfare: () => { [392, 523, 659].forEach((f, i) => tone(f, i * .13, .22, 'triangle', .2)); [523, 659, 784, 1047].forEach(f => tone(f, .42, 1.1, 'triangle', .12)); },
+    drumroll: (dur = 3) => { let t = 0, i = 0; while (t < dur) { const k = t / dur; noise(t, .045, .05 + k * .16, 900, 2600); if (i % 4 === 0) tone(95 + k * 30, t, .12, 'sine', .12 + k * .2, 60); t += .075 - k * .035; i++; } },
+    crash: (d = 0) => { noise(d, 1.4, .3, 6000, 3000); noise(d, .5, .2, 2500, 1200); tone(80, d, .4, 'sine', .35, 45); },
+    surprise: () => { Sound2.crash(); tone(523, .05, .12, 'triangle', .22); tone(784, .17, .9, 'triangle', .22); tone(1047, .17, .9, 'triangle', .16); tone(1319, .17, .9, 'sine', .12); tone(1568, .17, .9, 'sine', .08); setTimeout(() => Sound2.sparkle(), 350); },
     drum: n => { for (let i = 0; i < n; i++) noise(i * .055, .05, .09 + i * .003, 180, 360); },
+    applause: (dur = 3) => { for (let i = 0; i < dur * 45; i++) { const t = Math.random() * dur, f = 900 + Math.random() * 2600; noise(t, .035 + Math.random() * .03, .05 + Math.random() * .05 * (1 - t / dur / 1.5), f, f * 1.6); } },
     alarm: () => { for (let i = 0; i < 3; i++) { tone(880, i * .4, .16, 'square', .1); tone(1175, i * .4 + .18, .16, 'square', .08); } },
+    tik: hi => { tone(hi ? 2300 : 1900, 0, .035, 'square', hi ? .07 : .05); noise(0, .02, .08, 3000, 5000); },
+    tok: hi => { tone(hi ? 1500 : 1150, 0, .045, 'square', hi ? .07 : .05); noise(0, .02, .06, 1500, 2500); },
     beep: () => tone(660, 0, .08, 'square', .06)
   };
 })();
+const Sound2 = Sound;
 ['pointerdown', 'keydown'].forEach(ev => window.addEventListener(ev, () => Sound.unlock(), { once: true }));
 let toastT;
 function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2000); }
@@ -998,7 +1047,7 @@ $('#divLearn').innerHTML = `<div class="ill">${rectSVG(5, 3, { grid: true, maxW:
 $('#divPrac').innerHTML = artCluster(['bed', 'wardrobe', 'sofa', 'vase', 'duck', 'plant'], [160, 160, 160, 160, 160, 160]);
 $('#divProj').innerHTML = `<div class="ill" style="background:#fff;border-radius:20px;padding:10px">${rectSVG(8, 6, { grid: true, labels: false, maxW: 480, maxH: 330, maxU: 60 })}</div>` + artCluster(['bed', 'wardrobe', 'sofa'], [140, 140, 140]);
 $('#divPres').innerHTML = `<svg class="ill" width="300" height="300" viewBox="0 0 120 120"><path d="M60 6 l15 31 34 5 -25 24 6 34 -30-16 -30 16 6-34 -25-24 34-5z" fill="#F6BE4A" stroke="#18201B" stroke-width="3.5" stroke-linejoin="round"/></svg>` + artCluster(['sofa'], [220]);
-$('#rewardGrid').innerHTML = TYPES.map((t, i) => `<div class="fc ${isCore(t) ? 'core' : 'extra'}">${svgF(t, 150)}<h4>${LABEL[t]}</h4><div class="n">${TOTAL[t]} <small>${isCore(t) ? '1 per group' : 'surprise'}</small></div></div>`).join('');
+$('#rewardGrid').innerHTML = CORE.map(t => `<div class="fc core">${svgF(t, 150)}<h4>${LABEL[t]}</h4><div class="n">${TOTAL[t]} <small>1 per group</small></div></div>`).join('') + `<div class="fc extra mystery">${svgF('mystery', 190)}<h4>Surprise items<br>to decorate</h4><p class="small" style="margin-top:6px">just for decor</p><div class="n" style="font-size:80px">?</div></div>`;
 
 /* vocab art */
 $('#vL').innerHTML = `<rect x="40" y="40" width="200" height="100" fill="#fff" stroke="#18201B" stroke-width="4"/><path d="M40 166h200" stroke="#EE7D45" stroke-width="8" stroke-linecap="round"/><path d="M40 154v24M240 154v24" stroke="#EE7D45" stroke-width="5"/><text x="140" y="104" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="34" fill="#C9612F">6 cm</text>`;
@@ -1012,24 +1061,24 @@ function renderHunt() {
   S.hunt = S.hunt || {};
   $('#huntCount').innerHTML = S.teams.map(t => `<div class="hc2" style="--tc:${t.color}"><b>${esc(t.name)}</b><div class="row"><button data-t="${t.id}" data-d="-1">−</button><output>${S.hunt[t.id] || 0}</output><button data-t="${t.id}" data-d="1">+</button></div></div>`).join('');
 }
-$('#huntCount').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (!b) return; S.hunt = S.hunt || {}; S.hunt[b.dataset.t] = Math.max(0, (S.hunt[b.dataset.t] || 0) + +b.dataset.d); save(); (+b.dataset.d > 0 ? Sound.ting : Sound.click)(); });
+$('#huntCount').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (!b) return; S.hunt = S.hunt || {}; S.hunt[b.dataset.t] = Math.max(0, (S.hunt[b.dataset.t] || 0) + +b.dataset.d); save(); (+b.dataset.d > 0 ? Sound.bubble : Sound.click)(); });
 onChange(renderHunt); renderHunt();
 
 /* ===== count squares ===== */
 let cnt = 0;
 function buildCount() { cnt = 0; $('#cnum').textContent = 0; $('#rowsum').textContent = ''; $('#cgrid').innerHTML = Array.from({ length: 12 }, () => '<div class="cell"></div>').join(''); }
-$('#cgrid').addEventListener('click', e => { const c = e.target.closest('.cell'); if (!c || c.classList.contains('on')) return; cnt++; c.textContent = cnt; c.classList.add('on'); $('#cnum').textContent = cnt; Sound.ting(); if (cnt === 12) { setTimeout(() => { Sound.tingting(); $('#rowsum').innerHTML = 'Area = <span class="cg">12 cm²</span>'; }, 250); } });
-$('#cRows').onclick = () => { $$('#cgrid .cell').forEach((c, i) => { c.textContent = i + 1; c.classList.add('on'); }); cnt = 12; $('#cnum').textContent = 12; $('#rowsum').innerHTML = '4 + 4 + 4 = 12 &nbsp;→&nbsp; <span class="cg">3 rows × 4 = 12</span>'; Sound.tingting(); };
+$('#cgrid').addEventListener('click', e => { const c = e.target.closest('.cell'); if (!c || c.classList.contains('on')) return; cnt++; c.textContent = cnt; c.classList.add('on'); $('#cnum').textContent = cnt; Sound.bubble(); if (cnt === 12) { setTimeout(() => { Sound.sparkle(); $('#rowsum').innerHTML = 'Area = <span class="cg">12 cm²</span>'; }, 250); } });
+$('#cRows').onclick = () => { $$('#cgrid .cell').forEach((c, i) => { c.textContent = i + 1; c.classList.add('on'); }); cnt = 12; $('#cnum').textContent = 12; $('#rowsum').innerHTML = '4 + 4 + 4 = 12 &nbsp;→&nbsp; <span class="cg">3 rows × 4 = 12</span>'; Sound.xylo(12); };
 $('#cReset').onclick = () => { buildCount(); Sound.click(); };
 buildCount();
 
 /* ===== find the rule ===== */
 const RR = [[3, 2], [4, 3], [5, 2]];
 $('#ruleRows').innerHTML = RR.map(([L, W]) => `<tr><td class="sh">${rectSVG(L, W, { grid: true, labels: false, maxW: 260, maxH: 120, maxU: 48 })}</td><td class="rv-cell hid"><span>${L * W}</span></td><td class="rv-cell hid co"><span>${L} cm</span></td><td class="rv-cell hid cb"><span>${W} cm</span></td></tr>`).join('');
-$('#ruleRows').addEventListener('click', e => { const c = e.target.closest('.rv-cell'); if (!c || !c.classList.contains('hid')) return; c.classList.remove('hid'); Sound.ting(); });
+$('#ruleRows').addEventListener('click', e => { const c = e.target.closest('.rv-cell'); if (!c || !c.classList.contains('hid')) return; c.classList.remove('hid'); Sound.coin(); });
 
 /* click a blank to reveal it */
-document.addEventListener('click', e => { const b = e.target.closest('.bx'); if (!b) return; b.querySelectorAll('.frag').forEach(f => f.classList.add('on')); Sound.tingting(); });
+document.addEventListener('click', e => { const b = e.target.closest('.bx'); if (!b) return; b.querySelectorAll('.frag').forEach(f => f.classList.add('on')); Sound.win(); });
 
 /* ===== room drawings ===== */
 (() => {
@@ -1043,7 +1092,7 @@ document.addEventListener('click', e => { const b = e.target.closest('.bx'); if 
 })();
 (() => {
   const u = 13.5, ox = 20, oy = 16, W = 40 * u, H = 30 * u;
-  const F = [['Bed', 12, 8, 1, 1, '#E7F3EA'], ['Wardrobe', 10, 4, 28, 1, '#FDECE2'], ['Sofa', 9, 4, 2, 24, '#E7F1FB'], ['Plant', 3, 3, 35, 25, '#FDF7E3']];
+  const F = [['Bed', 12, 8, 1, 1, '#E7F3EA'], ['Wardrobe', 10, 4, 28, 1, '#FDECE2'], ['Sofa', 9, 4, 2, 24, '#E7F1FB'], ['Decor', 3, 3, 35, 25, '#fff']];
   let s = `<rect x="${ox}" y="${oy}" width="${W}" height="${H}" fill="#fff" stroke="#18201B" stroke-width="5"/><g stroke="#E7F1FB" stroke-width="1">`;
   for (let i = 1; i < 40; i++) s += `<path d="M${ox + i * u} ${oy}v${H}"/>`; for (let j = 1; j < 30; j++) s += `<path d="M${ox} ${oy + j * u}h${W}"/>`;
   s += `</g><path d="M${ox + 16 * u} ${oy + H}h${6 * u}" stroke="#fff" stroke-width="8"/><path d="M${ox + 16 * u} ${oy + H} a ${6 * u} ${6 * u} 0 0 1 ${6 * u} -${6 * u}" fill="none" stroke="#89928C" stroke-width="2" stroke-dasharray="5 4"/><text x="${ox + 19 * u}" y="${oy + H - 8}" text-anchor="middle" font-family="${FONT}" font-weight="700" font-size="16" fill="#89928C">door</text>`;
@@ -1051,6 +1100,89 @@ document.addEventListener('click', e => { const b = e.target.closest('.bx'); if 
   s += `<text x="${ox + W / 2}" y="${oy + H + 34}" text-anchor="middle" font-family="${FONT}" font-weight="800" font-size="24" fill="#3576B4">Room: 40 cm × 30 cm = 1,200 cm²</text>`;
   $('#roomModel').innerHTML = s;
 })();
+
+/* two-tap confirm (browser confirm() is blocked in some previews) */
+function sure(el, msg) {
+  if (el && el.dataset.arm) { clearTimeout(+el.dataset.armT); delete el.dataset.arm; if (el.dataset.lbl != null) el.innerHTML = el.dataset.lbl; el.classList.remove('armed'); return true; }
+  if (!el) return true;
+  el.dataset.arm = 1; el.dataset.lbl = el.innerHTML; el.innerHTML = 'Tap again to confirm'; el.classList.add('armed'); toast(msg); Sound.click();
+  el.dataset.armT = setTimeout(() => { delete el.dataset.arm; el.innerHTML = el.dataset.lbl; el.classList.remove('armed'); }, 3500);
+  return false;
+}
+/* ===== rooms (line drawings of the foam room models) ===== */
+const LW = 'stroke="#18201B" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"';
+const LWt = 'stroke="#18201B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+const cloud = (x, y, k = 1) => `<path transform="translate(${x} ${y}) scale(${k})" d="M0 10 c-6 0 -6 -8 0 -8 c1 -6 10 -7 12 -2 c4 -4 11 0 9 5 c5 1 4 6 -1 6 z" fill="#fff" ${LWt}/>`;
+const horse = (x, y) => `<path transform="translate(${x} ${y})" d="M0 4 h11 l3 -4 l3 1 l-2 3 v3 M1 4 l-1 6 M3 4 l1 6 M9 4 l-1 6 M11 4 l1 6 M0 4 l-3 2" fill="none" ${LWt}/>`;
+const lantern = (x, y, h) => `<g transform="translate(${x} ${y})"><ellipse cx="0" cy="0" rx="9" ry="8" fill="#fff" ${LWt}/><path d="M-4 -7 q4 7 0 14 M4 -7 q-4 7 0 14" fill="none" ${LWt}/><rect x="-10" y="12" width="20" height="${h}" rx="10" fill="#fff" ${LW}/><path d="M-4 15 v${h - 6} M0 13 v${h - 2} M4 15 v${h - 6}" ${LWt}/><ellipse cx="0" cy="${h + 22}" rx="9" ry="8" fill="#fff" ${LWt}/><path d="M-4 ${h + 15} q4 7 0 14 M4 ${h + 15} q-4 7 0 14" fill="none" ${LWt}/></g>`;
+const topiary = (x, y, s = 1) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M-14 0 h28 l-4 30 h-20z" fill="#fff" ${LW}/><path d="M0 0 c-14 -2 -14 -12 -8 -16 c-8 -4 -6 -14 2 -14 c-6 -6 -2 -16 6 -12 c-2 -10 4 -18 8 -26 c4 8 10 16 8 26 c8 -4 12 6 6 12 c8 0 10 10 2 14 c6 4 6 14 -8 16z" transform="translate(-6 0)" fill="#fff" ${LW}/></g>`;
+const books = (x, y) => `<g transform="translate(${x} ${y})"><path d="M0 0 h60" ${LW}/><path d="M-4 0 h68 v5 h-68z" fill="#fff" ${LWt}/><rect x="4" y="-24" width="6" height="24" fill="#fff" ${LWt}/><rect x="11" y="-28" width="6" height="28" fill="#fff" ${LWt}/><rect x="18" y="-20" width="6" height="20" fill="#fff" ${LWt}/><circle cx="34" cy="-6" r="6" fill="#fff" ${LWt}/><rect x="42" y="-20" width="6" height="22" fill="#fff" ${LWt} transform="rotate(-20 45 0)"/></g>`;
+const swag = (x0, x1, y, n, hang = true) => { const w = (x1 - x0) / n; let d = '', o = ''; for (let i = 0; i < n; i++) { const a = x0 + i * w; d += `M${a} ${y} q${w / 2} 16 ${w} 0 `; if (hang && i % 1 === 0) o += `<path d="M${a + w / 2} ${y + 8} v${8 + (i % 2) * 6}" ${LWt}/><circle cx="${a + w / 2}" cy="${y + 20 + (i % 2) * 6}" r="3.5" fill="#fff" ${LWt}/>`; } return `<path d="${d}" fill="none" ${LW}/><path d="${d.replace(/q/g, 'q').replace(/ 16 /g, ' 11 ')}" transform="translate(0 3)" fill="none" ${LWt}/>${o}`; };
+const lattice = (x, y, w, h) => `<g><rect x="${x}" y="${y}" width="${w}" height="${h}" fill="#fff" ${LWt}/><path d="M${x} ${y} L${x + w} ${y + h} M${x + w} ${y} L${x} ${y + h} M${x + w / 2} ${y} L${x + w} ${y + h / 2} M${x} ${y + h / 2} L${x + w / 2} ${y + h}" ${LWt}/></g>`;
+const ROOMS = {
+  andy: { name: 'Andy’s room', sub: 'Toy-box style', left: () => {
+      let s = `<rect x="10" y="24" width="94" height="96" rx="8" fill="#fff" ${LW}/><path d="M16 30 q20 30 6 86 M16 30 q30 18 46 0 M98 30 q-20 30 -6 86 M98 30 q-30 18 -46 0" fill="none" ${LW}/><path d="M24 70 q3 20 2 40 M32 74 q3 18 2 34 M86 74 q-3 18 -2 34" fill="none" ${LWt}/>`;
+      [[118, 26], [140, 44], [122, 64], [150, 78], [132, 96]].forEach(([x, y]) => s += cloud(x, y, .8));
+      return s + `<rect x="12" y="140" width="158" height="60" rx="8" fill="#fff" ${LW}/>`; },
+    back: () => { let s = ''; [[20, 20], [70, 34], [125, 18], [175, 40], [230, 22], [285, 36], [330, 18], [40, 66], [100, 80], [160, 70], [215, 88], [270, 72], [320, 92], [70, 110], [190, 118], [300, 126]].forEach(([x, y], i) => s += cloud(x, y, .75 + (i % 3) * .1));
+      return s + `<rect x="10" y="148" width="345" height="56" rx="8" fill="#fff" ${LW}/>`; } },
+  asian: { name: 'Typical Asian bedroom', sub: 'Lanterns & a horse painting', left: () => {
+      let s = `<path d="M6 10 h168 M6 16 h168" ${LWt}/><rect x="48" y="32" width="96" height="60" fill="#fff" ${LW}/><rect x="54" y="38" width="84" height="48" fill="#fff" ${LWt}/>`;
+      [[62, 46], [86, 44], [112, 48], [64, 66], [90, 64], [116, 68]].forEach(([x, y]) => s += horse(x, y));
+      return s + lantern(24, 42, 70) + lantern(162, 28, 54) + `<path d="M6 204 h168 M6 210 h168" ${LWt}/>`; },
+    back: () => `<path d="M8 10 h349 M8 16 h349" ${LWt}/><path d="M80 52 h62 v5 h-62z" fill="#fff" ${LWt}/><path d="M88 52 h18 l-3 -16 h-12z M116 52 h18 l-2 -14 h-14z" fill="#fff" ${LWt}/><path d="M97 36 q-8 -12 -14 -6 M97 36 q4 -14 12 -10 M125 38 v-20 q4 -6 8 0 v20" fill="none" ${LWt}/><circle cx="117" cy="18" r="3" fill="#fff" ${LWt}/><circle cx="121" cy="10" r="3" fill="#fff" ${LWt}/>`
+      + topiary(40, 170, .9) + books(212, 112) + `<rect x="290" y="70" width="58" height="46" fill="#fff" ${LW}/><rect x="296" y="76" width="46" height="34" fill="#fff" ${LWt}/><path d="M304 88 q6 -4 10 2 q4 -6 10 0 M306 100 q8 -4 16 2" fill="none" ${LWt}/>` + topiary(306, 172, 1.05) + `<path d="M8 202 h349 M8 208 h349" ${LWt}/>` },
+  american: { name: 'Typical American bedroom', sub: 'Wall panels, lamp & clock', left: () => {
+      let s = `<path d="M6 8 h168" ${LWt}/><rect x="18" y="34" width="40" height="52" fill="#fff" ${LW}/><rect x="24" y="40" width="28" height="40" fill="#fff" ${LWt}/><circle cx="88" cy="60" r="21" fill="#fff" ${LW}/><circle cx="88" cy="60" r="16" fill="#fff" ${LWt}/>`;
+      s += `<path d="M126 28 h24 l6 22 h-36z" fill="#fff" ${LW}/><path d="M120 50 q4 4 8 0 q4 4 8 0 q4 4 8 0 q4 4 8 0 q4 4 4 0" fill="none" ${LWt}/><path d="M138 50 v148 M130 200 h16" ${LW}/>`;
+      s += `<path d="M6 128 h168 M6 134 h168" ${LW}/>`; for (let x = 18; x < 176; x += 20) s += `<path d="M${x} 134 v74" ${LWt}/>`; return s; },
+    back: () => { let s = `<path d="M8 8 h349" ${LWt}/>` + books(150, 52) + `<path d="M130 82 h80 v5 h-80z" fill="#fff" ${LWt}/><ellipse cx="146" cy="76" rx="8" ry="6" fill="#fff" ${LWt}/><rect x="158" y="68" width="18" height="14" fill="#fff" ${LWt}/><path d="M182 82 l8 -16 l8 16z" fill="#fff" ${LWt}/>`;
+      s += `<circle cx="300" cy="70" r="24" fill="#fff" ${LW}/><circle cx="300" cy="70" r="19" fill="#fff" ${LWt}/><path d="M300 70 v-12 M300 70 h-10" ${LW}/>`;
+      s += `<path d="M8 122 h349 M8 128 h349" ${LW}/>`; for (let x = 22; x < 356; x += 24) s += `<path d="M${x} 128 v80" ${LWt}/>`; return s; } },
+  xmas: { name: 'Christmas-style room', sub: 'Tree, garland & gifts', left: () => {
+      let s = `<rect x="6" y="6" width="168" height="206" fill="none" ${LWt}/>` + swag(6, 174, 12, 4);
+      s += `<rect x="40" y="58" width="50" height="40" fill="#fff" ${LW}/><rect x="45" y="63" width="40" height="30" fill="#fff" ${LWt}/><rect x="98" y="62" width="40" height="34" fill="#fff" ${LW}/><ellipse cx="118" cy="79" rx="13" ry="10" fill="#fff" ${LWt}/><ellipse cx="156" cy="46" rx="9" ry="15" fill="#fff" ${LW}/>`;
+      s += `<path d="M6 150 h168 M6 156 h168" ${LW}/>` + lattice(40, 156, 22, 50) + lattice(110, 156, 22, 50); return s; },
+    back: () => { let s = `<rect x="6" y="6" width="353" height="206" fill="none" ${LWt}/>` + swag(6, 359, 12, 7);
+      s += `<path d="M50 70 h46 v5 h-46z" fill="#fff" ${LWt}/><circle cx="62" cy="58" r="7" fill="#fff" ${LWt}/><circle cx="57" cy="51" r="3" fill="#fff" ${LWt}/><circle cx="67" cy="51" r="3" fill="#fff" ${LWt}/><ellipse cx="62" cy="66" rx="8" ry="5" fill="#fff" ${LWt}/><rect x="76" y="58" width="10" height="12" fill="#fff" ${LWt}/>`;
+      s += `<path d="M8 146 h170 M300 146 h57 M8 152 h170" ${LW}/>` + lattice(26, 152, 24, 52) + lattice(96, 152, 24, 52);
+      s += `<path d="M250 26 l4 9 10 1 -7 7 2 10 -9 -5 -9 5 2 -10 -7 -7 10 -1z" fill="#fff" ${LW}/><path d="M250 52 l-24 40 h10 l-28 46 h12 l-30 52 h120 l-30 -52 h12 l-28 -46 h10z" fill="#fff" ${LW}/><path d="M232 92 q18 8 36 0 M222 138 q28 12 56 0" fill="none" ${LWt}/>`;
+      [[244, 76], [258, 110], [232, 124], [268, 150], [222, 170], [286, 178], [250, 160]].forEach(([x, y]) => s += `<circle cx="${x}" cy="${y}" r="4" fill="#fff" ${LWt}/>`);
+      s += `<rect x="178" y="172" width="28" height="22" fill="#fff" ${LW}/><path d="M192 172 v22 M178 183 h28 M192 172 q-8 -10 -12 -2 M192 172 q8 -10 12 -2" fill="none" ${LWt}/><rect x="150" y="182" width="24" height="16" fill="#fff" ${LW}/><path d="M162 182 v16" ${LWt}/>`;
+      return s + `<ellipse cx="330" cy="90" rx="13" ry="22" fill="#fff" ${LW}/><ellipse cx="330" cy="90" rx="9" ry="17" fill="#fff" ${LWt}/>`; } }
+};
+function roomSVG(k) {
+  const r = ROOMS[k];
+  return `<svg viewBox="30 18 568 394" aria-hidden="true"><path d="M40 310 L220 250 L590 250 L505 405 Z" fill="#fff" ${LW}/><path d="M66 312 L224 260 L572 260 L496 392 Z" fill="none" ${LWt}/>
+    <path d="M40 90 L220 30 L220 250 L40 310 Z" fill="#fff" ${LW}/><g transform="matrix(1,-0.3333,0,1,40,90)">${r.left()}</g>
+    <path d="M220 30 H590 V250 H220 Z" fill="#fff" ${LW}/><g transform="translate(222 32)">${r.back()}</g>
+    <path d="M220 30 V250" stroke="#18201B" stroke-width="4"/></svg>`;
+}
+const RCOL = ['#4E9A6B', '#EE7D45', '#4A93D6', '#E0A42E'];
+function roomInit(force) { if (force || !S.roomOrder || S.roomOrder.length !== 4) { S.roomOrder = shuffle(Object.keys(ROOMS)); S.rooms = {}; } S.rooms = S.rooms || {}; }
+let roomTeam = null;
+function renderRooms() {
+  roomInit(false);
+  const taken = k => Object.keys(S.rooms).find(t => S.rooms[t] === k);
+  if (!team(roomTeam) || S.rooms[roomTeam]) roomTeam = (S.teams.find(t => !S.rooms[t.id]) || S.teams[0] || {}).id;
+  $('#roomWho').innerHTML = S.teams.map(t => `<button data-t="${t.id}" class="${t.id === roomTeam ? 'on' : ''} ${S.rooms[t.id] ? 'done' : ''}" style="--tc:${t.color}">${esc(t.name)}</button>`).join('');
+  $('#rcards').innerHTML = S.roomOrder.map((k, i) => { const tid = taken(k), tm = team(tid); return `<button class="rc ${tid ? 'on' : ''}" data-k="${k}" style="--cc:${RCOL[i]}${tm ? ';--tc:' + tm.color : ''}"><div class="in"><div class="fa"><b>?</b><span>Card ${i + 1}</span></div><div class="ba">${roomSVG(k)}<div><h4>${ROOMS[k].name}</h4><p class="small mt8">${ROOMS[k].sub}</p><span class="who">${tm ? esc(tm.name) : ''}</span></div></div></div></button>`; }).join('');
+}
+$('#roomWho').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; roomTeam = b.dataset.t; $$('#roomWho button').forEach(x => x.classList.toggle('on', x === b)); Sound.click(); });
+$('#rcards').addEventListener('click', e => {
+  const c = e.target.closest('.rc'); if (!c || c.dataset.busy) return;
+  if (c.classList.contains('on')) { $('#roomBigT').textContent = ROOMS[c.dataset.k].name; $('#roomBigA').innerHTML = roomSVG(c.dataset.k); openM('#mRoom'); Sound.pop(); return; }
+  if (!roomTeam) return toast('Set up the groups first');
+  if (S.rooms[roomTeam]) return toast(`${team(roomTeam).name} already has a room`);
+  c.dataset.busy = 1; const tid = roomTeam; Sound.drumroll(3); $$('#rcards .rc').forEach(x => x !== c && x.classList.add('dim'));
+  const kf = []; for (let i = 0; i <= 60; i++) { const a = (i % 2 ? 1 : -1) * (0.6 + i / 60 * 3.4), y = -(i / 60) * 10; kf.push({ transform: `translateY(${y}px) rotate(${a}deg) scale(${1 + i / 60 * .04})` }); } kf.push({ transform: 'none' });
+  c.animate(kf, { duration: 3000, easing: 'linear' });
+  setTimeout(() => { $$('#rcards .rc').forEach(x => x.classList.remove('dim')); S.rooms[tid] = c.dataset.k; save(); Sound.surprise(); Conf.burst(160); }, 3000);
+});
+$('#roomReset').onclick = e => { if (Object.keys(S.rooms || {}).length && !sure(e.currentTarget, 'This clears all room picks')) return; roomInit(true); save();
+  const cs = $$('#rcards .rc'); Sound.drum(16); cs.forEach((c, i) => c.animate([{ transform: 'none' }, { transform: `translate(${(i % 2 ? -1 : 1) * 60}px, ${(i < 2 ? 1 : -1) * 40}px) rotate(${(i % 2 ? -1 : 1) * 12}deg) scale(.85)` }, { transform: `translate(${(i % 2 ? 1 : -1) * 40}px, ${(i < 2 ? -1 : 1) * 30}px) rotate(${(i % 2 ? 1 : -1) * 8}deg) scale(.9)` }, { transform: 'none' }], { duration: 900, easing: 'ease-in-out', delay: i * 60 }));
+  setTimeout(() => { Sound.bubble(); toast('Cards shuffled — pick again!'); }, 950); };
+onChange(renderRooms); renderRooms();
 
 /* ===== deck ===== */
 const deck = $('#deck'); let slides = $$('.slide', deck); let cur = 0;
@@ -1069,7 +1201,7 @@ function show(i, all) {
 function next() {
   const { els, groups } = frags(slides[cur]);
   const g = groups.find(g => els.some(e => (+e.dataset.f || 0) === g && !e.classList.contains('on')));
-  if (g !== undefined) { els.filter(e => (+e.dataset.f || 0) === g).forEach(e => e.classList.add('on')); Sound.pop(); return; }
+  if (g !== undefined) { els.filter(e => (+e.dataset.f || 0) === g).forEach(e => e.classList.add('on')); (slides[cur].querySelector('.bx') ? Sound.win : Sound.pop)(); return; }
   if (cur < slides.length - 1) show(cur + 1);
 }
 function prev() { if (cur > 0) show(cur - 1, true); }
@@ -1144,7 +1276,7 @@ function openDraw(tid) {
   renderDraw(); $('#dArt').innerHTML = ''; $('#dName').textContent = team(dTeam).name; $('#dSub').textContent = 'Press Draw!'; $('#dStage').style.setProperty('--tc', team(dTeam).color);
   openM('#mDraw');
 }
-function stockHTML() { return TYPES.map(t => `<span class="stk ${left(t) ? '' : 'zero'}">${svgF(t, 46)}${left(t)}</span>`).join(''); }
+function stockHTML() { const sx = TYPES.filter(t => !isCore(t)).reduce((n, t) => n + left(t), 0); return CORE.map(t => `<span class="stk ${left(t) ? '' : 'zero'}">${svgF(t, 46)}${left(t)}</span>`).join('') + `<span class="stk ${sx ? '' : 'zero'}" title="Surprise items">${svgF('mystery', 46)}${sx}</span>`; }
 function renderDraw() {
   $('#dTeams').innerHTML = S.teams.map(t => `<button data-t="${t.id}" class="${t.id === dTeam ? 'on' : ''}" style="--tc:${t.color}">${esc(t.name)} <small>${inv(t.id).length} pcs</small></button>`).join('');
   $('#dStock').innerHTML = stockHTML();
@@ -1155,13 +1287,13 @@ function doDraw() {
   if (S.teams.length > 4) toast('Note: the set has furniture for 4 groups');
   if (!pool.length) { $('#dArt').innerHTML = ''; $('#dName').textContent = 'All done!'; $('#dSub').textContent = tm.name + ' has all its furniture — give a clap instead'; Sound.ting(); return; }
   const win = pool[Math.floor(Math.random() * pool.length)]; drawing = true;
-  const seq = shuffle(TYPES.slice()); let k = 0, delay = 60, el = 0; $('#dStage').classList.remove('landed'); $('#dSub').textContent = 'Drawing…';
-  (function step() { const t = seq[k++ % seq.length]; $('#dArt').innerHTML = svgF(t, 300); $('#dName').textContent = LABEL[t] + '?'; Sound.tick(); el += delay; delay *= 1.12;
+  const seq = shuffle(CORE.concat(['mystery', 'mystery'])); let k = 0, delay = 60, el = 0; $('#dStage').classList.remove('landed'); $('#dSub').textContent = 'Drawing…';
+  (function step() { const t = seq[k++ % seq.length]; $('#dArt').innerHTML = svgF(t, 300); $('#dName').textContent = (t === 'mystery' ? 'Surprise' : LABEL[t]) + '?'; Sound.tick(); el += delay; delay *= 1.12;
     if (el < 2200) setTimeout(step, delay); else setTimeout(() => land(win), delay); })();
   function land(t) {
     drawing = false; give(dTeam, t); save();
     $('#dArt').innerHTML = svgF(t, 300); $('#dName').textContent = `${isCore(t) ? 'A' : 'A'} ${NAME[t]}!`; $('#dSub').textContent = `for ${tm.name}${isCore(t) ? '' : ' · surprise item'}`;
-    const st = $('#dStage'); void st.offsetWidth; st.classList.add('landed'); Sound.cash(); if (!isCore(t)) setTimeout(Sound.jingle, 500); Conf.burst(90);
+    const st = $('#dStage'); void st.offsetWidth; st.classList.add('landed'); Sound.cash(); if (!isCore(t)) setTimeout(() => { Sound.jingle(); Sound.sparkle(); }, 700); Conf.burst(90);
     renderDraw(); pulse(dTeam);
   }
 }
@@ -1172,7 +1304,7 @@ function dealRest() {
   while (guard++ < 200) { const any = S.teams.some(t => options(t.id).length); if (!any) break; const t = S.teams[i++ % S.teams.length]; const p = options(t.id); if (!p.length) continue; give(t.id, p[Math.floor(Math.random() * p.length)]); gave++; }
   save(); if (gave) { Sound.cash(); toast(`Gave out ${gave} more pieces`); } else toast('No furniture left');
 }
-$('#dealRest').onclick = () => { if (confirm('Give all the remaining furniture to the groups at random?')) dealRest(); };
+$('#dealRest').onclick = e => { if (sure(e.currentTarget, 'Give all remaining furniture at random')) dealRest(); };
 
 function boardHTML() {
   return S.teams.map(t => { const mine = inv(t.id);
@@ -1249,9 +1381,9 @@ function makeTeams(mode) {
 }
 $('#mkRandom').onclick = () => makeTeams('random'); $('#mkOrder').onclick = () => makeTeams('order');
 $('#addTeam').onclick = () => { const i = S.teams.length; if (i >= 6) return; S.teams.push({ id: uid(), name: `Group ${i + 1}`, color: COLORS[i % COLORS.length] }); save(); };
-$('#resetFurn').onclick = () => { if (confirm('Take all furniture back from every group?')) { S.inv = {}; S.log = []; save(); toast('Furniture reset'); } };
+$('#resetFurn').onclick = e => { if (sure(e.currentTarget, 'Take all furniture back')) { S.inv = {}; S.log = []; save(); toast('Furniture reset'); } };
 $('#resetCalled').onclick = () => { S.called = []; save(); toast('Everyone can be called again'); };
-$('#resetLesson').onclick = () => { if (confirm('Reset furniture, checks, stars and votes? (Names stay.)')) { S.inv = {}; S.log = []; S.calc = {}; S.stars = {}; S.votes = {}; S.hunt = {}; S.called = []; S.responder = null; save(); toast('Lesson reset'); } };
+$('#resetLesson').onclick = e => { if (sure(e.currentTarget, 'Reset furniture, rooms, checks, stars and votes (names stay)')) { S.inv = {}; S.log = []; S.calc = {}; S.stars = {}; S.votes = {}; S.hunt = {}; S.rooms = {}; S.roomOrder = null; S.called = []; S.responder = null; save(); toast('Lesson reset'); } };
 function openSetup() { if (!$('#rosterIn').value.trim() && S.people.length) $('#rosterIn').value = S.people.map(p => p.name + '\t' + (team(p.team)?.name || '')).join('\n'); renderTeamEd(); openM('#mSetup'); }
 function renderTeamEd() {
   const card = t => { const ms = t ? membersOf(t.id) : S.people.filter(p => !team(p.team));
@@ -1267,7 +1399,7 @@ ed.addEventListener('change', e => { if (e.target.classList.contains('tname')) s
 ed.addEventListener('click', e => {
   const tc = e.target.closest('.tcard');
   if (e.target.classList.contains('tdot')) { const t = team(tc.dataset.tid); t.color = COLORS[(COLORS.indexOf(t.color) + 1) % COLORS.length]; save(); }
-  else if (e.target.classList.contains('tdel')) { const t = team(tc.dataset.tid); if (!confirm(`Delete “${t.name}”?`)) return; membersOf(t.id).forEach(p => p.team = null); S.teams = S.teams.filter(x => x !== t); delete S.inv[t.id]; save(); }
+  else if (e.target.classList.contains('tdel')) { const t = team(tc.dataset.tid); if (!sure(e.target, `Delete ${t.name}?`)) return; membersOf(t.id).forEach(p => p.team = null); S.teams = S.teams.filter(x => x !== t); delete S.inv[t.id]; save(); }
   else if (e.target.classList.contains('mdel')) { const id = e.target.closest('.mchip').dataset.pid; S.people = S.people.filter(p => p.id !== id); S.called = S.called.filter(x => x !== id); if (S.responder === id) S.responder = null; save(); }
 });
 ed.addEventListener('submit', e => { e.preventDefault(); const inp = e.target.querySelector('input'); const nm = inp.value.trim(); if (!nm) return; S.people.push({ id: uid(), name: nm, team: e.target.closest('.tcard').dataset.tid }); save(); });
@@ -1313,7 +1445,7 @@ function spin() {
   (function step() { const x = c.length > 1 ? seq[k++ % seq.length] : win; setStage(x.name, x.team, false); Sound.tick(); el += delay; delay *= 1.13;
     if (el < 2100) setTimeout(step, delay); else setTimeout(() => landP(win), delay); })();
 }
-function landP(w) { spinning = false; lastPick = w; setStage(w.name, w.team, true); Sound.ting();
+function landP(w) { spinning = false; lastPick = w; setStage(w.name, w.team, true); Sound.tada();
   if (w.kind === 'person') { if (!S.called.includes(w.id)) S.called.push(w.id); S.responder = w.id;
     if ($('#rotate').checked && $('#pickPool').value === 'all' && w.team) S.rot = (S.teams.indexOf(w.team) + 1) % S.teams.length; }
   save(); updateMeta(); }
@@ -1323,13 +1455,18 @@ $('#pDraw').onclick = () => { if (!lastPick) return toast('Spin first'); const t
 /* ===== timer ===== */
 const Timer = {
   total: 0, left: 0, iv: null, paused: false,
-  start(sec) { this.total = sec; this.left = sec; this.paused = false; $('#tpause').textContent = 'Pause'; $('#timerw').classList.remove('done'); $('#timerw').classList.add('show'); closeAll(); this.paint(); clearInterval(this.iv); this.iv = setInterval(() => this.tick(), 1000); Sound.click(); },
-  tick() { if (this.paused) return; this.left--; if (this.left <= 10 && this.left > 0) Sound.beep(); if (this.left <= 0) { this.left = 0; clearInterval(this.iv); this.iv = null; Sound.alarm(); $('#timerw').classList.add('done'); toast("Time's up!"); } this.paint(); },
+  tt: null, ttOn: false,
+  tickTock() { clearTimeout(this.tt); if (!this.iv || this.left <= 0) return; const L = this.left, on = this.total <= 120 || L <= 30;
+    const gap = L <= 5 ? 160 : L <= 10 ? 250 : L <= 20 ? 380 : L <= 30 ? 500 : 1000;
+    if (on && !this.paused) { this.ttOn = !this.ttOn; this.ttOn ? Sound.tik(L <= 10) : Sound.tok(L <= 10); }
+    this.tt = setTimeout(() => this.tickTock(), gap); },
+  start(sec) { this.total = sec; this.left = sec; this.paused = false; $('#tpause').textContent = 'Pause'; $('#timerw').classList.remove('done'); $('#timerw').classList.add('show'); closeAll(); this.paint(); clearInterval(this.iv); this.iv = setInterval(() => this.tick(), 1000); Sound.click(); this.tickTock(); },
+  tick() { if (this.paused) return; this.left--; if (this.left <= 0) { this.left = 0; clearInterval(this.iv); this.iv = null; clearTimeout(this.tt); Sound.alarm(); $('#timerw').classList.add('done'); toast("Time's up!"); } this.paint(); },
   paint() { const m = Math.floor(this.left / 60), s = this.left % 60; $('#ttext').textContent = `${m}:${String(s).padStart(2, '0')}`; $('#tring').setAttribute('stroke-dashoffset', String(100 - (this.total ? this.left / this.total * 100 : 0))); $('#tring').setAttribute('stroke', this.left <= 10 ? '#EE7D45' : '#F6BE4A'); }
 };
 $('#tpause').onclick = () => { Timer.paused = !Timer.paused; $('#tpause').textContent = Timer.paused ? 'Resume' : 'Pause'; };
-$('#tplus').onclick = () => { Timer.left += 60; Timer.total = Math.max(Timer.total, Timer.left); if (!Timer.iv) Timer.iv = setInterval(() => Timer.tick(), 1000); $('#timerw').classList.remove('done'); Timer.paint(); };
-$('#tclose').onclick = () => { clearInterval(Timer.iv); Timer.iv = null; $('#timerw').classList.remove('show', 'done'); };
+$('#tplus').onclick = () => { Timer.left += 60; Timer.total = Math.max(Timer.total, Timer.left); if (!Timer.iv) { Timer.iv = setInterval(() => Timer.tick(), 1000); Timer.tickTock(); } $('#timerw').classList.remove('done'); Timer.paint(); };
+$('#tclose').onclick = () => { clearInterval(Timer.iv); Timer.iv = null; clearTimeout(Timer.tt); $('#timerw').classList.remove('show', 'done'); };
 $$('.tpre button').forEach(b => b.onclick = () => Timer.start(+b.dataset.sec));
 $('#tCustomGo').onclick = () => { const m = parseFloat($('#tCustom').value); if (m > 0) Timer.start(Math.round(m * 60)); };
 
@@ -1338,7 +1475,7 @@ let cTeam = null, showKey = false;
 const num = v => { const n = parseFloat(String(v).replace(/[, ]/g, '')); return isNaN(n) ? null : n; };
 function calcOf(tid) {
   const c = (S.calc[tid] = S.calc[tid] || { rows: {}, extra: [], total: '', free: '' });
-  const items = inv(tid).map(x => ({ id: x.id, type: x.type })).concat(c.extra);
+  const items = inv(tid).filter(x => isCore(x.type)).map(x => ({ id: x.id, type: x.type })).concat(c.extra.filter(x => isCore(x.type)));
   return { c, items };
 }
 function scoreOf(tid) {
@@ -1370,11 +1507,11 @@ $('#ctBody').addEventListener('change', e => {
   const inp = e.target.closest('input'); if (!inp) return; const { c } = calcOf(cTeam), k = inp.dataset.k;
   if (k === 'total' || k === 'free') c[k] = inp.value.trim(); else { const id = inp.closest('tr').dataset.id; (c.rows[id] = c.rows[id] || {})[k] = inp.value.trim(); }
   const before = scoreOf(cTeam).ok; persist(); renderCalc(); const after = scoreOf(cTeam).ok;
-  if (after > before) Sound.tingting(); else if (inp.value.trim() && (k === 'A' || k === 'total' || k === 'free')) Sound.wrong();
+  if (after > before) Sound.coin(); else if (inp.value.trim() && (k === 'A' || k === 'total' || k === 'free')) Sound.wrong();
 });
 $('#ctBody').addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.target.blur(); } });
 $('#ctBody').addEventListener('click', e => { const b = e.target.closest('.delr'); if (!b) return; const id = b.closest('tr').dataset.id; const { c } = calcOf(cTeam); c.extra = c.extra.filter(x => x.id !== id); delete c.rows[id]; save(); });
-$('#addRow').onclick = () => { if (!cTeam) return; const t = prompt('Which item? Type: bed, wardrobe, sofa, vase, duck, plant', 'plant'); if (!t) return; const k = t.trim().toLowerCase().replace('plant pot', 'plant'); if (!TYPES.includes(k)) return toast('Unknown item'); calcOf(cTeam).c.extra.push({ id: uid(), type: k }); save(); };
+$('#addRow').onchange = e => { const k = e.target.value; e.target.value = ''; if (!k || !cTeam) return; calcOf(cTeam).c.extra.push({ id: uid(), type: k }); save(); Sound.bubble(); };
 $('#showKey').onclick = () => { showKey = !showKey; $('#showKey').textContent = showKey ? 'Hide answers' : 'Show answers'; renderCalc(); Sound.click(); };
 onChange(renderCalc); renderCalc();
 
@@ -1386,7 +1523,7 @@ function renderFb() {
   $('#fbGrid').style.gridTemplateColumns = `repeat(${Math.max(1, S.teams.length)},1fr)`;
   $('#fbGrid').innerHTML = S.teams.map(t => { const st = starsOf(t.id); return `<div class="fbc" style="--tc:${t.color}"><h4>${esc(t.name)}</h4>${CRIT.map((c, ci) => `<div class="crit"><span>${c}</span><div class="stars" data-t="${t.id}" data-c="${ci}">${[1, 2, 3].map(n => `<button data-n="${n}">${STAR(n <= st[ci])}</button>`).join('')}</div></div>`).join('')}<div class="fbsum">${st.reduce((a, b) => a + b, 0)} / 9 stars</div></div>`; }).join('');
 }
-$('#fbGrid').addEventListener('click', e => { const b = e.target.closest('.stars button'); if (!b) return; const w = b.closest('.stars'); const st = starsOf(w.dataset.t); const n = +b.dataset.n; st[+w.dataset.c] = st[+w.dataset.c] === n ? n - 1 : n; save(); Sound.ting(); });
+$('#fbGrid').addEventListener('click', e => { const b = e.target.closest('.stars button'); if (!b) return; const w = b.closest('.stars'); const st = starsOf(w.dataset.t); const n = +b.dataset.n; st[+w.dataset.c] = st[+w.dataset.c] === n ? n - 1 : n; save(); Sound.xylo(st[+w.dataset.c] * 2 || 1); });
 onChange(renderFb); renderFb();
 
 /* ===== sticker vote ===== */
@@ -1395,7 +1532,7 @@ function renderVote() {
   $('#voteGrid').style.gridTemplateColumns = `repeat(${Math.max(1, S.teams.length)},1fr)`;
   $('#voteGrid').innerHTML = S.teams.map(t => { const v = S.votes[t.id] || 0; return `<div class="vc" style="--tc:${t.color}"><h4>${esc(t.name)}</h4><div class="vn2">${v}</div><div class="stk2">${STICK.repeat(Math.min(v, 30))}</div><div class="vbtns"><button data-t="${t.id}" data-d="-1">−</button><button data-t="${t.id}" data-d="1">+</button></div></div>`; }).join('');
 }
-$('#voteGrid').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (!b) return; S.votes[b.dataset.t] = Math.max(0, (S.votes[b.dataset.t] || 0) + +b.dataset.d); save(); (+b.dataset.d > 0 ? Sound.pop : Sound.click)(); });
+$('#voteGrid').addEventListener('click', e => { const b = e.target.closest('button[data-t]'); if (!b) return; S.votes[b.dataset.t] = Math.max(0, (S.votes[b.dataset.t] || 0) + +b.dataset.d); save(); (+b.dataset.d > 0 ? Sound.boing : Sound.click)(); });
 onChange(renderVote); renderVote();
 
 /* ===== final ===== */
@@ -1409,7 +1546,7 @@ function renderFinal(reveal) {
   if (!reveal) return;
   const bars = $$('#finalBars .fbar').reverse();
   Sound.drum(28);
-  bars.forEach((b, k) => setTimeout(() => { b.classList.add('in'); requestAnimationFrame(() => $$('.seg', b).forEach(s => s.style.width = s.dataset.w + '%')); Sound.pop(); if (k === bars.length - 1) setTimeout(() => { Sound.jingle(); setTimeout(Sound.fanfare, 700); Conf.burst(220); }, 900); }, 1500 + k * 900));
+  bars.forEach((b, k) => setTimeout(() => { b.classList.add('in'); requestAnimationFrame(() => $$('.seg', b).forEach(s => s.style.width = s.dataset.w + '%')); Sound.bubble(); if (k === bars.length - 1) setTimeout(() => { Sound.jingle(); setTimeout(Sound.fanfare, 700); setTimeout(() => Sound.applause(4), 1200); Conf.burst(220); }, 900); }, 1500 + k * 900));
 }
 $('#revealFinal').onclick = () => renderFinal(true);
 $('#finalSlide').addEventListener('enter', () => renderFinal(false));
