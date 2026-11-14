@@ -432,6 +432,10 @@ b{font-weight:750}
 .chk{border-radius:18px;padding:14px 20px;font:600 24px/1.35 var(--head)}
 .chk.no{background:var(--pt)}.chk.yes{background:var(--gt)}
 #boardMain .fit{width:96px;padding:6px 6px 4px;font-size:14px}#boardMain .fit svg{width:66px;height:66px}#boardMain .fitems{gap:8px;margin-top:10px}
+.vq{position:relative;cursor:pointer}
+.vq .vt{visibility:hidden}
+.vq .vqm{position:absolute;left:32px;right:32px;bottom:30px;height:200px;border-radius:20px;background:#fff;display:grid;place-items:center;font:800 110px var(--geo);color:var(--grey2)}
+.vq.on .vt{visibility:visible;animation:rise .45s both}.vq.on .vqm{display:none}
 /* chrome */
 .toolbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:2px;background:var(--ink);padding:6px;border-radius:16px;z-index:50;transition:opacity .3s,transform .3s}
 .toolbar.hide{opacity:0;transform:translate(-50%,14px);pointer-events:none}
@@ -588,23 +592,22 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
 <!-- 3 REWARD RULES -->
 <section class="slide flexs" data-part="Opening" data-title="Win furniture!">
  <div class="kicker rv">Our reward</div><h2 class="rv" style="--i:1">Right answer = draw a furniture piece!</h2>
- <p class="lead rv mt16" style="--i:2">Every group will get <b class="cb">1 bed, 1 wardrobe and 1 sofa</b> — plus some <b class="cy">surprise items</b>. Keep them for your bedroom project.</p>
  <div class="fgrid fill mt24 rv" style="--i:3" id="rewardGrid"></div>
- <div class="actions rv" style="--i:4"><button class="btn dark" data-open-setup>Set up the 4 groups</button><button class="btn y" data-draw>Try a draw</button><button class="btn" data-board>See the furniture board</button></div>
+ <div class="actions rv" style="--i:4"><button class="btn y" data-draw>Try a draw</button><button class="btn" data-board>See the furniture board</button></div>
 </section>
 
 <!-- 9 VOCAB -->
-<section class="slide flexs" data-part="Review" data-title="Review: key words" data-draws="3">
- <div class="kicker rv">Review · key words</div><h2 class="rv" style="--i:1">Length, width and area</h2>
+<section class="slide flexs" data-part="Review" data-title="Review: key words">
+ <div class="kicker rv">Review · key words</div><h2 class="rv" style="--i:1">What is the word?</h2>
  <div class="g3 fill mt32">
-  <div class="box o voc rv" style="--i:1"><svg viewBox="0 0 300 200" id="vL"></svg><h3>length</h3><div class="ph">/leŋθ/ · <span class="vn">chiều dài</span></div><p>The <b class="co">long</b> side.<br>The length is <b>6 cm</b>.</p></div>
-  <div class="box b voc rv" style="--i:2"><svg viewBox="0 0 300 200" id="vW"></svg><h3>width</h3><div class="ph">/wɪdθ/ · <span class="vn">chiều rộng</span></div><p>The <b class="cb">short</b> side.<br>The width is <b>3 cm</b>.</p></div>
-  <div class="box y voc rv" style="--i:3"><svg viewBox="0 0 300 200" id="vA"></svg><h3>area</h3><div class="ph">/ˈeəriə/ · <span class="vn">diện tích</span></div><p>The <b class="cy">space inside</b>.<br>The area is <b>18 cm²</b>.</p></div>
+  <div class="box o voc vq rv" style="--i:1"><svg viewBox="0 0 300 200" id="vL"></svg><div class="vt"><h3>length</h3><div class="ph">/leŋθ/ · <span class="vn">chiều dài</span></div><p>The <b class="co">long</b> side.<br>The length is <b>6 cm</b>.</p></div><div class="vqm">?</div></div>
+  <div class="box b voc vq rv" style="--i:2"><svg viewBox="0 0 300 200" id="vW"></svg><div class="vt"><h3>width</h3><div class="ph">/wɪdθ/ · <span class="vn">chiều rộng</span></div><p>The <b class="cb">short</b> side.<br>The width is <b>3 cm</b>.</p></div><div class="vqm">?</div></div>
+  <div class="box y voc vq rv" style="--i:3"><svg viewBox="0 0 300 200" id="vA"></svg><div class="vt"><h3>area</h3><div class="ph">/ˈeəriə/ · <span class="vn">diện tích</span></div><p>The <b class="cy">space inside</b>.<br>The area is <b>18 cm²</b>.</p></div><div class="vqm">?</div></div>
  </div>
 </section>
 
 <!-- WARM-UP -->
-<section class="slide flexs" data-part="Warm-up" data-title="Warm-up: Rectangle Hunt!" data-draws="2">
+<section class="slide flexs" data-part="Warm-up" data-title="Warm-up: Rectangle Hunt!" data-draws="3">
  <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Warm-up</div><h2 class="rv" style="--i:1">Rectangle Hunt!</h2></div>
   <div class="actions rv" style="--i:2;margin:0"><button class="btn y" data-timer="60"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2M9.5 2.5h5"/></svg>Start 1 minute</button></div></div>
  <div class="g2 fill mt24" style="grid-template-columns:1.15fr .85fr">
@@ -714,7 +717,7 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
 </section>
 
 <!-- EXERCISE 3 -->
-<section class="slide flexs" data-part="Practice" data-title="Exercise 3: A piece of wood" data-draws="1">
+<section class="slide flexs" data-part="Practice" data-title="Exercise 3: A piece of wood" data-draws="2">
  <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Practice · Exercise 3</div><h2 class="rv" style="--i:1">A piece of wood</h2></div></div>
  <div class="box y fill mt24 rv xbox" style="--i:2">
   <p class="xq">A piece of wood is a rectangle. It is <b>15 cm</b> long and <b>5 cm</b> wide. What is its area?</p>
@@ -728,7 +731,7 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
 </section>
 
 <!-- EXERCISE 4 -->
-<section class="slide flexs" data-part="Practice" data-title="Exercise 4: Sharing chocolate" data-draws="4">
+<section class="slide flexs" data-part="Practice" data-title="Exercise 4: Sharing chocolate" data-draws="5">
  <div style="display:flex;justify-content:space-between;align-items:flex-end"><div><div class="kicker rv">Practice · Exercise 4</div><h2 class="rv" style="--i:1">Sharing chocolate</h2></div></div>
  <div class="fill mt24" style="display:grid;grid-template-columns:1fr 1fr;gap:26px">
   <div class="box y rv xbox" style="--i:2"><p class="xq" style="font-size:31px">Wendy needs to share chocolate for four friends. Each gets one piece: A, B, C or D. <b>Find the area of each piece.</b></p>
@@ -1318,11 +1321,12 @@ $('#clientBox').addEventListener('click', () => { const bx = $('#clientBox'); if
   setTimeout(() => { bx.classList.add('on'); delete bx.dataset.busy; Sound.surprise(); setTimeout(() => Sound.applause(2.5), 600); Conf.burst(200); }, 3000); });
 $('#clientSlide').addEventListener('enter', () => { $('#clientBox').classList.remove('on'); });
 
+document.addEventListener('click', e => { const v = e.target.closest('.vq'); if (!v || v.classList.contains('on')) return; v.classList.add('on'); Sound.win(); });
 /* ===== draw bars on question slides ===== */
 const totalPieces = () => TYPES.reduce((n, t) => n + TOTAL[t], 0);
 function paintDbars() { const given = S.teams.reduce((n, t) => n + inv(t.id).length, 0); $$('.dbar .dg').forEach(e => e.textContent = `${given} / ${totalPieces()} pieces given`); }
 $$('.slide[data-draws]').forEach(sl => { const d = document.createElement('div'); d.className = 'dbar';
-  d.innerHTML = `<button class="btn dark sm" data-pick>Call a student</button><button class="btn y sm" data-draw>${svgF('bed', 26)} Correct → Draw</button><span class="dn">${sl.dataset.draws} draw${sl.dataset.draws > 1 ? 's' : ''} on this page</span><span class="dg"></span>`;
+  d.innerHTML = `<button class="btn y sm" data-draw>${svgF('bed', 26)} Correct → Draw</button><span class="dn">${sl.dataset.draws} draw${sl.dataset.draws > 1 ? 's' : ''} on this page</span><span class="dg"></span>`;
   sl.appendChild(d); });
 onChange(paintDbars); paintDbars();
 
