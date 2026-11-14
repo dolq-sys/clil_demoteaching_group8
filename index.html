@@ -448,6 +448,10 @@ b{font-weight:750}
 .winshow.on .dancer{animation:enter 1s cubic-bezier(.2,.9,.3,1.3) both,dance 1.6s ease-in-out 1s infinite}
 @keyframes enter{from{transform:translateY(-400px) scale(.4) rotate(-180deg);opacity:0}to{transform:none;opacity:1}}
 @keyframes dance{0%{transform:rotate(0) translateY(0)}20%{transform:rotate(-8deg) translateY(-26px)}40%{transform:rotate(0) translateY(0) scaleX(1)}50%{transform:scaleX(-1)}60%{transform:scaleX(-1) rotate(8deg) translateY(-26px)}80%{transform:scaleX(-1) translateY(0)}100%{transform:scaleX(1)}}
+.ltimer{position:fixed;right:14px;bottom:14px;z-index:55;display:none;font:700 15px var(--geo);font-variant-numeric:tabular-nums;color:var(--muted);background:rgba(241,241,240,.92);border:0;border-radius:10px;padding:7px 10px 5px;cursor:pointer;opacity:.75}
+.ltimer.show{display:block}.ltimer:hover{opacity:1}
+.ltimer.idle{color:var(--faint)}.ltimer.paused{color:var(--faint);text-decoration:line-through}
+.ltimer.low{color:var(--od);background:var(--ot)}.ltimer.over{color:#fff;background:var(--pd)}
 /* chrome */
 .toolbar{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:2px;background:var(--ink);padding:6px;border-radius:16px;z-index:50;transition:opacity .3s,transform .3s}
 .toolbar.hide{opacity:0;transform:translate(-50%,14px);pointer-events:none}
@@ -576,7 +580,7 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
 </section>
 
 <!-- 1 TITLE -->
-<section class="slide" data-part="Opening" data-title="Area of a Rectangle">
+<section class="slide" data-part="Opening" data-title="Area of a Rectangle" data-lesson-start>
  <div class="title-wrap">
   <div>
    <div class="kicker rv">CLIL · Maths in English · Grade 3</div>
@@ -1045,6 +1049,7 @@ textarea:focus,input:focus,select:focus{outline:3px solid var(--y)}
   <div class="mb"><div class="ovgrid" id="ovGrid"></div></div>
 </div></div>
 <div class="scrim" id="mRoom"><div class="modal roomm"><div class="mh"><h3 id="roomBigT"></h3><button class="xbtn" data-close>✕</button></div><div class="mb" id="roomBigA"></div></div></div>
+<button class="ltimer" id="lTimer" title="Lesson timer: click to start / pause · double-click to reset">45:00</button>
 <canvas id="confetti"></canvas>
 
 <script>(() => {
@@ -1355,6 +1360,21 @@ $$('.slide[data-draws]').forEach(sl => { const d = document.createElement('div')
   sl.appendChild(d); });
 onChange(paintDbars); paintDbars();
 
+/* ===== silent 45-minute lesson timer ===== */
+const LT = (() => { const el = $('#lTimer'), DUR = 45 * 60 * 1000; let iv;
+  const st = () => S.lt || (S.lt = { end: 0, left: DUR, run: false });
+  const remain = () => { const t = st(); return t.run ? t.end - Date.now() : t.left; };
+  function paint() { const r = remain(), t = st(), sec = Math.max(0, Math.ceil(r / 1000));
+    el.textContent = `${Math.floor(sec / 60)}:${String(sec % 60).padStart(2, '0')}`;
+    el.className = 'ltimer' + (el.classList.contains('show') ? ' show' : '') + (!t.run && t.left === DUR ? ' idle' : !t.run ? ' paused' : '') + (sec === 0 ? ' over' : sec <= 300 ? ' low' : ''); }
+  function tick() { paint(); }
+  let clickT;
+  el.addEventListener('click', () => { clearTimeout(clickT); clickT = setTimeout(() => { const t = st(); if (t.run) { t.left = Math.max(0, t.end - Date.now()); t.run = false; } else { t.end = Date.now() + t.left; t.run = true; } persist(); paint(); }, 220); });
+  el.addEventListener('dblclick', () => { clearTimeout(clickT); S.lt = { end: 0, left: DUR, run: false }; persist(); paint(); });
+  iv = setInterval(tick, 500);
+  return { vis(i) { const startIdx = slides.findIndex(x => x.hasAttribute('data-lesson-start')); el.classList.toggle('show', i >= startIdx); paint(); } }; })();
+window.LT = LT;
+
 /* ===== deck ===== */
 const deck = $('#deck'); let slides = $$('.slide', deck); let cur = 0;
 function fit() { const s = Math.min(innerWidth / 1600, innerHeight / 900); deck.style.transform = `translate(-50%,-50%) scale(${s})`; }
@@ -1368,6 +1388,7 @@ function show(i, all) {
   $('#progBar').style.width = ((i + 1) / slides.length * 100) + '%';
   try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
   sl.dispatchEvent(new Event('enter'));
+  if (window.LT) LT.vis(i);
 }
 function next() {
   const { els, groups } = frags(slides[cur]);
