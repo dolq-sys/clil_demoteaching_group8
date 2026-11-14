@@ -1751,7 +1751,10 @@ function renderFinal(reveal) {
   Sound.drum(28);
   bars.forEach((b, k) => setTimeout(() => { b.classList.add('in'); requestAnimationFrame(() => $$('.seg', b).forEach(s => s.style.width = s.dataset.w + '%')); Sound.bubble(); if (k === bars.length - 1) setTimeout(() => { Sound.jingle(); setTimeout(Sound.fanfare, 700); setTimeout(() => Sound.applause(4), 1200); Conf.burst(220); setTimeout(() => showWinner(sorted[0]), 2600); }, 900); }, 1500 + k * 900));
 }
-function showWinner(r) { if (!r || !r.t) return; const t = r.t, k = S.rooms && S.rooms[t.id];
+function roomFor(tid) { S.rooms = S.rooms || {}; if (S.rooms[tid]) return S.rooms[tid];
+  roomInit(false); const taken = Object.values(S.rooms); const free = (S.roomOrder || Object.keys(ROOMS)).filter(k => !taken.includes(k));
+  const k = free[0] || Object.keys(ROOMS)[S.teams.findIndex(t => t.id === tid) % 4]; S.rooms[tid] = k; save(); return k; }
+function showWinner(r) { if (!r || !r.t) return; const t = r.t, k = roomFor(t.id);
   $('#winRoom').innerHTML = k ? roomSVG(k) : ''; $('#winName').textContent = t.name + '’s room!'; $('#winName').style.color = t.color;
   $('#winSub').textContent = k ? ROOMS[k].name : 'The winning bedroom'; $('#winDancer').src = $('.creveal img').src;
   $('#winShow').classList.add('on'); Sound.surprise(); Fire.show(12, 420); setTimeout(() => Sound.applause(5), 800); }
